@@ -1,6 +1,0 @@
-# Merak
-
-
-Run :
-
-### `npm start`
