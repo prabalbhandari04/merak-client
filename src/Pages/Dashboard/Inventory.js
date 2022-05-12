@@ -24,6 +24,7 @@
 
 //Component - Orgasm 
 import CardList from '../../Components/Organisms/CardList'
+import Stats from '../../Components/Organisms/Stats'
 
 // material -ui
 import { Container} from '@mui/material';
@@ -32,7 +33,6 @@ import {Search} from '@mui/icons-material'
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import Stack from '@mui/material/Stack';
 
 
 //Component - Atoms
@@ -91,10 +91,6 @@ const Topbar = styledComponents.div`
   justify-content: space-between;
 `
 
-const Qu = styledComponents.h1`
-  text-align: center;
-`
-
 const TxtField = styled(TextField)({
 
   '& .MuiOutlinedInput-root': {
@@ -139,23 +135,7 @@ const Inventory = () => {
 
         <Subtitle title="Storage Stats" /> 
 
-        <Stack direction="row" spacing={20}>
-        <Stack spacing={2}>
-          <Qu>{packed.length}</Qu>
-          <span style={{color: '#00A7E3'}}>To be packed</span>
-        </Stack>
-
-        <Stack spacing={2}>
-          <Qu>{delivered.length}</Qu>
-          <span style={{color: '#00A7E3'}}>To be delivered</span>
-        </Stack>
-
-        <Stack spacing={2}>
-          <Qu>{stock.length}</Qu>
-          <span style={{color: '#00A7E3'}}>Total in stock</span>
-        </Stack>
-
-        </Stack> 
+        <Stats packed={packed} delivered={delivered} stock={stock}/>
 
         <Subtitle title="To be Delivered" />  
        
@@ -167,7 +147,6 @@ const Inventory = () => {
       </Container>
      
     </>
-// >>>>>>> origin/main
   )
 }
 
