@@ -1,6 +1,9 @@
 import React from 'react'
 
-//Component - Orgasm 
+//Component - Molecule
+import AddProduct from '../../Components/Molecules/AddProduct';
+
+//Component - Organism 
 import CardList from '../../Components/Organisms/CardList'
 
 // material -ui
@@ -46,19 +49,19 @@ const Inventory = () => {
 
   return (
     <>
-    <Container style={{marginTop: '30px'}}>
+      <Container style={{marginTop: '30px'}}>
 
-        <Title title="Inventory" />  
+          <Title title="Inventory" />  
 
-        <Subtitle title="To be Delivered" />  
-       
-        <CardList products={delivered} />
+          <Subtitle title="To be Delivered" />  
+        
+          <CardList products={delivered} />
 
-        <Subtitle title="To be Packed" />  
+          <Subtitle title="To be Packed" />  
 
-        <CardList products={packed} />
+          <CardList products={packed} />
       </Container>
-     
+      <AddProduct/>
     </>
   )
 }
