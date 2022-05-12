@@ -33,11 +33,13 @@ import {Search} from '@mui/icons-material'
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
+import Box from '@mui/material/Box';
 
 
 //Component - Atoms
 import Title from '../../Components/Atoms/Title';
 import Subtitle from '../../Components/Atoms/Subtitle';
+import Add from '../../Components/Atoms/AddButton'
 
 //Styled components
 import styledComponents from 'styled-components'
@@ -111,7 +113,6 @@ const TxtField = styled(TextField)({
 const Inventory = () => {
 
   return (
-
     <>
       <Container style={{marginTop: '30px'}}>
         <Topbar>
@@ -137,6 +138,8 @@ const Inventory = () => {
 
         <Stats packed={packed} delivered={delivered} stock={stock}/>
 
+        <Box sx={{ m: '2rem' }} /> 
+
         <Subtitle title="To be Delivered" />  
        
         <CardList products={delivered} />
@@ -144,8 +147,10 @@ const Inventory = () => {
         <Subtitle title="To be Packed" />  
 
         <CardList products={packed} />
+
       </Container>
-     
+
+      <Add/>
     </>
   )
 }
