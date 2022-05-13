@@ -4,12 +4,13 @@ import Grid from "@mui/material/Grid";
 
 const ProductForm = () => {
 
+
 return(
     <div>
-        <grid>
+        <Grid>
             <form>
-                <Grid container spacing={1} style={{ color: "white" }}>
-                    <Grid item xs={12} sm={6}>
+                <Grid container spacing={2} style={{ color: "white" }}>
+                    <Grid item xs={6}>
                     <TextField
                         sx={{ input: { color: "black", background: "white" } }}
                         InputLabelProps={{ style: { color: "black" } }}
@@ -21,64 +22,71 @@ return(
                         autoComplete="on"
                     />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                     <TextField
-                        sx={{ input: { color: "black", background: "white" } }}
+                        sx={{ input: {color:"black", background: "white"}}}
                         InputLabelProps={{ style: { color: "black" } }}
                         placeholder="Product Description"
                         label="Description"
                         variant="filled"
+                        multiline
+                        rows={4}
+                        fullWidth
                         required
                         autoComplete="on"
                     />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6}>
                     <TextField
-                        sx={{ input: { color: "black", background: "white" } }}
+                        sx={{ color: "black", background: "white"  }}
                         InputLabelProps={{ style: { color: "black" } }}
                         placeholder="Variant Type"
                         label="Variant"
                         variant="filled"
+                        fullWidth
                         required
                         autoComplete="on"
                     />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6}>
                     <TextField
                         sx={{ input: { color: "black", background: "white" } }}
                         InputLabelProps={{ style: { color: "black" } }}
                         placeholder="Variant Value"
                         label="Value"
                         variant="filled"
+                        fullWidth
                         required
                         autoComplete="on"
                     />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6}>
                     <TextField
                         sx={{ input: { color: "black", background: "white" } }}
                         InputLabelProps={{ style: { color: "black" } }}
                         placeholder="Product Quantity"
                         label="Quantity"
                         variant="filled"
+                        fullWidth
                         required
                         autoComplete="on"
                     />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6}>
                     <TextField
                         sx={{ input: { color: "black", background: "white" } }}
                         InputLabelProps={{ style: { color: "black" } }}
                         placeholder="Product Price"
                         label="Price"
                         variant="filled"
+                        fullWidth
                         required
                         autoComplete="on"
                     />
                     </Grid>
                 </Grid>
             </form>
-        </grid>
+        </Grid>
     </div>
 )
 }

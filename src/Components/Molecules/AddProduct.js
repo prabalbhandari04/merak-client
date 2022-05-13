@@ -31,7 +31,7 @@ const AddProduct = () => {
         onClick={handleOpen}
         color="primary"
         aria-label="add"
-        sx={{ position: "absolute", bottom: 16, right: 16 }}
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
       >
         <AddIcon />
       </Fab>
@@ -49,6 +49,7 @@ const AddProduct = () => {
             </Typography>
             <ProductForm/>
           </Box>
+          
         </Modal>
       </div>
     </div>
