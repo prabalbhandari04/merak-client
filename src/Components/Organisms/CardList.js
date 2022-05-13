@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // Material Ui
 import { Grid } from '@mui/material';
 import Card from '../Molecules/Card'
-
 // ----------------------------------------------------------------------
 
 

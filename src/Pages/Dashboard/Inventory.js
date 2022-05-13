@@ -50,13 +50,15 @@ const delivered = [
     id: 1,
     img: "https://imgs.search.brave.com/M3I0djBm_PCYQ44FDVmtJEai1am2wNJu6C6dDj72ODc/rs:fit:1200:1200:1/g:ce/aHR0cDovL2Nkbi5w/aW5jaG9meXVtLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvTmlj/ZS1DcmVhbS02Lmpw/Zw",
     title: "Icecream",
-    quantity: "12"
+    quantity: "12",
+    price: "100"
   },
   {
     id: 2,
     img: "https://shoppinglife.lk/wp-content/uploads/2021/11/olive-oil-1-922x1024.png",
     title: "Extra virgin olive oil",
-    quantity: "10"
+    quantity: "10",
+    price: "1200"
   },
 ]
 
@@ -147,7 +149,6 @@ const Inventory = () => {
         <Subtitle title="To be Packed" />  
 
         <CardList products={packed} />
-
       </Container>
 
       <Add/>
