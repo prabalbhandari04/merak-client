@@ -3,9 +3,9 @@ import {Search} from '@mui/icons-material'
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 const TxtField = styled(TextField)({
-
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: 'white',

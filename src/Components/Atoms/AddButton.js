@@ -3,7 +3,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
 const Add = () => (
-    <Fab sx={{position: 'absolute', bottom: 16, right: 16}}>
+    <Fab sx={{position: 'fixed', bottom: 16, right: 16}}>
         <AddIcon />
     </Fab>
 )
