@@ -6,7 +6,6 @@ import { Link as RouterLink } from 'react-router-dom';
 // Material Ui Components
 import { Box, Link, Card as Cards, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Modal from '../Organisms/ProductDetail';
 
 // -----------Styling Product Image---------
 
@@ -38,7 +37,6 @@ const Card = ({ product }) => {
           <Typography variant="subtitle1" style={{color:'gray'}} noWrap>
             <div>
               {title}
-              <Modal />
             </div>
             <span style={{color: '#00A7E3'}}>{quantity} orders</span>
           </Typography>
