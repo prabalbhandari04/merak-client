@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 //Component - Atoms
 import Subtitle from '../../Components/Atoms/Subtitle';
 import AddItem from '../../Components/Molecules/AddItem'
-
 //Dummy Array Data
 const delivered = [
   {
@@ -85,6 +84,7 @@ const Inventory = () => {
         <Subtitle title="To be Packed" />  
 
         <CardList products={packed} />
+
       </Container>
 
       <AddItem/>
