@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // Material Ui Components
 import { Box, Link, Card as Cards, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Modal from '../Organisms/ProductDetail';
+
 
 // -----------Styling Product Image---------
 
@@ -27,7 +27,7 @@ const Card = ({ product }) => {
   const { title, img, quantity} = product;
 
   return (
-    <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }}>
+    <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }} style={{cursor: 'pointer'}} >
       
       <Box sx={{ pt: '100%', position: 'relative'}}>
         <ProductImgStyle alt={title} src={img} />
@@ -36,14 +36,13 @@ const Card = ({ product }) => {
       <Stack spacing={2} sx={{ p: 1}} style={{background: '#181818'}}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
           <Typography variant="subtitle1" style={{color:'gray'}} noWrap>
-            <div>
-              {title}
-              <Modal />
-            </div>
+            {title}
+            <br></br>
             <span style={{color: '#00A7E3'}}>{quantity} orders</span>
           </Typography>
         </Link>
       </Stack>
+      
     </Cards>
   );
 }
