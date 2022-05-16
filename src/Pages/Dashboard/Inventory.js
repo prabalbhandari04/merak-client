@@ -1,46 +1,67 @@
-import React from 'react';
-
-//Component - Molecule
-//import AddProduct from '../../Components/Molecules/AddProduct';
-
-//Component - Organism 
+//Component - Organisms 
 import CardList from '../../Components/Organisms/CardList'
+import Stats from '../../Components/Organisms/Stats'
+import TopBar from '../../Components/Organisms/TopBar'
 
 // material -ui
 import { Container} from '@mui/material';
+import Box from '@mui/material/Box';
 
 //Component - Atoms
-import Title from '../../Components/Atoms/Title';
 import Subtitle from '../../Components/Atoms/Subtitle';
-
-
+import AddItem from '../../Components/Molecules/AddItem'
 //Dummy Array Data
 const delivered = [
   {
     id: 1,
     img: "https://imgs.search.brave.com/M3I0djBm_PCYQ44FDVmtJEai1am2wNJu6C6dDj72ODc/rs:fit:1200:1200:1/g:ce/aHR0cDovL2Nkbi5w/aW5jaG9meXVtLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvTmlj/ZS1DcmVhbS02Lmpw/Zw",
     title: "Icecream",
-    quantity: "12"
+    quantity: "12",
+    price: "100",
+    description: 'Yo baraf ho hai'
   },
   {
     id: 2,
     img: "https://shoppinglife.lk/wp-content/uploads/2021/11/olive-oil-1-922x1024.png",
     title: "Extra virgin olive oil",
-    quantity: "10"
+    quantity: "10",
+    price: "420",
+    description: 'Yo suddha olive ko tel ho'
   },
 ]
 
 
 const packed = [
   {
-    id: 1,
+    id: 2,
     img: "https://shoppinglife.lk/wp-content/uploads/2021/11/olive-oil-1-922x1024.png",
     title: "Extra virgin olive oil",
-    quantity: "5"
+    quantity: "10",
+    price: "420",
+    description: 'Yo suddha olive ko tel ho'
   },
   
 ]
 
+
+const stock = [
+  {
+    id: 1,
+    img: "https://imgs.search.brave.com/M3I0djBm_PCYQ44FDVmtJEai1am2wNJu6C6dDj72ODc/rs:fit:1200:1200:1/g:ce/aHR0cDovL2Nkbi5w/aW5jaG9meXVtLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvTmlj/ZS1DcmVhbS02Lmpw/Zw",
+    title: "Icecream",
+    quantity: "12",
+    price: "100",
+    description: 'Yo baraf ho hai'
+  },
+  {
+    id: 2,
+    img: "https://shoppinglife.lk/wp-content/uploads/2021/11/olive-oil-1-922x1024.png",
+    title: "Extra virgin olive oil",
+    quantity: "10",
+    price: "420",
+    description: 'Yo suddha olive ko tel ho'
+  },
+]
 
 
 const Inventory = () => {
@@ -48,18 +69,25 @@ const Inventory = () => {
   return (
     <>
       <Container style={{marginTop: '30px'}}>
+        <TopBar />
 
-          <Title title="Inventory" />  
+        <Subtitle title="Storage Stats" /> 
 
-          <Subtitle title="To be Delivered" />  
-        
-          <CardList products={delivered} />
+        <Stats packed={packed} delivered={delivered} stock={stock}/>
 
-          <Subtitle title="To be Packed" />  
+        <Box sx={{ m: '2rem' }} /> 
 
-          <CardList products={packed} />
+        <Subtitle title="To be Delivered" />  
+       
+        <CardList products={delivered} />
+
+        <Subtitle title="To be Packed" />  
+
+        <CardList products={packed} />
+
       </Container>
-      {/* <AddProduct/> */}
+
+      <AddItem/>
     </>
   )
 }
