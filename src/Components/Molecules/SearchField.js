@@ -4,41 +4,48 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import styledComponents from 'styled-components';
 
 const TxtField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: 'white',
+        borderColor: '#252525',
       },
   
       '&:hover fieldset': {
-        borderColor: 'white',
+        borderColor: '#252525',
       },
   
       '&.Mui-focused fieldset': {
-        borderColor: 'white',
+        borderColor: '#252525',
       },
     },
   });
+
+const Container = styledComponents.div`
+  display: flex;
+  align-items:center;
+  
+`
   
 
 const SearchField = () => {
     return (
+      <Container>
         <TxtField 
         id="outlined-basic" 
         label="Search Item" 
         variant="outlined" 
         sx={{ input: { color: 'white'}}} 
-        InputLabelProps={{ style: { color: 'white' } }} 
+        InputLabelProps={{ style: { color: 'white'}, padding:1 }} 
         color='secondary' 
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton edge="end">
-              <Search />
-            </IconButton>
-          </InputAdornment>
-        }
         />
+
+        <IconButton>
+            <Search sx={{ color: '#FFFFFF' }}/>
+        </IconButton>
+
+      </Container>
     );
   }
   
