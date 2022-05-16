@@ -1,19 +1,12 @@
-
-import React, {useState} from 'react';
+//Data match garna use gareko not necessary to use
+import PropTypes from 'prop-types';
 
 import { Link as RouterLink } from 'react-router-dom';
 
 // Material Ui Components
 import { Box, Link, Card as Cards, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
-// Material Ui
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import ProductDetails from './ProductDetails';
-
+import Modal from '../Organisms/ProductDetail';
 
 // -----------Styling Product Image---------
 
@@ -31,63 +24,34 @@ const ProductImgStyle = styled('img')({
 
 const Card = ({ product }) => {
 
-  
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-
-  const { name, quantity} = product;
-  const image = product.variant[0].image;
+  const { title, img, quantity} = product;
 
   return (
-    <>
-    <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }} style={{cursor: 'pointer'}} onClick={handleClickOpen}>
+    <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }} style={{cursor: 'pointer'}} >
       
       <Box sx={{ pt: '100%', position: 'relative'}}>
-        <ProductImgStyle alt={name} src={image} />
+        <ProductImgStyle alt={title} src={img} />
       </Box>
 
       <Stack spacing={2} sx={{ p: 1}} style={{background: '#181818'}}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
           <Typography variant="subtitle1" style={{color:'gray'}} noWrap>
-            {name}
-            <br></br>
+            <div>
+              {title}
+              <Modal />
+            </div>
             <span style={{color: '#00A7E3'}}>{quantity} orders</span>
           </Typography>
         </Link>
       </Stack>
     </Cards>
-
-
-    
-    
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
-          {"Product Details"}
-        </DialogTitle>
-        <DialogContent style={{background: '#181818', color: 'gray'}}>
-          <DialogContentText id="alert-dialog-description">
-            <ProductDetails product={product}/>
-          </DialogContentText>
-        </DialogContent>
-      </Dialog>
-    
-    </>
   );
 }
 
+//Not necessary - ignore
+Card.propTypes = {
+  product: PropTypes.object,
+};
 
 
 export default Card;

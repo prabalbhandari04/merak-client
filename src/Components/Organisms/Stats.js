@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux'; //Selecter for Redux state for allProducts(Api)
-import styledComponents from 'styled-components' //Styled components
-import Stack from '@mui/material/Stack'; //Material Ui
-
+//Styled components
+import styledComponents from 'styled-components'
+import Stack from '@mui/material/Stack';
 
 const Qu = styledComponents.h1`
 text-align: center;
@@ -10,25 +9,22 @@ font-weight: 900;
 margin: .5rem;
 `
 
-const Stats = () => {
-
-  const allProducts = useSelector(state => state.allProducts.products);
- 
+const Stats = ({packed, delivered, stock}) => {
 
   return (
     <Stack direction="row" spacing='5rem'>
     <Stack>
-      <Qu>{allProducts.length}</Qu>
+      <Qu>{packed.length}</Qu>
       <span style={{color: '#00A7E3'}}>To be packed</span>
     </Stack>
 
     <Stack>
-      <Qu>{allProducts.length}</Qu>
+      <Qu>{delivered.length}</Qu>
       <span style={{color: '#00A7E3'}}>To be delivered</span>
     </Stack>
 
     <Stack>
-      <Qu>{allProducts.length}</Qu>
+      <Qu>{stock.length}</Qu>
       <span style={{color: '#00A7E3'}}>Total in stock</span>
     </Stack>
 
