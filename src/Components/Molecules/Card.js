@@ -27,7 +27,7 @@ const Card = ({ product }) => {
   const { title, img, quantity} = product;
 
   return (
-    <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }}>
+    <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }} style={{cursor: 'pointer'}} >
       
       <Box sx={{ pt: '100%', position: 'relative'}}>
         <ProductImgStyle alt={title} src={img} />
