@@ -1,6 +1,8 @@
 //Api chaina tesaile data match garna use gareko not necessary
 import PropTypes from 'prop-types';
 
+import React from 'react';
+
 // Material Ui
 import { Grid } from '@mui/material';
 import Card from '../Molecules/Card'
