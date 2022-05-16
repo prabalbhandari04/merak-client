@@ -3,7 +3,7 @@ import {Search} from '@mui/icons-material'
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import OutlinedInput from '@mui/material/OutlinedInput';
+// import OutlinedInput from '@mui/material/OutlinedInput';
 
 const TxtField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
@@ -31,7 +31,7 @@ const SearchField = () => {
         sx={{ input: { color: 'white'}}} 
         InputLabelProps={{ style: { color: 'white' } }} 
         color='secondary' 
-        endAdornment={
+        endadornment={
           <InputAdornment position="end">
             <IconButton edge="end">
               <Search />
