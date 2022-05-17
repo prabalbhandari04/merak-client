@@ -6,14 +6,16 @@ import PropTypes from 'prop-types';
 // Material Ui
 import Modal from '@mui/material/Modal';
 import { Grid } from '@mui/material';
-import { Box, Typography} from '@mui/material';
+import { Box, Typography, Stack} from '@mui/material';
 
 import Card from '../Molecules/Card'
 import ProductDetails from '../Molecules/ProductDetails';
 
 // ----------------------------------------------------------------------
 
-
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 const style = {
