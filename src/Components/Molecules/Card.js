@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -13,10 +13,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ProductDetails from './ProductDetails';
-import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-//import styledComponents from 'styled-components';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+import styledComponents from 'styled-components';
+
+
+// material
+import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
 
 
 // -----------Styling Product Image---------
@@ -30,6 +35,12 @@ const ProductImgStyle = styled('img')({
 });
 
 // ------------------------
+
+const Cont = styledComponents.div`
+  display: flex;
+  justify-content: space-between;
+  background: #181818;
+`
 
 const Card = ({ product }) => {
 
@@ -49,6 +60,9 @@ const Card = ({ product }) => {
   const image = product.variant[0].image;
 
   console.log(product)
+
+  const ref = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -71,20 +85,48 @@ const Card = ({ product }) => {
       
     </Cards>
 
-
-    
-    
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
-          {"Product Details"}
-          <IconButton><EditIcon color='primary'/></IconButton>
-          <IconButton><DeleteIcon color='error'/></IconButton>
-        </DialogTitle>
+        <Cont>
+          <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
+            {"Product Details"}
+          </DialogTitle>
+
+          <IconButton ref={ref} onClick={() => setIsOpen(true)}>
+              <MoreVertIcon style={{ color: 'white' }}/>
+          </IconButton>
+
+          <Menu
+            open={isOpen}
+            anchorEl={ref.current}
+            onClose={() => setIsOpen(false)}
+            PaperProps={{
+              sx: { width: 200, maxWidth: '100%' },
+            }}
+            // anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            // transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          >
+            <MenuItem sx={{ color: 'text.secondary' }} onClick={() => setIsOpen(false)}>
+              <ListItemIcon >
+                <DeleteIcon style={{ color: 'red' }}/>
+              </ListItemIcon>
+              <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
+            </MenuItem>
+
+            <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }} onClick={() => setIsOpen(false)}>
+              <ListItemIcon>
+                <EditIcon />
+              </ListItemIcon>
+              <ListItemText primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
+            </MenuItem>
+          </Menu>
+
+        </Cont>
+        
         <DialogContent style={{background: '#181818', color: 'gray'}}>
           <DialogContentText id="alert-dialog-description">
             <ProductDetails product={product}/>
