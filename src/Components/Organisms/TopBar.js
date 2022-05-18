@@ -1,8 +1,9 @@
 import Title from '../../Components/Atoms/Title';
 
 import styledComponents from 'styled-components'
-import Search from '../Molecules/Search';
+
 import SearchField from '../Molecules/SearchField'
+
 
 const Topbar = styledComponents.div`
   display: flex;
@@ -32,10 +33,10 @@ const initialDetails = [
 const TopBar = () => {
 
     return (
+      
         <Topbar>
         <Title title="Inventory" />  
-        {/* <Search details={initialDetails}/> */}
-        <SearchField />
+        <SearchField details={initialDetails}/>
 
       </Topbar>
     );

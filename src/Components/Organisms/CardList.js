@@ -3,8 +3,6 @@ import * as React from 'react';
 //Api chaina tesaile data match garna use gareko not necessary
 import PropTypes from 'prop-types';
 
-import React from 'react';
-
 // Material Ui
 import Modal from '@mui/material/Modal';
 import { Grid } from '@mui/material';
