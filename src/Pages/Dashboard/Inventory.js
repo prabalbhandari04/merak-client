@@ -9,7 +9,8 @@ import Box from '@mui/material/Box';
 
 //Component - Atoms
 import Subtitle from '../../Components/Atoms/Subtitle';
-import AddItem from '../../Components/Molecules/AddItem'
+// import AddItem from '../../Components/Molecules/AddItem';
+import AddOrder from '../../Components/Molecules/AddOrder';
 
 
 
@@ -42,7 +43,7 @@ const Inventory = () => {
 
       </Container>
 
-      <AddItem/>
+      <AddOrder/>
     </>
   )
 }
