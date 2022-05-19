@@ -38,11 +38,12 @@ const SearchField = ({details}) => {
           product
           .title
           .toLowerCase()
-          .includes(search.toLowerCase()) ||
-          product
-          .quantity
-          .toLowerCase()
-          .includes(search.toLowerCase())
+          .includes(search.toLowerCase()) 
+          // ||
+          // product
+          // .quantity
+          // .toLowerCase()
+          // .includes(search.toLowerCase())
         );
       }
     );
@@ -57,9 +58,7 @@ const SearchField = ({details}) => {
 
     function searchList() {
       return (
-        <Scroll>
           <SearchList filteredProduct={filteredProduct} />
-        </Scroll>
       );
     }
 
