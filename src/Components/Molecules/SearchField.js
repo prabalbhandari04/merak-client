@@ -38,11 +38,6 @@ const SearchField = ({details}) => {
           .title
           .toLowerCase()
           .includes(search.toLowerCase()) 
-          ||
-          product
-          .quantity
-          .toLowerCase()
-          .includes(search.toLowerCase())
         );
       }
     );
