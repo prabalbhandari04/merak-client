@@ -4,7 +4,6 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 // import OutlinedInput from '@mui/material/OutlinedInput';
-  import Scroll from './Scroll';
   import SearchList from './SearchList';
 import {useState} from 'react';
 
@@ -39,11 +38,11 @@ const SearchField = ({details}) => {
           .title
           .toLowerCase()
           .includes(search.toLowerCase()) 
-          // ||
-          // product
-          // .quantity
-          // .toLowerCase()
-          // .includes(search.toLowerCase())
+          ||
+          product
+          .quantity
+          .toLowerCase()
+          .includes(search.toLowerCase())
         );
       }
     );
@@ -82,7 +81,6 @@ const SearchField = ({details}) => {
           </InputAdornment>
         }
         />
-       
         {searchList()}
         </>
     );
