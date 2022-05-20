@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 //Component - Atoms
 import Subtitle from '../../Components/Atoms/Subtitle';
 import AddItem from '../../Components/Molecules/AddItem'
+import AddVar from '../../Components/Molecules/AddVar'
 
 
 
@@ -41,6 +42,8 @@ const Inventory = () => {
         <CardList/>
 
       </Container>
+
+      <AddVar />
 
       <AddItem/>
     </>

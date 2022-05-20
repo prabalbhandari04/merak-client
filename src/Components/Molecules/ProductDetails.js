@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 
 const ProductDetails = ({ product }) => {
 
-  const image = product.variant[0].image;
-  const price = product.variant[0].price;
+  const image = product.default_image;
+  const price = product.default_price;
   console.log(image)
 
   return (
