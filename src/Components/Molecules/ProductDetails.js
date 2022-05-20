@@ -8,6 +8,7 @@ const ProductDetails = ({ product }) => {
 
   const image = product.variant[0].image;
   const price = product.variant[0].price;
+  console.log(image)
 
   return (
 

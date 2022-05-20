@@ -47,7 +47,7 @@ const CardList = () => {
           console.log('Error', err)
         })
 
-        console.log(response)
+        //console.log(response)
         dispatch(setProducts(response.data));
       }
       

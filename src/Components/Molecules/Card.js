@@ -3,6 +3,9 @@ import React, {useRef, useState} from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 
+import {useSelector, useDispatch} from 'react-redux';
+import {setProducts} from '../../Redux/Actions/productActions';
+
 // Material Ui Components
 import { Box, Link, Card as Cards, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -11,13 +14,15 @@ import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import ProductDetails from './ProductDetails';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import Divider from '@mui/material/Divider';
 import styledComponents from 'styled-components';
+import Button from '@mui/material/Button';
 
 
 // material
@@ -43,8 +48,7 @@ const Cont = styledComponents.div`
 `
 
 const Card = ({ product }) => {
-
-  
+ 
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -53,6 +57,19 @@ const Card = ({ product }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+
+  const [oopen, setOOpen] = useState(false);
+
+  const handleClickOOpen = () => {
+    setIsOpen(false)
+    console.log('=======================================================================================================================')
+    setOOpen(true);
+  };
+
+  const handleCloose = () => {
+    setOOpen(false);
   };
 
 
@@ -107,15 +124,10 @@ const Card = ({ product }) => {
             PaperProps={{
               sx: { width: 200, maxWidth: '100%' },
             }}
+            style={{ color: '#181818'}}
             // anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             // transformOrigin={{ vertical: 'top', horizontal: 'right' }}
           >
-            <MenuItem sx={{ color: 'text.secondary' }} onClick={() => setIsOpen(false)}>
-              <ListItemIcon >
-                <DeleteIcon style={{ color: 'red' }}/>
-              </ListItemIcon>
-              <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
-            </MenuItem>
 
             <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }} onClick={() => setIsOpen(false)}>
               <ListItemIcon>
@@ -123,7 +135,39 @@ const Card = ({ product }) => {
               </ListItemIcon>
               <ListItemText primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
             </MenuItem>
+
+            <Divider sx={{ my: 0.5 }} />
+
+            <MenuItem sx={{ color: 'text.secondary' }} onClick={() => handleClickOOpen()}>
+              <ListItemIcon >
+                <DeleteIcon style={{ color: 'red' }}/>
+              </ListItemIcon>
+              <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} style={{ color: 'red' }}/>
+            </MenuItem>
+
           </Menu>
+          
+          <Dialog
+            open={oopen}
+            onClose={handleCloose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Delete this product?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to delete the product {product.name}?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloose}>Cancel</Button>
+              <Button onClick={handleCloose} autoFocus style={{ color: 'red' }}>
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
 
         </Cont>
         
