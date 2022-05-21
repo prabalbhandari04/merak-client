@@ -9,10 +9,6 @@ let headers = {
         "Authorization": 'Bearer ' + token
 };
 
-//Proxy URL to bypass Cors
-const prox = "https://kissasian1988.herokuapp.com/"
-//----------------------------------------------------
-
 
 
 
@@ -29,17 +25,31 @@ const productAdded = () => ({
     type: types.ADD_PRODUCTS,
 })
 
+//------------Put Products----------------------------
+const productUpdated = () => ({
+    type: types.UPDATE_PRODUCTS,
+})
 
-//------------Post Variants----------------------------
+//------------Delete Products----------------------------
+
+const productDeleted = () => ({
+    type: types.DELETE_PRODUCTS,
+})
+
+
+//------------Post Variants (do not touch)----------------------------
 const variantAdded = () => ({
     type: types.ADD_VARIANTS,
 })
 
 
+
+
+
 //------------Api Call Get Products----------------------------
 export const loadProducts = () => {
     return function (dispatch) {
-        axios.get(`${prox}https://merak-test.herokuapp.com/inventory/product/`, {headers: headers}).then((res) => {
+        axios.get(`https://merak-test.herokuapp.com/inventory/product/`, {headers: headers}).then((res) => {
             dispatch(getProducts(res.data));
         }).catch((err) => console.log(err));
     }
@@ -49,18 +59,44 @@ export const loadProducts = () => {
 //------------Api Call Post Products----------------------------
 export const addProducts = (product) => {
     return function (dispatch) {
-        axios.post(`${prox}https://merak-test.herokuapp.com/inventory/product/`, product, {headers: headers}).then((res) => {
+        axios.post(`https://merak-test.herokuapp.com/inventory/product/`, product, {headers: headers}).then((res) => {
             dispatch(productAdded());
+            dispatch(loadProducts()); //post garesi update herna hoye jabe
+        }).catch((err) => console.log(err));
+    }
+}
+
+
+//------------Api Call Update Products----------------------------
+export const updateProducts = ({uuid, updated}) => {
+    return function (dispatch) {
+        axios.put(`https://merak-test.herokuapp.com/inventory/product/${uuid}/`, updated, {headers: headers}).then((res) => {
+            dispatch(productUpdated());
             dispatch(loadProducts());
         }).catch((err) => console.log(err));
     }
 }
 
 
-//------------Api Call Post Products Variant----------------------------
+
+
+//------------Api Call Delete Products----------------------------
+
+export const deleteProducts = (uuid) => {
+    return function (dispatch) {
+        axios.delete(`https://merak-test.herokuapp.com/inventory/product/${uuid}/`, {headers: headers}).then((res) => {
+            dispatch(productDeleted());
+            dispatch(loadProducts());
+        }).catch((err) => console.log(err));
+    }
+
+}
+
+
+//------------Api Call Post Products Variant(Do not touch)----------------------------
 export const addVariants = (variant) => {
     return function (dispatch) {
-        axios.post(`${prox}https://merak-test.herokuapp.com/inventory/variant/`, variant, {headers: headers}).then((res) => {
+        axios.post(`https://merak-test.herokuapp.com/inventory/variant/`, variant, {headers: headers}).then((res) => {
             dispatch(variantAdded());
             dispatch(loadProducts());
         }).catch((err) => console.log(err));

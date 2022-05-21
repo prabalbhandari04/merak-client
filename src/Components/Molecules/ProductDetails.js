@@ -8,9 +8,7 @@ import Typography from '@mui/material/Typography';
   
 
 
-const ProductDetails = ({ product }) => {
-
- 
+const ProductDetails = ({ product }) => { 
 
   return (
 

@@ -123,7 +123,7 @@ const AddItem = () => {
         </DialogContent>
         <DialogActions style={{background: '#181818'}}>
           <Button onClick={handleClose} style={{color: 'white'}}>Cancel</Button>
-          <Button type="submit" form="product-form-id" style={{color: 'white'}} autoFocus onClick={handleClose}>
+          <Button type="submit" form="product-form-id" style={{color: '#00A7E3'}} autoFocus onClick={handleClose}>
            Add
           </Button>
         </DialogActions>
