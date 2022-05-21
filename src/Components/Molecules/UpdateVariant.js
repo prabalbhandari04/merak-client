@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-
+import axios from 'axios';
 
 import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
+import EditIcon from '@mui/icons-material/Edit';
 
 //---------------Mui Dialog -----------------
 import Button from "@mui/material/Button";
@@ -14,7 +14,18 @@ import {Grid,Typography} from "@material-ui/core";
 import TextField from '@mui/material/TextField';
 //-------------------------------------------
 
-const AddItem = () => {
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0Nzg3MjE2LCJpYXQiOjE2NTI3ODcyMTYsImp0aSI6IjcwOTkyNWY0OWViZjQ1ZDY5MmQxMzA0NjI1YjcyZGY0IiwidXNlcl9pZCI6MX0.E0X_MC9hUbRa_Sn0ji1gjAXZvrPBw1h_2TWhxUK5HEc"
+
+let headers = {
+        "Content-type": "application/json; charset=UTF-8",
+        "Authorization": 'Bearer ' + token
+};
+
+//Proxy bypass Cors
+
+const prox = "https://kissasian1988.herokuapp.com/"
+
+const UpdateVariant = () => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -24,6 +35,38 @@ const AddItem = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [name, setName] = useState('')
+  const [value, setValue] = useState('')
+  const [price, setPrice] = useState('')
+  const [quantity, setQuantity] = useState('')
+  const product = 2
+  const suk = "Baraf-L"
+
+  const updatevarient = ()=>{
+    const newvariant = {
+      'field': [{name, value}],
+      price,
+      product,
+      quantity,
+    }
+
+    const updatevarient = async () => {
+      const response = await axios.put(`https://merak-test.herokuapp.com/inventory/variant/${suk}/`, newvariant,
+      {
+        headers: headers
+      }).catch((err) => {
+        console.log('Error', err)
+      })
+
+    }
+
+    updatevarient()
+    
+
+    handleClose()
+      
+  }
 
   
 
@@ -55,25 +98,25 @@ const AddItem = () => {
                 <div className="border-invisible"></div>
 
                 <Grid item xs={12} sm={6}>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Field" label="Field" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Field" label="Field" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e)=>{setName(e.target.value)}}/>
                 </Grid>
 
                 <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Value" label="Value" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }} placeholder="Value" label="Value" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e)=>{setValue(e.target.value)}}/>
                 </Grid> 
             
 
                 <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Price" label="Price" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Price" label="Price" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e)=>{setPrice(e.target.value)}}/>
                 </Grid> 
 
                 <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e)=>{setQuantity(e.target.value)}}/>
                 </Grid> 
                 
                 <Grid item sx={{justifyContent: 'center', alignItems: 'center'}}>
                     <Button component="label" style={{color: 'white', background: 'gray'}}>
-                    <AddIcon /> &nbsp;Image
+                    <EditIcon /> &nbsp;Image
                         <input accept="image/*" hidden type="file" />
                     </Button>
                 </Grid> 
@@ -86,7 +129,7 @@ const AddItem = () => {
         </DialogContent>
         <DialogActions style={{background: '#181818'}}>
           <Button onClick={handleClose} style={{color: 'white'}}>Cancel</Button>
-          <Button onClick={handleClose} style={{color: 'white'}} autoFocus>
+          <Button onClick={updatevarient} style={{color: 'white'}} autoFocus>
            Add
           </Button>
         </DialogActions>
@@ -94,12 +137,12 @@ const AddItem = () => {
 
       <Fab
         onClick={handleClickOpen}
-        sx={{ position: "fixed", bottom: 16, right: 256 }}
+        sx={{ position: "fixed", bottom: 16, right: 512 }}
       >
-        <AddIcon />
+        <EditIcon />
       </Fab>
     </>
   );
 };
 
-export default AddItem;
+export default UpdateVariant;

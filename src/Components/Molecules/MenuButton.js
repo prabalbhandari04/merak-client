@@ -38,9 +38,6 @@ const prox = "https://kissasian1988.herokuapp.com/"
 
 
 const MenuButton = ({ product }) => {
-  console.log('=======================================================================================================================================')
-  console.log(product)
-  console.log('=======================================================================================================================================')
   const uuid = product.uuid
 
   const [name, setName] = useState(product.name)

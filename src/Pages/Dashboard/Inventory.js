@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Subtitle from '../../Components/Atoms/Subtitle';
 import AddItem from '../../Components/Molecules/AddItem'
 import AddVar from '../../Components/Molecules/AddVar'
+import UpdateVariant from '../../Components/Molecules/UpdateVariant'
 
 
 
@@ -42,6 +43,8 @@ const Inventory = () => {
         <CardList/>
 
       </Container>
+
+      <UpdateVariant />
 
       <AddVar />
 
