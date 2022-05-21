@@ -10,9 +10,39 @@ body {
   
 }
 
+
+
+::-webkit-scrollbar {
+  width: 0.469vw;
+  height: 0.469vw;
+  background: #181818;
+  border-radius: 0.391vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #eaeaea;
+  border-radius: 0.391vw;
+}
+
 /* #222222 */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.border-addproduct {
+    border-bottom: 1px solid gray;
+    width: 98%;
+    margin: 0 auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.border-invisible {
+    width: 98%;
+    margin: 0 auto;
+}
+
+
