@@ -25,10 +25,11 @@ const AddItem = () => {
     setOpen(false);
   };
 
-  
+  const addvarient = ()=>{
+      
+  }
 
   
-
   return (
     <>
       <Dialog

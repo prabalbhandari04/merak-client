@@ -1,4 +1,6 @@
-import { useSelector } from 'react-redux'; //Selecter for Redux state for allProducts(Api)
+import {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {loadProducts} from '../../Redux/Actions/productsActions';
 import styledComponents from 'styled-components' //Styled components
 import Stack from '@mui/material/Stack'; //Material Ui
 
@@ -12,23 +14,28 @@ margin: .5rem;
 
 const Stats = () => {
 
-  const allProducts = useSelector(state => state.allProducts.products);
+  const dispatch = useDispatch();
+  const {products} = useSelector(state => state.data);
+
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, [dispatch]);
  
 
   return (
     <Stack direction="row" spacing='5rem'>
     <Stack>
-      <Qu>{allProducts.length}</Qu>
+      <Qu>{products.length}</Qu>
       <span style={{color: '#00A7E3'}}>To be packed</span>
     </Stack>
 
     <Stack>
-      <Qu>{allProducts.length}</Qu>
+      <Qu>{products.length}</Qu>
       <span style={{color: '#00A7E3'}}>To be delivered</span>
     </Stack>
 
     <Stack>
-      <Qu>{allProducts.length}</Qu>
+      <Qu>{products.length}</Qu>
       <span style={{color: '#00A7E3'}}>Total in stock</span>
     </Stack>
 

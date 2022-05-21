@@ -1,5 +1,5 @@
 
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -48,35 +48,31 @@ const Card = ({ product }) => {
     setOpen(false);
   };
 
-  const { name, quantity} = product;
-  const image = product.default_image;
 
-  console.log(product)
 
-  const ref = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
     <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }} style={{cursor: 'pointer'}} onClick={handleClickOpen}>
       
       <Box sx={{ pt: '100%', position: 'relative'}}>
-        <ProductImgStyle alt={name} src={image} />
+        <ProductImgStyle alt={product.name} src={`https://merak-test.herokuapp.com${product.default_image}`}/>
       </Box>
 
       <Stack spacing={2} sx={{ p: 1}} style={{background: '#181818'}}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
           <Typography variant="subtitle1" style={{color:'gray'}} noWrap>
-            {name}
+            {product.name}
             <br></br>
-            <span style={{color: '#00A7E3'}}>{quantity} orders</span>
+            <span style={{color: '#00A7E3'}}>{product.quantity} orders</span>
           </Typography>
         </Link>
       </Stack>
     </Cards>
 
 
-
+    
+    
       <Dialog
         open={open}
         onClose={handleClose}
