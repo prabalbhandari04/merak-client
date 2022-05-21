@@ -13,12 +13,20 @@ const ProductDetails = ({ product }) => {
   return (
 
     <Card sx={{ maxWidth: 345 }} elevation={0} style={{background: '#181818', color: '#00A7E3'}}>
+       {product.default_image != null ?
         <CardMedia
           component="img"
           height="240"
           image={`https://merak-test.herokuapp.com${product.default_image}`}
           alt={product.title}
         />
+        :
+        <CardMedia
+          component="img"
+          height="240"
+          image="https://spectrumpaint.com/store/media/10071/pv/50_rhinosatin-1604334194.jpg"
+          alt={product.title}
+        />}
         <br></br>
         <CardContent style={{background: '#181818', color: '#00A7E3'}}>
           <Typography gutterBottom variant="body1" component="div">
