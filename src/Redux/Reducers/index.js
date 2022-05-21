@@ -1,9 +1,10 @@
 import {combineReducers} from 'redux';
 import { productReducer } from './productReducer';
+import {orderReducar} from './orderReducer'
 
 const reducers = combineReducers({
     allProducts: productReducer,
-    allORders: orderReducer
+
 })
 
 export default reducers;

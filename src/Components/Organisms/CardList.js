@@ -1,4 +1,3 @@
-
 import React, {useEffect} from 'react';
 import axios from 'axios';
 
@@ -12,13 +11,15 @@ import Card from '../Molecules/Card'
 import {useSelector, useDispatch} from 'react-redux';
 import {setProducts} from '../../Redux/Actions/productActions';
 
-
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
 //Authentication for Merak
 
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNzA0ODI2LCJpYXQiOjE2NTI2OTc2MjYsImp0aSI6IjFjMDhiODlkMDI4YjQ1NTE5YzlhMjA3NTUxMzU3OTc3IiwidXNlcl9pZCI6MX0.HjNpVw_DcQ1qHCHIxWcJ6aNhtmY6Cg2NfAfLOl7xaow"
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0Nzg3MjE2LCJpYXQiOjE2NTI3ODcyMTYsImp0aSI6IjcwOTkyNWY0OWViZjQ1ZDY5MmQxMzA0NjI1YjcyZGY0IiwidXNlcl9pZCI6MX0.E0X_MC9hUbRa_Sn0ji1gjAXZvrPBw1h_2TWhxUK5HEc"
 
 let headers = {
         "Content-type": "application/json; charset=UTF-8",
@@ -45,10 +46,13 @@ const CardList = () => {
         }).catch((err) => {
           console.log('Error', err)
         })
+
+        //console.log(response)
         dispatch(setProducts(response.data));
       }
       
       fetchProducts()
+
     });
 
   //Redux State for AllProducts(Api)
@@ -74,4 +78,6 @@ const CardList = () => {
   );
 }
 
-export default CardList;
+  
+
+export default CardList 

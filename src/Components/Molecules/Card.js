@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -13,6 +13,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ProductDetails from './ProductDetails';
+import styledComponents from 'styled-components';
+
+import MenuButton from './MenuButton'
 
 
 // -----------Styling Product Image---------
@@ -27,11 +30,14 @@ const ProductImgStyle = styled('img')({
 
 // ------------------------
 
-
+const Cont = styledComponents.div`
+  display: flex;
+  justify-content: space-between;
+  background: #181818;
+`
 
 const Card = ({ product }) => {
-
-  
+ 
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -42,9 +48,13 @@ const Card = ({ product }) => {
     setOpen(false);
   };
 
-
   const { name, quantity} = product;
-  const image = product.variant[0].image;
+  const image = product.default_image;
+
+  console.log(product)
+
+  const ref = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -63,21 +73,25 @@ const Card = ({ product }) => {
           </Typography>
         </Link>
       </Stack>
-      
     </Cards>
 
 
-    
-    
+
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
-          {"Product Details"}
-        </DialogTitle>
+        <Cont>
+          <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
+            {"Product Details"}
+          </DialogTitle>
+
+          <MenuButton product={product}/>       
+
+        </Cont>
+        
         <DialogContent style={{background: '#181818', color: 'gray'}}>
           <DialogContentText id="alert-dialog-description">
             <ProductDetails product={product}/>
