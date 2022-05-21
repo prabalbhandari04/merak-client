@@ -53,13 +53,13 @@ const Card = ({ product }) => {
 
 
 
-
   return (
     <>
     <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }} style={{cursor: 'pointer'}} onClick={handleClickOpen}>
       
       <Box sx={{ pt: '100%', position: 'relative'}}>
-        <ProductImgStyle alt={product.name} src={`https://merak-test.herokuapp.com${product.default_image}`}/>
+        {product.default_image != null ? <ProductImgStyle alt={product.name} src={`https://merak-test.herokuapp.com${product.default_image}`}/>
+        : <ProductImgStyle alt={product.name} src="https://spectrumpaint.com/store/media/10071/pv/50_rhinosatin-1604334194.jpg"/>}
       </Box>
 
       <Stack spacing={2} sx={{ p: 1}} style={{background: '#181818'}}>
