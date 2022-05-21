@@ -1,11 +1,11 @@
 import { ActionTypes } from "../Constants/action-types";
 
 const initialState = {
-    products: []
+    orders: []
 }
 
 
-export const productOrders = (state = initialState, {type, payload}) => {
+export const orderReducer = (state = initialState, {type, payload}) => {
     switch (type) {
         case ActionTypes.SET_ORDERS:
 
