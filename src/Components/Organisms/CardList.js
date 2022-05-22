@@ -1,9 +1,11 @@
+
 import React, {useEffect} from 'react';
 import axios from 'axios';
 
+// Material Ui
 import { Grid } from '@mui/material';
 import Card from '../Molecules/Card'
-  
+
 
 // -----------------Redux State for AllProducts(Api)-----------------------------------------------------
 
@@ -16,7 +18,7 @@ import {setProducts} from '../../Redux/Actions/productActions';
 
 //Authentication for Merak
 
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNzYyNDQ5LCJpYXQiOjE2NTI3NTUyNDksImp0aSI6IjA3NDhjMzc0NmQ1ODQ1YzlhYmU5YzIzMmU4Zjc0Y2QzIiwidXNlcl9pZCI6MX0.Lx8M0sbl0NUdIxRsWX9E05FlGKoGj6N_v9feTEq73DM"
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyNzA0ODI2LCJpYXQiOjE2NTI2OTc2MjYsImp0aSI6IjFjMDhiODlkMDI4YjQ1NTE5YzlhMjA3NTUxMzU3OTc3IiwidXNlcl9pZCI6MX0.HjNpVw_DcQ1qHCHIxWcJ6aNhtmY6Cg2NfAfLOl7xaow"
 
 let headers = {
         "Content-type": "application/json; charset=UTF-8",
@@ -72,6 +74,4 @@ const CardList = () => {
   );
 }
 
-  
-
-export default CardList 
+export default CardList;

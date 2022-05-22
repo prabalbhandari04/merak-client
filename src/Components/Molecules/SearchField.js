@@ -4,6 +4,10 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 // import OutlinedInput from '@mui/material/OutlinedInput';
+  import Scroll from './Scroll';
+  import SearchList from './SearchList';
+import {useState} from 'react';
+
 
 const TxtField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
@@ -22,15 +26,54 @@ const TxtField = styled(TextField)({
   });
   
 
-const SearchField = () => {
+const SearchField = ({details}) => {
+
+  
+  const [search, setSearch] = useState("");
+
+
+    const filteredProduct = details.filter(
+      product => {
+        return (
+          product
+          .title
+          .toLowerCase()
+          .includes(search.toLowerCase()) 
+          // ||
+          // product
+          // .quantity
+          // .toLowerCase()
+          // .includes(search.toLowerCase())
+        );
+      }
+    );
+  
+    const handleChange = e => {
+      setSearch(e.target.value);
+    };
+
+   
+  
+   
+
+    function searchList() {
+      return (
+          <SearchList filteredProduct={filteredProduct} />
+      );
+    }
+
+
+
     return (
+      <>
         <TxtField 
         id="outlined-basic" 
         label="Search Item" 
         variant="outlined" 
         sx={{ input: { color: 'white'}}} 
         InputLabelProps={{ style: { color: 'white' } }} 
-        color='secondary' 
+        color='secondary'
+        onChange = {handleChange} 
         endadornment={
           <InputAdornment position="end">
             <IconButton edge="end">
@@ -39,7 +82,13 @@ const SearchField = () => {
           </InputAdornment>
         }
         />
+       
+        {searchList()}
+        </>
     );
   }
   
   export default SearchField;
+
+  
+  
