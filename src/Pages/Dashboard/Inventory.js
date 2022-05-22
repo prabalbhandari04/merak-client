@@ -9,9 +9,9 @@ import Box from '@mui/material/Box';
 
 //Component - Atoms
 import Subtitle from '../../Components/Atoms/Subtitle';
-// import AddItem from '../../Components/Molecules/AddItem';
-import AddOrder from '../../Components/Molecules/AddOrder';
-
+// import AddOrder from '../../Components/Molecules/AddOrder';
+import AddItem from '../../Components/Molecules/AddItem';
+import Card from '../../Components/Molecules/Card';
 
 
 const Inventory = () => {
@@ -40,10 +40,9 @@ const Inventory = () => {
         <Box sx={{ m: '2rem' }} /> 
 
         <CardList/>
-
       </Container>
-
-      <AddOrder/>
+      <Card/>
+      <AddItem/>
     </>
   )
 }

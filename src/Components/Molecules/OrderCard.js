@@ -57,9 +57,8 @@ const Card = ({ product }) => {
       <Stack spacing={2} sx={{ p: 1}} style={{background: '#181818'}}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
           <Typography variant="subtitle1" style={{color:'gray'}} noWrap>
-            {name}
             <br></br>
-            <span style={{color: '#00A7E3'}}>{quantity} orders</span>
+            <span style={{color: '#00A7E3'}}>orders</span>
           </Typography>
         </Link>
       </Stack>
@@ -76,7 +75,7 @@ const Card = ({ product }) => {
         </DialogTitle>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
           <DialogContentText id="alert-dialog-description">
-            <OrderDetails product={product}/>
+            <OrderDetails order="order"/>
           </DialogContentText>
         </DialogContent>
       </Dialog>

@@ -10,8 +10,8 @@ import Typography from '@mui/material/Typography';
 
 const OrderDetails = ({ product }) => {
 
-  const image = order.variant[0].image;
-  const price = order.variant[0].price;
+  // const image = order.variant[0].image;
+  // const price = order.variant[0].price;
 
   return (
 
@@ -37,7 +37,7 @@ const OrderDetails = ({ product }) => {
           </Typography>
           <br></br>
           <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
-           <span style={{color: 'gray'}}> Status: </span> Rs{price}
+           <span style={{color: 'gray'}}> Status: </span> Rs
           </Typography>
           <br></br>
           <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">

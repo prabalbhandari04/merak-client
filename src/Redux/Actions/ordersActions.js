@@ -18,54 +18,54 @@ const prox = "https://kissasian1988.herokuapp.com/"
 
 
 //------------Get Products----------------------------
-const getProducts = (products) => ({
-    type: types.GET_PRODUCTS,
-    payload: products,
+const getOrders = (orders) => ({
+    type: types.GET_ORDERS,
+    payload: orders,
 })
 
 
 //------------Post Products----------------------------
-const productAdded = () => ({
+const productOrders = () => ({
     type: types.ADD_PRODUCTS,
 })
 
 
 //------------Post Variants----------------------------
-const variantAdded = () => ({
-    type: types.ADD_VARIANTS,
-})
+// const variantAdded = () => ({
+//     type: types.ADD_VARIANTS,
+// })
 
 
 //------------Api Call Get Products----------------------------
-export const loadProducts = () => {
+export const loadOrders = () => {
     return function (dispatch) {
-        axios.get(`${prox}https://merak-test.herokuapp.com/inventory/product/`, {headers: headers}).then((res) => {
-            dispatch(getProducts(res.data));
+        axios.get(`${prox}https://merak-test.herokuapp.com/inventory/order/`, {headers: headers}).then((res) => {
+            dispatch(getOrders(res.data));
         }).catch((err) => console.log(err));
     }
 }
 
 
 //------------Api Call Post Products----------------------------
-export const addProducts = (product) => {
+export const addOrders = (product) => {
     return function (dispatch) {
-        axios.post(`${prox}https://merak-test.herokuapp.com/inventory/product/`, product, {headers: headers}).then((res) => {
-            dispatch(productAdded());
-            dispatch(loadProducts());
+        axios.post(`${prox}https://merak-test.herokuapp.com/inventory/order/`, product, {headers: headers}).then((res) => {
+            dispatch(orderAdded());
+            dispatch(loadOrders());
         }).catch((err) => console.log(err));
     }
 }
 
 
-//------------Api Call Post Products Variant----------------------------
-export const addVariants = (variant) => {
-    return function (dispatch) {
-        axios.post(`${prox}https://merak-test.herokuapp.com/inventory/variant/`, variant, {headers: headers}).then((res) => {
-            dispatch(variantAdded());
-            dispatch(loadProducts());
-        }).catch((err) => console.log(err));
-    }
-}
+// //------------Api Call Post Products Variant----------------------------
+// export const addVariants = (variant) => {
+//     return function (dispatch) {
+//         axios.post(`${prox}https://merak-test.herokuapp.com/inventory/variant/`, variant, {headers: headers}).then((res) => {
+//             dispatch(variantAdded());
+//             dispatch(loadProducts());
+//         }).catch((err) => console.log(err));
+//     }
+// }
 
 
 
