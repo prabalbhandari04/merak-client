@@ -1,7 +1,9 @@
 
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
+import MenuButton from './MenuButton';
+import styledComponents from 'styled-components';
 
 // Material Ui Components
 import { Box, Link, Card as Cards, Typography, Stack } from '@mui/material';
@@ -13,9 +15,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ProductDetails from './ProductDetails';
-import styledComponents from 'styled-components';
-
-import MenuButton from './MenuButton'
 
 
 // -----------Styling Product Image---------
@@ -30,14 +29,18 @@ const ProductImgStyle = styled('img')({
 
 // ------------------------
 
-const Cont = styledComponents.div`
+
+const Container = styledComponents.div`
   display: flex;
   justify-content: space-between;
   background: #181818;
 `
 
+
+
 const Card = ({ product }) => {
- 
+
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -48,52 +51,51 @@ const Card = ({ product }) => {
     setOpen(false);
   };
 
-  const { name, quantity} = product;
-  const image = product.default_image;
 
-  console.log(product)
-
-  const ref = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
     <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }} style={{cursor: 'pointer'}} onClick={handleClickOpen}>
       
       <Box sx={{ pt: '100%', position: 'relative'}}>
-        <ProductImgStyle alt={name} src={image} />
+        {product.default_image != null ? <ProductImgStyle alt={product.name} src={`https://merak-test.herokuapp.com${product.default_image}`}/>
+        : <ProductImgStyle alt={product.name} src="https://spectrumpaint.com/store/media/10071/pv/50_rhinosatin-1604334194.jpg"/>}
       </Box>
 
       <Stack spacing={2} sx={{ p: 1}} style={{background: '#181818'}}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
           <Typography variant="subtitle1" style={{color:'gray'}} noWrap>
-            {name}
+            {product.name}
             <br></br>
-            <span style={{color: '#00A7E3'}}>{quantity} orders</span>
+            <span style={{color: '#00A7E3'}}>{product.quantity} orders</span>
           </Typography>
         </Link>
       </Stack>
+      
     </Cards>
 
 
-
+    
+    
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <Cont>
+        <Container>
+
           <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
             {"Product Details"}
           </DialogTitle>
+          
+          <MenuButton product={product}/>
 
-          <MenuButton product={product}/>       
+        </Container>
 
-        </Cont>
-        
+
         <DialogContent style={{background: '#181818', color: 'gray'}}>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText id="alert-dialog-description" component="div">
             <ProductDetails product={product}/>
           </DialogContentText>
         </DialogContent>
@@ -102,6 +104,7 @@ const Card = ({ product }) => {
     </>
   );
 }
+
 
 
 export default Card;

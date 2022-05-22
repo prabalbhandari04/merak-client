@@ -13,9 +13,41 @@ import DialogTitle from "@mui/material/DialogTitle";
 import {Grid,Typography} from "@material-ui/core";
 import TextField from '@mui/material/TextField';
 //-------------------------------------------
+import {useDispatch} from "react-redux";
+import {addProducts} from '../../Redux/Actions/productsActions';
+// import {addVariants} from "../../Redux/Actions/productsActions";
+
+
+
+
 
 const AddItem = () => {
   const [open, setOpen] = React.useState(false);
+
+  let dispatch = useDispatch();
+
+
+  const [state, setState] = React.useState({
+    name: '',
+    description: '',
+    default_price: '',
+  });
+
+
+
+  const {name,  description} = state;
+
+  const handleInputChange = (e) => {
+    let {name, value} = e.target;
+    setState({...state, [name]: value});
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addProducts(state));
+  }
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -40,25 +72,22 @@ const AddItem = () => {
         <Grid style={{ maxWidth: 450, padding: "5px 5px", margin: "0 auto" }}>
         
         <Typography variant="body2" style={{color: 'white'}} component="p" gutterBottom>
-          *Indicates a required field
+          
       </Typography> 
 
-        <form id="metadata-form-id">
+        <form id="product-form-id" onSubmit={handleSubmit}>
           <Grid container spacing={1} style={{color: 'white'}}>
-            <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Product Name" label="Product Name" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+            <Grid item xs={12}>
+              <TextField sx={{ input: { color: 'black', background: 'white' } }} name="name" InputLabelProps={{ style: { color: 'black' } }}  value={name} onChange={handleInputChange} placeholder="Product Name" label="Product Name" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
             </Grid>
 
-            <Grid xs={12} sm={6} item>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
-            </Grid> 
          
            
             <Grid item xs={12}>
-              <TextField InputProps={{ style: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  label="Description" multiline rows={4} placeholder="Description" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+              <TextField InputProps={{ style: { color: 'black', background: 'white' } }} name="description" InputLabelProps={{ style: { color: 'black' } }} value={description} onChange={handleInputChange}  label="Description" multiline rows={4} placeholder="Description" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
             </Grid>
 
-                <div className="border-addproduct"></div>
+                {/* <div className="border-addproduct"></div>
 
                 <Typography variant="body1" style={{color: 'white'}} component="p" gutterBottom>
                     &nbsp; Variants
@@ -76,15 +105,15 @@ const AddItem = () => {
             
 
                 <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Price" label="Price" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
-                </Grid> 
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="default_price" value={default_price} onChange={handleInputChange} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Price" label="Price" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                </Grid>  */}
                 
-                <Grid item sx={{justifyContent: 'center', alignItems: 'center'}}>
+                {/* <Grid item sx={{justifyContent: 'center', alignItems: 'center'}}>
                     <Button component="label" style={{color: 'white', background: 'gray'}}>
                     <AddIcon /> &nbsp;Image
                         <input accept="image/*" hidden type="file" />
                     </Button>
-                </Grid> 
+                </Grid>  */}
             
             
           </Grid>
@@ -94,7 +123,7 @@ const AddItem = () => {
         </DialogContent>
         <DialogActions style={{background: '#181818'}}>
           <Button onClick={handleClose} style={{color: 'white'}}>Cancel</Button>
-          <Button onClick={handleClose} style={{color: 'white'}} autoFocus>
+          <Button type="submit" form="product-form-id" style={{color: '#00A7E3'}} autoFocus onClick={handleClose}>
            Add
           </Button>
         </DialogActions>

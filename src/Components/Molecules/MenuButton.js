@@ -1,10 +1,4 @@
 import React, {useRef, useState} from 'react';
-import axios from 'axios';
-
-import { Link as RouterLink } from 'react-router-dom';
-
-// Material Ui Components
-import { Typography, Grid } from '@mui/material';
 
 // Material Ui
 import Dialog from '@mui/material/Dialog';
@@ -17,159 +11,133 @@ import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
-
 import TextField from '@mui/material/TextField';
 
-// material
+import { Typography, Grid } from '@mui/material';
+
 import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
 
-//Authentication for Merak
 
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY0Nzg3MjE2LCJpYXQiOjE2NTI3ODcyMTYsImp0aSI6IjcwOTkyNWY0OWViZjQ1ZDY5MmQxMzA0NjI1YjcyZGY0IiwidXNlcl9pZCI6MX0.E0X_MC9hUbRa_Sn0ji1gjAXZvrPBw1h_2TWhxUK5HEc"
+//Redux
+import { useDispatch } from 'react-redux';
+import { deleteProducts, updateProducts } from '../../Redux/Actions/productsActions';
 
-let headers = {
-        "Content-type": "application/json; charset=UTF-8",
-        "Authorization": 'Bearer ' + token
-};
 
-//Proxy bypass Cors
 
-const prox = "https://kissasian1988.herokuapp.com/"
 
 
 const MenuButton = ({ product }) => {
-  console.log('=======================================================================================================================================')
-  console.log(product)
-  console.log('=======================================================================================================================================')
-  const uuid = product.uuid
+    
+  const dispatch = useDispatch();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+
+  const ref = useRef(null);
 
   const [name, setName] = useState(product.name)
   const [description, setDescription] = useState(product.description)
  
-  const [oopen, setOOpen] = useState(false);
-
-  const handleClickOOpen = () => {
-    setIsOpen(false)
-    setOOpen(true);
-  };
-
-  const delete_button = () =>{
-    const deleteProduct = async () => {
-      const response = await axios.delete(`https://merak-test.herokuapp.com/inventory/product/${uuid}`,
-      {
-        headers: headers
-      }).catch((err) => {
-        console.log('Error', err)
-      })
-
-    }
-
-    deleteProduct()
-    
-    setOOpen(false);
-  }
-
-  const handleCloose = () => {
-    setOOpen(false);
-  };
-
-  const editProduct = ()=>{
-
-    handleClickOOOpen()
-    setIsOpen(false)
-  }
-
-  const [ooopen, setOOOpen] = React.useState(false);
-
-  const handleClickOOOpen = () => {
-    setOOOpen(true);
-  };
-
-  const handleClooose = () => {
-    setOOOpen(false);
-  };
-
-  const editaxios = ()=>{
-    const updated = {
-      name,
-      description
-    }
-
-    const updateproduct = async () => {
-      const response = await axios.put(`https://merak-test.herokuapp.com/inventory/product/${uuid}/`, updated,
-      {
-        headers: headers
-      }).catch((err) => {
-        console.log('Error', err)
-      })
-
-    }
-
-    updateproduct()
-
-    handleClooose()
-  }
   
 
-  console.log(product)
+  const handleClickOpen2 = () => {
+    setIsOpen(false)
+    setOpen2(true);
+  };
 
-  const ref = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const handleClickOpen3 = () => {
+    setOpen3(true);
+  };
+
+  
+
+  const handleClose2 = () => {
+    setOpen2(false);
+  };
+
+  const handleClose3 = () => {
+    setOpen3(false);
+  };
+
+
+  const updateProduct = () => {
+
+    handleClickOpen3()
+    setIsOpen(false)
+  }
+
+
+  //Api ma updated data pathako
+  const handleUpdate = (uuid) => {
+
+    const updated = {name, description}
+    dispatch(updateProducts({uuid, updated}))
+    handleClose3()
+
+  }
+  
+  //Api ma delete garne data ko uuid pathako
+  const handleDelete = (uuid) => {
+    dispatch(deleteProducts(uuid));
+    setOpen2(false);
+  }
+
+
 
   return (
     <>
         <IconButton ref={ref} onClick={() => setIsOpen(true)}>
               <MoreVertIcon style={{ color: 'white' }}/>
-          </IconButton>
+        </IconButton>
 
           <Menu
             open={isOpen}
             anchorEl={ref.current}
             onClose={() => setIsOpen(false)}
             PaperProps={{
-              sx: { width: 200, maxWidth: '100%' },
+              sx: { width: 200, maxWidth: '100%', background: '#181818'},
             }}
             style={{ color: '#181818'}}
-            // anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            // transformOrigin={{ vertical: 'top', horizontal: 'right' }}
           >
 
-            <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }} onClick={() => editProduct()}>
-              <ListItemIcon>
+            <MenuItem sx={{ color: 'white' }} onClick={() => updateProduct()}>
+              <ListItemIcon style={{color: 'white'}}>
                 <EditIcon />
               </ListItemIcon>
               <ListItemText primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
             </MenuItem>
 
-            <Divider sx={{ my: 0.5 }} />
+            <Divider sx={{ my: 0.5, background: 'gray'}} />
 
-            <MenuItem sx={{ color: 'text.secondary' }} onClick={() => handleClickOOpen()}>
-              <ListItemIcon >
+            <MenuItem sx={{ color: 'text.secondary' }} onClick={() => handleClickOpen2()}>
+              <ListItemIcon  style={{color: 'white'}}>
                 <DeleteIcon style={{ color: 'red' }}/>
               </ListItemIcon>
               <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} style={{ color: 'red' }}/>
             </MenuItem>
+
           </Menu>
           
 
 
           <Dialog
-            open={oopen}
-            onClose={handleCloose}
+            open={open2}
+            onClose={handleClose2}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">
+            <DialogTitle id="alert-dialog-title" style={{color: 'white', background: '#181818'}}>
               {"Delete this product?"}
             </DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Are you sure you want to delete the product {product.name}?
+            <DialogContent style={{color: 'white', background: '#181818'}}>
+              <DialogContentText id="alert-dialog-description" style={{color: 'white'}}>
+                Are you sure you want to delete the product <span style={{color: 'gray'}}>{product.name}</span>
               </DialogContentText>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloose}>Cancel</Button>
-              <Button onClick={delete_button} autoFocus style={{ color: 'red' }}>
+            <DialogActions style={{color: 'white', background: '#181818'}}>
+              <Button onClick={handleClose2} style={{color: 'white'}}>Cancel</Button>
+              <Button autoFocus style={{ color: 'red' }} onClick={() => handleDelete(product.uuid)}>
                 Delete
               </Button>
             </DialogActions>
@@ -178,8 +146,8 @@ const MenuButton = ({ product }) => {
 
 
       <Dialog
-        open={ooopen}
-        onClose={handleClooose}
+        open={open3}
+        onClose={handleClose3}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -193,7 +161,7 @@ const MenuButton = ({ product }) => {
           *Indicates a required field
       </Typography> 
 
-        <form id="metadata-form-id">
+        <form id="product-form">
           <Grid container spacing={1} style={{color: 'white'}}>
             <Grid item xs={12}>
               <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Product Name" label="Product Name" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} value={name} onChange={(e)=>{setName(e.target.value)}}/>
@@ -202,16 +170,18 @@ const MenuButton = ({ product }) => {
             <Grid item xs={12}>
               <TextField InputProps={{ style: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  label="Description" multiline rows={4} placeholder="Description" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} value={description} onChange={(e)=>{setDescription(e.target.value)}}/>
             </Grid>  
+            </Grid>
+        </form>
 
-            <DialogActions style={{background: '#181818'}}>
-          <Button onClick={handleClooose} style={{color: 'white'}}>Cancel</Button>
-          <Button onClick={editaxios} style={{color: 'white'}} autoFocus>
+        <DialogActions style={{background: '#181818'}}>
+          <Button onClick={handleClose3} style={{color: 'white'}}>Cancel</Button>
+          <Button style={{color: '#00A7E3'}} form="product-form" autoFocus onClick={() => handleUpdate(product.uuid)}>
            Update
           </Button>
         </DialogActions>         
             
-          </Grid>
-        </form>
+          
+       
      
     </Grid>
         </DialogContent>
