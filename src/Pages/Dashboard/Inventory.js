@@ -1,67 +1,136 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react';
+import styledComponents from 'styled-components'
 
-//Component - Molecule
-import AddProduct from '../../Components/Molecules/AddProduct';
-
-//Component - Organism 
+//Component - Organisms 
 import CardList from '../../Components/Organisms/CardList'
+import Stats from '../../Components/Organisms/Stats'
+
+//Component - Atoms
+import Subtitle from '../../Components/Atoms/Subtitle';
+import AddItem from '../../Components/Molecules/AddItem';
+import Title from '../../Components/Atoms/Title';
+
+//Redux
+import {useSelector, useDispatch} from 'react-redux';
+import {loadProducts} from '../../Redux/Actions/productsActions';
 
 // material -ui
 import { Container} from '@mui/material';
-
-//Component - Atoms
-import Title from '../../Components/Atoms/Title';
-import Subtitle from '../../Components/Atoms/Subtitle';
-
-
-//Dummy Array Data
-const delivered = [
-  {
-    id: 1,
-    img: "https://imgs.search.brave.com/M3I0djBm_PCYQ44FDVmtJEai1am2wNJu6C6dDj72ODc/rs:fit:1200:1200:1/g:ce/aHR0cDovL2Nkbi5w/aW5jaG9meXVtLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvTmlj/ZS1DcmVhbS02Lmpw/Zw",
-    title: "Icecream",
-    quantity: "12"
-  },
-  {
-    id: 2,
-    img: "https://shoppinglife.lk/wp-content/uploads/2021/11/olive-oil-1-922x1024.png",
-    title: "Extra virgin olive oil",
-    quantity: "10"
-  },
-]
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import SearchIcon from '@mui/icons-material/Search';
+import { styled } from '@mui/material/styles';
+import InputAdornment from '@mui/material/InputAdornment';
 
 
-const packed = [
-  {
-    id: 1,
-    img: "https://shoppinglife.lk/wp-content/uploads/2021/11/olive-oil-1-922x1024.png",
-    title: "Extra virgin olive oil",
-    quantity: "5"
-  },
+
+
+
+//-------Custom Styling----------------------------
+const TxtField = styled(TextField)({
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'gray',
+        borderRadius: '10px',
+      },
   
-]
+      '&:hover fieldset': {
+        borderColor: 'gray',
+      },
+  
+      '&.Mui-focused fieldset': {
+        borderColor: 'gray',
+      },
+    },
+  });
 
 
-
+const Topbar = styledComponents.div`
+  display: flex;
+  justify-content: space-between;
+`
+//-------------------------------------------------
 
 
 const Inventory = () => {
+
+  const dispatch = useDispatch(); //Redux Dispatch
+  const {products} = useSelector(state => state.data); //Redux State
+  const [search, setSearch] = useState("");
+
+  //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, [dispatch]);
+    
+
+  //Filtering Products
+  const filteredProduct = products.filter(
+      product => {
+        return (
+          product
+          .name
+          .toLowerCase()
+          .includes(search.toLowerCase()) 
+        );
+      }
+    );
+  
+    const handleChange = e => {
+      setSearch(e.target.value);
+    };
+
+
 
   return (
     <>
       <Container style={{marginTop: '30px'}}>
 
-          <Title title="Inventory" />  
 
-          <Subtitle title="To be Delivered" />  
+      {/* TopBar Content */}
+      <Topbar>
+
+        <Title title="Inventory" />  
+
+        <TxtField id="outlined-basic" label="Search Item" variant="outlined" sx={{ input: { color: 'white'}}} 
+        InputLabelProps={{ style: { color: 'gray' } }} color='secondary' onChange = {handleChange} 
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon style={{color: 'gray'}}/>
+            </InputAdornment>
+           )
+          }}
+        />
+
+      </Topbar>
+
         
-          <CardList products={delivered} />
 
-          <Subtitle title="To be Packed" />  
+        {/* Body Content */}
 
-          <CardList products={packed} />
+
+        <Subtitle title="Storage Stats" /> 
+
+        <Stats/>
+
+        <Box sx={{ m: '2rem' }} /> 
+
+        <Subtitle title="To be Delivered" />
+
+        <Box sx={{ m: '2rem' }} />   
+       
+        <CardList filteredProduct={filteredProduct}/>
+
+        <Subtitle title="To be Packed" />  
+
+        <Box sx={{ m: '2rem' }} /> 
+
+        <CardList filteredProduct={filteredProduct}/>
+
       </Container>
-      <AddProduct/>
+
+      <AddItem/>
     </>
   )
 }
