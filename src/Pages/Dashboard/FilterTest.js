@@ -1,5 +1,5 @@
 // import React, { useEffect, useMemo, useState } from "react";
-// import CardList from '../../Components/Organisms/CardList'
+// import CardFilter from '../../Components/Organisms/CardFilter'
 
 // //Filter list by category in React JS
 // const FilterTest = () => {
@@ -109,11 +109,14 @@
 // }
 
 //   // Avoid duplicate function calls with useMemo
-//   const filteredList = useMemo(getFilteredList, [selectedCategory, productList]);
+//   const filteredLists = useMemo(getFilteredList, [selectedCategory, productList]);
 //   const filteredListPrice = useMemo(getFilteredListPrice, [selectedPrice, productList]);
   
-//   const totalFilter = arrayUnique(filteredList.concat(filteredListPrice));
-//   const filteredProduct =  totalFilter;
+//   // const totalFilter = arrayUnique(filteredLists.concat(filteredListPrice));
+
+//   const temp = filteredLists.concat(filteredListPrice)
+//   const temp2 = arrayUnique(temp)
+//   const filteredList=  temp2;
   
 //   function handleCategoryChange(event) {
 //     setSelectedCategory(event.target.value);
@@ -155,7 +158,7 @@
 //           </select>
 //         </div>
 //       </div>
-//       <CardList filteredProduct = {filteredProduct}/>
+//       <CardFilter filteredList = {filteredList}/>
 //     </div>
 //   );
 // }
