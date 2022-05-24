@@ -1,48 +1,55 @@
 import React from 'react'
-import {Typography, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
-//-----------------------------------------
-import PropTypes from 'prop-types';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
   
   
-  const ProductImgStyle = styled('img')({
-      top: 50,
-      left:430,
-      width: '40%',
-      height: '70%',
-      objectFit: 'cover',
-      position: 'absolute',
-  
-    });
 
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ product }) => { 
 
+  return (
 
-return (
-        <div>
-            <ProductImgStyle alt={product.title} src={product.img} />
-            <Stack spacing={2} sx={{ p: 1}} style={{background: 'black',position:'absolute',top:50,left:10}} >
-                <Typography variant="subtitle1" style={{color:'gray'}} noWrap component="span">
-                  <h1>{product.title}</h1>
-                  <span style={{color: '#00A7E3'}}>Description: {product.description}</span>
-                  <br></br>
-                  <span style={{color: '#00A7E3'}}>Price: {product.price} Nrs</span>
-                  <br></br>
-                  <span style={{color: '#00A7E3'}}>Stock: {product.quantity} Pcs</span>
-                </Typography>
-            </Stack>
-      
-            </div>
+    <Card sx={{ maxWidth: 345 }} elevation={0} style={{background: '#181818', color: '#00A7E3'}}>
+       {product.default_image != null ?
+        <CardMedia
+          component="img"
+          height="240"
+          image={`https://merak-test.herokuapp.com${product.default_image}`}
+          alt={product.title}
+        />
+        :
+        <CardMedia
+          component="img"
+          height="240"
+          image="https://spectrumpaint.com/store/media/10071/pv/50_rhinosatin-1604334194.jpg"
+          alt={product.title}
+        />}
+        <br></br>
+        <CardContent style={{background: '#181818', color: '#00A7E3'}}>
+          <Typography gutterBottom variant="body1" component="div">
+           <span style={{color: 'gray'}}> Title: </span> {product.name} 
+          </Typography>
+          <br></br>
+          <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
+           <span style={{color: 'gray'}}> Description: </span> {product.description}
+          </Typography>
+          <br></br>
+          <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
+           <span style={{color: 'gray'}}> Price: </span> Rs {product.default_price}
+          </Typography>
+          <br></br>
+          <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
+           <span style={{color: 'gray'}}> Quantity: </span> {product.quantity}pcs
+          </Typography>
+        </CardContent>
+
+    </Card>
 )
 };
 
-
-
-ProductDetails.propTypes = {
-    product: PropTypes.object,
-  };
 
 
 
