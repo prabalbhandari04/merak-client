@@ -79,8 +79,6 @@ const AddOrder = () => {
                 <FormControl variant="filled" sx={{ m: 1}} InputLabelProps={{ style: { color: 'black' } }} fullWidth >
                     <InputLabel id="demo-simple-select-filled-label">Assigned To</InputLabel>
                     <Select style ={{backgroundColor:"white"}} InputLabelProps={{ style: { color: 'black' } }}
-                        // name={value}
-                        // value ={value}
                         onChange={handleChange}
                         >
                           {optionsMember?.map(option=> {
@@ -96,7 +94,7 @@ const AddOrder = () => {
             <Grid item xs={12} sm={6}>
                 <FormControl variant="filled" sx={{ m: 1}} InputLabelProps={{ style: { color: 'black' } }} fullWidth >
                     <InputLabel id="demo-simple-select-filled-label">Items</InputLabel>
-                    <Select
+                    <Select style ={{backgroundColor:"white"}} InputLabelProps={{ style: { color: 'black' } }}
                         onChange={handleChange}
                         >
                           {optionsItem?.map(option=> {
