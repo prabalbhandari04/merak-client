@@ -28,10 +28,24 @@ const AddOrder = () => {
     setOpen(false);
   };
     const [assign, setAssign] = React.useState('');
+    const [items, setItems] = React.useState('');
 
     const handleChange = (event) => {
         setAssign(event.target.value);
+        setItems(event.target.value);
     };
+  
+    const optionsMember = [
+      {label: 'React',      value: 'react'},
+      {label: 'JavaScript', value: 'js'   },
+      {label: 'TypeScript', value: 'ts'   }
+  ];
+
+  const optionsItem = [
+    {label: 'React',      value: 'react'},
+    {label: 'JavaScript', value: 'js'   },
+    {label: 'TypeScript', value: 'ts'   }
+];
 
   return (
     <>
@@ -64,62 +78,38 @@ const AddOrder = () => {
             <Grid item xs={12} sm={6}>
                 <FormControl variant="filled" sx={{ m: 1}} InputLabelProps={{ style: { color: 'black' } }} fullWidth >
                     <InputLabel id="demo-simple-select-filled-label">Assigned To</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-filled-label"
-                        id="demo-simple-select-filled"
-                        value={assign}
+                    <Select style ={{backgroundColor:"white"}} InputLabelProps={{ style: { color: 'black' } }}
+                        // name={value}
+                        // value ={value}
                         onChange={handleChange}
                         >
-                        <MenuItem value="">
-                            <em>None</em>
+                          {optionsMember?.map(option=> {
+                            return(
+                              <MenuItem key={option.value} value={option.value}>
+                              {option.label ?? option.value}
+                              </MenuItem>
+                            );
+                          })}
+                    </Select>
+                </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+                <FormControl variant="filled" sx={{ m: 1}} InputLabelProps={{ style: { color: 'black' } }} fullWidth >
+                    <InputLabel id="demo-simple-select-filled-label">Items</InputLabel>
+                    <Select
+                        onChange={handleChange}
+                        >
+                          {optionsItem?.map(option=> {
+                            return(
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label ?? option.value}
                         </MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        );
+                      })}
                     </Select>
                 </FormControl>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Order Name" label="Product Name" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
-            </Grid>
-
-            <Grid xs={12} sm={6} item>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
-            </Grid> 
-         
-           
-            <Grid item xs={12}>
-              <TextField InputProps={{ style: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  label="Description" multiline rows={4} placeholder="Description" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
-            </Grid>
-
-                <div className="border-addproduct"></div>
-
-                <Typography variant="body1" style={{color: 'white'}} component="p" gutterBottom>
-                    &nbsp; Variants
-                </Typography>
-
-                <div className="border-invisible"></div>
-
-                <Grid item xs={12}>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Field" label="Field" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
-                </Grid>
-
-                <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Value" label="Value" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
-                </Grid> 
-            
-
-                <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Price" label="Price" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
-                </Grid> 
-                
-                <Grid item sx={{justifyContent: 'center', alignItems: 'center'}}>
-                    <Button component="label" style={{color: 'white', background: 'gray'}}>
-                    <AddIcon /> &nbsp;Image
-                        <input accept="image/*" hidden type="file" />
-                    </Button>
-                </Grid> 
             
             
           </Grid>
