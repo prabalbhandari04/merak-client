@@ -130,9 +130,9 @@ const Inventory = () => {
   const [selectedCategory, setSelectedCategory] = useState();
   const [selectedPrice, setSelectedPrice] = useState();
   // Add default value on page load
-  useEffect(() => {
-    setProductList(items);
-  }, []);
+  // useEffect(() => {
+  //   setProductList(items);
+  // }, []);
 
   // Function to get filtered list
   function getFilteredList() {
@@ -258,8 +258,8 @@ const Inventory = () => {
               style = {{marginLeft: '10px', marginRight: '10px', marginTop: '10px', marginBottom: '10px'}}
             >
               <option value="">All</option>
-              <option value="500">>Rs 500</option>
-              <option value="1000">>Rs 1000</option>
+              <option value="500">Rs 500</option>
+              <option value="1000">Rs 1000</option>
               <option value="1500">Rs 1000-1500</option>
             </select>
           </div>
