@@ -40,6 +40,7 @@ const Container = styledComponents.div`
 
 const Card = ({ product }) => {
 
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -103,6 +104,7 @@ const Card = ({ product }) => {
     </>
   );
 }
+
 
 
 export default Card;
