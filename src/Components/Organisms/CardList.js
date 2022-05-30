@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 
 // Material Ui
@@ -13,7 +13,7 @@ const CardList = ({filteredProduct}) => {
   return (
     <>
     
-    <Grid container spacing={3} style={{marginBottom: '30px',marginTop : '30px'}}>
+    <Grid container spacing={3} style={{marginBottom: '30px'}}>
 
       {filteredProduct && filteredProduct.map((product, index) => (
         <Grid  key={index} item xs={12} sm={6} md={3}>

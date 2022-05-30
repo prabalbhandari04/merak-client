@@ -7,7 +7,8 @@ import Stats from '../../Components/Organisms/Stats'
 
 //Component - Atoms
 import Subtitle from '../../Components/Atoms/Subtitle';
-import AddItem from '../../Components/Molecules/AddItem';
+// import AddItem from '../../Components/Molecules/AddItem';
+import AddOrder from '../../Components/Molecules/AddOrder';
 import Title from '../../Components/Atoms/Title';
 
 //Redux
@@ -21,78 +22,45 @@ import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
-
-
-
-
+import Grid from '@mui/material/Grid';
+import Button from "@mui/material/Button";
 
 //-------Custom Styling----------------------------
 const TxtField = styled(TextField)({
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'gray',
-        borderRadius: '10px',
-      },
-  
-      '&:hover fieldset': {
-        borderColor: 'gray',
-      },
-  
-      '&.Mui-focused fieldset': {
-        borderColor: 'gray',
-      },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'gray',
+      borderRadius: '10px',
     },
-  });
 
+    '&:hover fieldset': {
+      borderColor: 'gray',
+    },
+
+    '&.Mui-focused fieldset': {
+      borderColor: 'gray',
+    },
+  },
+});
 
 const Topbar = styledComponents.div`
   display: flex;
   justify-content: space-between;
 `
-//-------------------------------------------------
 
 
 const Order = () => {
-
-  const dispatch = useDispatch(); //Redux Dispatch
-  const {products} = useSelector(state => state.data); //Redux State
   const [search, setSearch] = useState("");
-
-  //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
-  useEffect(() => {
-    dispatch(loadProducts());
-  }, [dispatch]);
-    
-
-  //Filtering Products
-  const filteredProduct = products.filter(
-      product => {
-        return (
-          product
-          .name
-          .toLowerCase()
-          .includes(search.toLowerCase()) 
-        );
-      }
-    );
   
-    const handleChange = e => {
-      setSearch(e.target.value);
-    };
-
-
-
+  const handleChange = e => {
+    setSearch(e.target.value);
+  };
   return (
-    <>
-      <Container style={{marginTop: '30px'}}>
-
-
-      {/* TopBar Content */}
-      <Topbar>
-
-        <Title title="Order" />  
-
-        <TxtField id="outlined-basic" label="Search Item" variant="outlined" sx={{ input: { color: 'white'}}} 
+<>
+    <Container style={{marginTop: '30px'}}>
+        <Topbar>
+        <Title title="Activity" /> 
+        <TxtField id="outlined-basic" label="Search Activity" variant="outlined" sx={{ input: { color: 'white'}}} 
         InputLabelProps={{ style: { color: 'gray' } }} color='secondary' onChange = {handleChange} 
         InputProps={{
           endAdornment: (
@@ -102,37 +70,21 @@ const Order = () => {
            )
           }}
         />
-
-      </Topbar>
-
-        
-
-        {/* Body Content */}
-
-
-        <Subtitle title="Storage Stats" /> 
-
-        <Stats/>
-
-        <Box sx={{ m: '2rem' }} /> 
-
-        <Subtitle title="To be Delivered" />
-
-        <Box sx={{ m: '2rem' }} />   
-       
-        <CardList filteredProduct={filteredProduct}/>
-
-        <Subtitle title="To be Packed" />  
-
-        <Box sx={{ m: '2rem' }} /> 
-
-        <CardList filteredProduct={filteredProduct}/>
+        </Topbar>
 
       </Container>
-
-      <AddItem/>
+      <Grid container spacing={8}>
+          <Grid item mx={4} >
+              <Subtitle title="Order"/>
+          </Grid>
+          <Grid item mx={2} >
+          <Button type="submit" form="product-form-id" style={{color: '#00A7E3'}} autoFocus>
+           Add
+          </Button>
+          </Grid>
+      </Grid>
+      <AddOrder/>
     </>
   )
 }
-
 export default Order;
