@@ -4,6 +4,7 @@ import styledComponents from 'styled-components'
 //Component - Organisms 
 import CardList from '../../Components/Organisms/CardList'
 import Stats from '../../Components/Organisms/Stats'
+import Card from '../../Components/Molecules/OrderCard'
 
 //Component - Atoms
 import Subtitle from '../../Components/Atoms/Subtitle';
@@ -13,7 +14,7 @@ import Title from '../../Components/Atoms/Title';
 
 //Redux
 import {useSelector, useDispatch} from 'react-redux';
-import {loadProducts} from '../../Redux/Actions/productsActions';
+import {loadOrders} from '../../Redux/Actions/ordersActions';
 
 // material -ui
 import { Container} from '@mui/material';
@@ -50,11 +51,20 @@ const Topbar = styledComponents.div`
 
 
 const Order = () => {
+  const dispatch = useDispatch(); //Redux Dispatch
+  const {orders} = useSelector(state => state.data); //Redux State
   const [search, setSearch] = useState("");
+
+  //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
+  useEffect(() => {
+    dispatch(loadOrders());
+  }, [dispatch]);
   
   const handleChange = e => {
     setSearch(e.target.value);
   };
+
+  console.log(orders)
   return (
 <>
     <Container style={{marginTop: '30px'}}>
@@ -72,17 +82,34 @@ const Order = () => {
         />
         </Topbar>
 
+        <Subtitle title="Order"/>
+
+        <Grid container spacing={3} style={{marginBottom: '30px'}}>
+
+          {orders && orders.map((order, index) => (
+            <Grid  key={index} item xs={12} sm={6} md={3}>
+              <Card order={order}/>
+            </Grid>
+          ))}
+
+        </Grid>
+
+
       </Container>
-      <Grid container spacing={8}>
+
+      
+      {/* <Grid container spacing={8}>
           <Grid item mx={4} >
-              <Subtitle title="Order"/>
+             
           </Grid>
           <Grid item mx={2} >
           <Button type="submit" form="product-form-id" style={{color: '#00A7E3'}} autoFocus>
            Add
           </Button>
           </Grid>
-      </Grid>
+      </Grid> */}
+
+      
       <AddOrder/>
     </>
   )

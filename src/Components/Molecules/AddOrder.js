@@ -27,12 +27,20 @@ const AddOrder = () => {
   const handleClose = () => {
     setOpen(false);
   };
-    const [assign, setAssign] = React.useState('');
+
+    const [assignby, setAssignby] = React.useState('your_user_name');
+    const [assignto, setAssignto] = React.useState('Staff member');
+    const [orderby, setOrderby] = React.useState('');
+    const [location, setLocation] = React.useState('');
     const [items, setItems] = React.useState('');
 
+
     const handleChange = (event) => {
-        setAssign(event.target.value);
-        setItems(event.target.value);
+      setAssignby(event.target.value);
+      setAssignto(event.target.value);
+      setOrderby(event.target.value);
+      setLocation(event.target.value);
+      
     };
   
     const optionsMember = [
@@ -47,6 +55,11 @@ const AddOrder = () => {
     {label: 'TypeScript', value: 'ts'   }
 ];
 
+const addhandle = ()=>{
+  console.log(orderby)
+  handleClose()
+} 
+
   return (
     <>
       <Dialog
@@ -59,23 +72,65 @@ const AddOrder = () => {
           {"Add Order"}
         </DialogTitle>
         <DialogContent style={{background: '#181818'}}>
-        <Grid style={{ maxWidth: 450, padding: "5px 5px", margin: "0 auto" }}>
-        
-        <Typography variant="body2" style={{color: 'white'}} component="p" gutterBottom>
-          *Indicates a required field
-      </Typography> 
+        <Grid style={{ maxWidth: 600, padding: "5px 5px", margin: "0 auto" }}>
 
         <form id="metadata-form-id">
           <Grid container spacing={1} style={{color: 'white'}}>
+
+            <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                <span style={{color: 'gray'}}> Assigned by: </span> 
+              </Typography>
+            </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Order Name" label="Order Name" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'} }/>
+              <TextField sx={{ input: { color: 'black', background: 'white' } }} disabled fullWidth autoComplete='off' style={{background:'#181818'}} defaultValue={assignby} onChange={handleChange}/>
             </Grid>
 
+
+            <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                <span style={{color: 'gray'}}> Assigned to: </span> 
+              </Typography>
+            </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} InputLabelProps={{ style: { color: 'black' } }} label="Assigned By" variant="filled" disabled fullWidth autoComplete='off' style={{background:'#181818'}} defaultValue="jajoisgreat"/>
+              <TextField sx={{ input: { color: 'black', background: 'white'} }} variant="filled" fullWidth autoComplete='off' style={{background:'#181818'}} defaultValue={assignto} onChange={handleChange}/>
+            </Grid>
+            
+
+            <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                <span style={{color: 'gray'}}> Ordered by: </span> 
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={handleChange}/>
             </Grid>
 
+
+            <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                <span style={{color: 'gray'}}> Customer Location: </span> 
+              </Typography>
+            </Grid>
             <Grid item xs={12} sm={6}>
+              <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={handleChange}/>
+            </Grid>
+
+
+            <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                <span style={{color: 'gray'}}> Product Ordered: </span> 
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={handleChange}/>
+            </Grid>
+       
+
+
+
+
+            {/* <Grid item xs={12} sm={6}>
                 <FormControl variant="filled" sx={{ m: 1}} InputLabelProps={{ style: { color: 'black' } }} fullWidth >
                     <InputLabel id="demo-simple-select-filled-label">Assigned To</InputLabel>
                     <Select style ={{backgroundColor:"white"}} InputLabelProps={{ style: { color: 'black' } }}
@@ -106,10 +161,13 @@ const AddOrder = () => {
                       })}
                     </Select>
                 </FormControl>
-            </Grid>
+            </Grid> */}
 
             
             
+
+
+
           </Grid>
         </form>
      
@@ -117,7 +175,7 @@ const AddOrder = () => {
         </DialogContent>
         <DialogActions style={{background: '#181818'}}>
           <Button onClick={handleClose} style={{color: 'white'}}>Cancel</Button>
-          <Button onClick={handleClose} style={{color: 'white'}} autoFocus>
+          <Button onClick={addhandle} style={{color: 'white'}} autoFocus>
            Add
           </Button>
         </DialogActions>

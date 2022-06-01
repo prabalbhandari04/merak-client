@@ -28,8 +28,7 @@ import OrderDetails from './OrderDetails';
 // ------------------------
 
 
-
-const Card = ({ product }) => {
+const Card = ({ order }) => {
 
   
   const [open, setOpen] = useState(false);
@@ -48,17 +47,27 @@ const Card = ({ product }) => {
 
   return (
     <>
-    <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }} style={{cursor: 'pointer'}} onClick={handleClickOpen}>
-      
-      <Box sx={{ pt: '100%', position: 'relative'}}>
-        {/* <ProductImgStyle alt={name} src={image} /> */}
-      </Box>
-
+    <Cards variant="outlined" sx={{border: "outlined", boxShadow: "none", outline: '2px', width:"25rem"}} style={{cursor: 'pointer', backgroundColor: '#181818'}} onClick={handleClickOpen} >
       <Stack spacing={2} sx={{ p: 1}} style={{background: '#181818'}}>
-        <Link to="#" color="inherit" underline="hover" component={RouterLink}>
-          <Typography variant="subtitle1" style={{color:'gray'}} noWrap>
-            <br></br>
-            <span style={{color: '#00A7E3'}}>orders</span>
+        <Link to="#" color="inherit" underline="none" component={RouterLink}>
+          <Typography variant="subtitle1" style={{color:'#00A7E3'}} noWrap>
+            {order.invoice}
+          </Typography>
+          <br></br>
+          <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+           <span style={{color: 'gray'}}> Ordered by: </span> {order.ordered_by.full_name} 
+          </Typography>
+         
+          <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+           <span style={{color: 'gray'}}> Assigned to: </span> {order.assigned_to.full_name}
+          </Typography>
+          
+          <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+           <span style={{color: 'gray'}}> Status: </span> {order.status}
+          </Typography>
+          
+          <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+           <span style={{color: 'gray'}}> Delivery Location: </span>
           </Typography>
         </Link>
       </Stack>
@@ -71,11 +80,11 @@ const Card = ({ product }) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
-          {"Product Details"}
+          {"Order Details"}
         </DialogTitle>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
           <DialogContentText id="alert-dialog-description">
-            <OrderDetails order="order"/>
+            <OrderDetails order={order}/>
           </DialogContentText>
         </DialogContent>
       </Dialog>

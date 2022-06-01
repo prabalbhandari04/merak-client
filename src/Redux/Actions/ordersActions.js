@@ -50,7 +50,7 @@ export const loadOrders = () => {
 export const addOrders = (product) => {
     return function (dispatch) {
         axios.post(`${prox}https://merak-test.herokuapp.com/inventory/order/`, product, {headers: headers}).then((res) => {
-            dispatch(orderAdded());
+            //dispatch(orderAdded());
             dispatch(loadOrders());
         }).catch((err) => console.log(err));
     }

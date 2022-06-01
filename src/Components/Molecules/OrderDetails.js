@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
   
 
 
-const OrderDetails = ({ product }) => {
+const OrderDetails = ({ order }) => {
 
   // const image = order.variant[0].image;
   // const price = order.variant[0].price;
@@ -25,23 +25,23 @@ const OrderDetails = ({ product }) => {
 
         <CardContent style={{background: '#181818', color: '#00A7E3'}}>
         <Typography gutterBottom variant="body1" component="div" align="center"> 
-           {product.name} 
+           
           </Typography>
 
           <Typography gutterBottom variant="body1" component="div">
-           <span style={{color: 'gray'}}> Assigned by: </span> {product.name} 
+           <span style={{color: 'gray'}}> Ordered by: </span> {order.ordered_by.full_name} 
           </Typography>
          
           <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
-           <span style={{color: 'gray'}}> Assigned to: </span> {product.description}
+           <span style={{color: 'gray'}}> Assigned to: </span> {order.assigned_to.full_name}
           </Typography>
           <br></br>
           <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
-           <span style={{color: 'gray'}}> Status: </span> Rs
+           <span style={{color: 'gray'}}> Status: </span> {order.status}
           </Typography>
           <br></br>
           <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
-           <span style={{color: 'gray'}}> Delivery Location: </span> {product.quantity}pcs
+           <span style={{color: 'gray'}}> Delivery Location: </span>
           </Typography>
         </CardContent>
 
