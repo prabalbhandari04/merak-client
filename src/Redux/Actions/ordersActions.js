@@ -17,23 +17,28 @@ const prox = "https://kissasian1988.herokuapp.com/"
 
 
 
-//------------Get Products----------------------------
+//------------Get Ouders----------------------------
 const getOrders = (orders) => ({
     type: types.GET_ORDERS,
     payload: orders,
 })
 
 
-//------------Post Products----------------------------
-const productOrders = () => ({
-    type: types.ADD_PRODUCTS,
+//------------Post Ouders----------------------------
+const ordersAdd = () => ({
+    type: types.ADD_ORDERS,
 })
 
+//------------Put Ouders----------------------------
+const ordersUpdate = () => ({
+    type: types.UPDATE_ORDERS,
+})
 
-//------------Post Variants----------------------------
-// const variantAdded = () => ({
-//     type: types.ADD_VARIANTS,
-// })
+//------------Delete Ouders----------------------------
+
+const ordersDelete = () => ({
+    type: types.DELETE_ORDERS,
+})
 
 
 //------------Api Call Get Products----------------------------
@@ -57,15 +62,16 @@ export const addOrders = (product) => {
 }
 
 
-// //------------Api Call Post Products Variant----------------------------
-// export const addVariants = (variant) => {
-//     return function (dispatch) {
-//         axios.post(`${prox}https://merak-test.herokuapp.com/inventory/variant/`, variant, {headers: headers}).then((res) => {
-//             dispatch(variantAdded());
-//             dispatch(loadProducts());
-//         }).catch((err) => console.log(err));
-//     }
-// }
+//------------Api Call Post Products----------------------------
+export const deleteOrders = (uuid) => {
+    return function (dispatch) {
+        axios.post(`${prox}https://merak-test.herokuapp.com/inventory/order/${uuid}/`, {headers: headers}).then((res) => {
+            //dispatch(orderAdded());
+            dispatch(loadOrders());
+        }).catch((err) => console.log(err));
+    }
+}
+
 
 
 

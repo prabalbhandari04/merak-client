@@ -17,8 +17,29 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 //-------------------------------------------
 
+//Redux
+import {useSelector, useDispatch} from 'react-redux';
+import {loadProducts} from '../../Redux/Actions/productsActions';
+
+
 const AddOrder = () => {
   const [open, setOpen] = React.useState(false);
+
+  const dispatch = useDispatch(); //Redux Dispatch
+  const {products} = useSelector(state => state.data);
+
+  React.useEffect(() => {
+    dispatch(loadProducts());
+  }, [dispatch]);
+
+  console.log(products)
+  
+  const opensessame = () =>{ //Redux State
+
+
+    handleClickOpen()
+
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -182,7 +203,7 @@ const addhandle = ()=>{
       </Dialog>
 
       <Fab
-        onClick={handleClickOpen}
+        onClick={opensessame}
         sx={{ position: "fixed", bottom: 16, right: 16 }}
       >
         <AddIcon />

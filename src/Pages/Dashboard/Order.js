@@ -15,6 +15,7 @@ import Title from '../../Components/Atoms/Title';
 //Redux
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOrders} from '../../Redux/Actions/ordersActions';
+import {loadProducts} from '../../Redux/Actions/productsActions';
 
 // material -ui
 import { Container} from '@mui/material';

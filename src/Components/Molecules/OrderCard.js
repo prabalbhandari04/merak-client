@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 
+import styledComponents from 'styled-components';
+
 // Material Ui Components
 import { Box, Link, Card as Cards, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -13,6 +15,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import OrderDetails from './OrderDetails';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 // -----------Styling Product Image---------
@@ -27,6 +30,12 @@ import OrderDetails from './OrderDetails';
 
 // ------------------------
 
+const Container = styledComponents.div`
+  display: flex;
+  justify-content: space-between;
+  background: #181818;
+  align-item: center;
+`
 
 const Card = ({ order }) => {
 
@@ -40,6 +49,12 @@ const Card = ({ order }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  console.log(order)
+
+  const deletion = () =>{
+    console.log("jhbajdshfcfncwjecob veh oehoiehfoihewofnojew ne wewh foei ef e hfoi")
+  }
 
 
 //   const { name, quantity} = product;
@@ -79,9 +94,12 @@ const Card = ({ order }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
-          {"Order Details"}
-        </DialogTitle>
+        <Container>
+          <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
+            {"Order Details"}
+          </DialogTitle>
+          <DeleteIcon style={{color: 'red', margin:'10px'}} onClick={deletion}/>
+        </Container>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
           <DialogContentText id="alert-dialog-description">
             <OrderDetails order={order}/>
