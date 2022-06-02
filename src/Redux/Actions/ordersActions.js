@@ -65,7 +65,7 @@ export const addOrders = (product) => {
 //------------Api Call Post Products----------------------------
 export const deleteOrders = (uuid) => {
     return function (dispatch) {
-        axios.post(`${prox}https://merak-test.herokuapp.com/inventory/order/${uuid}/`, {headers: headers}).then((res) => {
+        axios.delete(`${prox}https://merak-test.herokuapp.com/inventory/order/${uuid}/`, {headers: headers}).then((res) => {
             //dispatch(orderAdded());
             dispatch(loadOrders());
         }).catch((err) => console.log(err));

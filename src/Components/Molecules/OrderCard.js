@@ -17,6 +17,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import OrderDetails from './OrderDetails';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+//Redux
+import {useSelector, useDispatch} from 'react-redux';
+import {deleteOrders} from '../../Redux/Actions/ordersActions';
 
 // -----------Styling Product Image---------
 
@@ -39,8 +42,9 @@ const Container = styledComponents.div`
 
 const Card = ({ order }) => {
 
-  
   const [open, setOpen] = useState(false);
+
+  const dispatch = useDispatch(); //Redux Dispatch
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -52,8 +56,9 @@ const Card = ({ order }) => {
 
   console.log(order)
 
-  const deletion = () =>{
-    console.log("jhbajdshfcfncwjecob veh oehoiehfoihewofnojew ne wewh foei ef e hfoi")
+  const deletion = (uuid) =>{
+    dispatch(deleteOrders(uuid))
+
   }
 
 
@@ -98,7 +103,7 @@ const Card = ({ order }) => {
           <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
             {"Order Details"}
           </DialogTitle>
-          <DeleteIcon style={{color: 'red', margin:'10px'}} onClick={deletion}/>
+          <DeleteIcon style={{color: 'red', margin:'10px'}} onClick={()=>{deletion(order.invoice)}}/>
         </Container>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
           <DialogContentText id="alert-dialog-description">

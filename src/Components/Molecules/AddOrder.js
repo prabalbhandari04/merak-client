@@ -33,7 +33,6 @@ const AddOrder = () => {
   }, [dispatch]);
 
   console.log(products)
-  
   const opensessame = () =>{ //Redux State
 
 
