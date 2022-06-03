@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 import MenuButton from './MenuButton';
@@ -15,6 +15,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ProductDetails from './ProductDetails';
+
+
+//Redux
+import {useSelector, useDispatch} from 'react-redux';
+import { loadVariants } from '../../Redux/Actions/productsActions';
 
 
 // -----------Styling Product Image---------
@@ -41,6 +46,17 @@ const Container = styledComponents.div`
 const Card = ({ product }) => {
 
 
+  const dispatch = useDispatch(); //Redux Dispatch
+  const {variants} = useSelector(state => state.data); //Redux State
+ 
+
+  //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
+  useEffect(() => {
+    dispatch(loadVariants());
+  }, [dispatch]);
+
+
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -58,8 +74,15 @@ const Card = ({ product }) => {
     <Cards sx={{border: "none", boxShadow: "none", outline: 'none' }} style={{cursor: 'pointer'}} onClick={handleClickOpen}>
       
       <Box sx={{ pt: '100%', position: 'relative'}}>
-        {product.default_image != null ? <ProductImgStyle alt={product.name} src={`https://merak-test.herokuapp.com${product.default_image}`}/>
-        : <ProductImgStyle alt={product.name} src="https://spectrumpaint.com/store/media/10071/pv/50_rhinosatin-1604334194.jpg"/>}
+          {variants.map((obj, index) => {
+
+          if (product.id === obj.product) { 
+            return (<span key={index}><ProductImgStyle alt={product.name} src={obj.image}/></span>)
+          }  else {
+            return null
+          }
+
+          })}
       </Box>
 
       <Stack spacing={2} sx={{ p: 1}} style={{background: '#181818'}}>
@@ -67,7 +90,7 @@ const Card = ({ product }) => {
           <Typography variant="subtitle1" style={{color:'gray'}} noWrap>
             {product.name}
             <br></br>
-            <span style={{color: '#00A7E3'}}>{product.quantity} orders</span>
+            <span style={{color: '#00A7E3'}}>0 orders</span>
           </Typography>
         </Link>
       </Stack>
