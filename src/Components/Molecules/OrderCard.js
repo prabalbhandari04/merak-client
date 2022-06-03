@@ -16,6 +16,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import OrderDetails from './OrderDetails';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+
+
 
 //Redux
 import {useSelector, useDispatch} from 'react-redux';
@@ -44,6 +48,16 @@ const Card = ({ order }) => {
 
   const [open, setOpen] = useState(false);
 
+  const [open2, setOpen2] = useState(false);
+
+  const handleClickOpen2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = () => {
+    setOpen2(false);
+  };
+
   const dispatch = useDispatch(); //Redux Dispatch
 
   const handleClickOpen = () => {
@@ -56,7 +70,8 @@ const Card = ({ order }) => {
 
   console.log(order)
 
-  const deletion = (uuid) =>{
+  const handleDelete = (uuid) =>{
+    handleClose2()
     dispatch(deleteOrders(uuid))
 
   }
@@ -79,7 +94,7 @@ const Card = ({ order }) => {
           </Typography>
          
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-           <span style={{color: 'gray'}}> Assigned to: </span> {order.assigned_to.full_name}
+           <span style={{color: 'gray'}}> Assigned to: </span> {()=>{if(!order.assigned_to.full_name){return""}}}
           </Typography>
           
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
@@ -103,7 +118,7 @@ const Card = ({ order }) => {
           <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
             {"Order Details"}
           </DialogTitle>
-          <DeleteIcon style={{color: 'red', margin:'10px'}} onClick={()=>{deletion(order.invoice)}}/>
+          <DeleteIcon style={{color: 'red', margin:'10px' }} onClick={handleClickOpen2}/>
         </Container>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
           <DialogContentText id="alert-dialog-description">
@@ -111,6 +126,28 @@ const Card = ({ order }) => {
           </DialogContentText>
         </DialogContent>
       </Dialog>
+
+          <Dialog
+            open={open2}
+            onClose={handleClose2}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title" style={{color: 'white', background: '#181818'}}>
+              {"Delete this product?"}
+            </DialogTitle>
+            <DialogContent style={{color: 'white', background: '#181818'}}>
+              <DialogContentText id="alert-dialog-description" style={{color: 'white'}}>
+                Are you sure you want to delete the Order
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions style={{color: 'white', background: '#181818'}}>
+              <Button onClick={handleClose2} style={{color: 'white'}}>Cancel</Button>
+              <Button autoFocus style={{ color: 'red' }} onClick={() => handleDelete(order.invoice)}>
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
     
     </>
   );

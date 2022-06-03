@@ -15,7 +15,6 @@ import Title from '../../Components/Atoms/Title';
 //Redux
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOrders} from '../../Redux/Actions/ordersActions';
-import {loadProducts} from '../../Redux/Actions/productsActions';
 
 // material -ui
 import { Container} from '@mui/material';
@@ -88,7 +87,7 @@ const Order = () => {
         <Grid container spacing={3} style={{marginBottom: '30px'}}>
 
           {orders && orders.map((order, index) => (
-            <Grid  key={index} item xs={12} sm={6} md={3}>
+            <Grid  key={index} item >
               <Card order={order}/>
             </Grid>
           ))}

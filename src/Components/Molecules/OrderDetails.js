@@ -17,7 +17,8 @@ const Container = styledComponents.div`
   padding: 2px 8px;
 `
 const Image = styledComponents.img`
-  height: 100px;
+  width: 100px;
+
 `
 
 const Info = styledComponents.h2`
@@ -52,7 +53,7 @@ const OrderDetails = ({ order }) => {
           </Typography>
           <br></br>
           <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
-           <span style={{color: 'gray'}}> Assigned to: </span> {order.assigned_to.full_name}
+           <span style={{color: 'gray'}}> Assigned to: </span> {()=>{if(!order.assigned_to.full_name){return""}}}
           </Typography>
           <br></br>
           <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
@@ -77,9 +78,9 @@ const OrderDetails = ({ order }) => {
         <Stack direction="row">
           <Box sx={{width:'1rem'}}></Box>
           <Typography variant="body1" color="text.secondary" style={{color: 'white'}}>Image</Typography>
-          <Box sx={{width:'5rem'}}></Box>
+          <Box sx={{width:'8rem'}}></Box>
           <Typography variant="body1" color="text.secondary" style={{color: 'white'}}>Product Name</Typography>
-          <Box sx={{width:'7rem'}}></Box>
+          <Box sx={{width:'4rem'}}></Box>
           <Typography variant="body1" color="text.secondary" style={{color: 'white'}}>Price(RS)</Typography>
           <Box sx={{width:'3rem'}}></Box>
           <Typography variant="body1" color="text.secondary" style={{color: 'white'}}>Quantity</Typography>
@@ -93,7 +94,7 @@ const OrderDetails = ({ order }) => {
                 <Image src={order.product.image}></Image>
 
                 <div>
-                  <Info>{"Should be name"}</Info>
+                  <Info>{order.product.sku}</Info>
                 </div>
 
                 <div>

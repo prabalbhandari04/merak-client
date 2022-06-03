@@ -20,6 +20,7 @@ import Select from '@mui/material/Select';
 //Redux
 import {useSelector, useDispatch} from 'react-redux';
 import {loadProducts} from '../../Redux/Actions/productsActions';
+import {addOrders} from '../../Redux/Actions/ordersActions';
 
 
 const AddOrder = () => {
@@ -32,10 +33,9 @@ const AddOrder = () => {
     dispatch(loadProducts());
   }, [dispatch]);
 
-  console.log(products)
-  const opensessame = () =>{ //Redux State
-
-
+  const opensessame = () =>{ 
+    console.log(products)
+    
     handleClickOpen()
 
   }
@@ -54,13 +54,12 @@ const AddOrder = () => {
     const [location, setLocation] = React.useState('');
     const [items, setItems] = React.useState('');
 
-
     const handleChange = (event) => {
       setAssignby(event.target.value);
       setAssignto(event.target.value);
       setOrderby(event.target.value);
       setLocation(event.target.value);
-      
+      setItems(event.target.value);
     };
   
     const optionsMember = [
@@ -75,8 +74,17 @@ const AddOrder = () => {
     {label: 'TypeScript', value: 'ts'   }
 ];
 
-const addhandle = ()=>{
-  console.log(orderby)
+const addhandle = (e)=>{
+  e.preventDefault();
+
+  dispatch(addOrders(
+    {
+      "items": JSON.parse(items),
+      "ordered_by": "02",
+      "assigned_to": "01"
+
+    }
+  ));
   handleClose()
 } 
 
