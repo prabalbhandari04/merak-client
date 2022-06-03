@@ -68,8 +68,6 @@ const Card = ({ order }) => {
     setOpen(false);
   };
 
-  console.log(order)
-
   const handleDelete = (uuid) =>{
     handleClose2()
     dispatch(deleteOrders(uuid))

@@ -3,6 +3,7 @@ import * as types from "../Constants/action-types";
 const initialState = {
     products: [],
     product: {},
+    variants:[],
     variant: {},
     loading: true,
 }
@@ -42,6 +43,13 @@ export const productsReducers = (state = initialState, action) => {
                 ...state,
                 loading: false,
             }
+        case types.GET_VARIANTS:
+            return {
+                ...state,
+                variants: action.payload,
+                loading: false,
+            }
+
         default:
             return state;
     }  

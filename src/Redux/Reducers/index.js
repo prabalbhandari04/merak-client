@@ -4,7 +4,7 @@ import { ordersReducers } from './ordersReducers';
 
 const reducers = combineReducers({
     data: productsReducers,
-    data: ordersReducers
+    data1: ordersReducers
 
 })
 

@@ -19,7 +19,7 @@ import Select from '@mui/material/Select';
 
 //Redux
 import {useSelector, useDispatch} from 'react-redux';
-import {loadProducts} from '../../Redux/Actions/productsActions';
+
 import {addOrders} from '../../Redux/Actions/ordersActions';
 
 
@@ -27,14 +27,9 @@ const AddOrder = () => {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch(); //Redux Dispatch
-  const {products} = useSelector(state => state.data);
-
-  React.useEffect(() => {
-    dispatch(loadProducts());
-  }, [dispatch]);
 
   const opensessame = () =>{ 
-    console.log(products)
+    
     
     handleClickOpen()
 
@@ -53,14 +48,6 @@ const AddOrder = () => {
     const [orderby, setOrderby] = React.useState('');
     const [location, setLocation] = React.useState('');
     const [items, setItems] = React.useState('');
-
-    const handleChange = (event) => {
-      setAssignby(event.target.value);
-      setAssignto(event.target.value);
-      setOrderby(event.target.value);
-      setLocation(event.target.value);
-      setItems(event.target.value);
-    };
   
     const optionsMember = [
       {label: 'React',      value: 'react'},
@@ -75,11 +62,12 @@ const AddOrder = () => {
 ];
 
 const addhandle = (e)=>{
+  console.log(items)
   e.preventDefault();
 
   dispatch(addOrders(
     {
-      "items": JSON.parse(items),
+      "items": JSON.parse(`[{"product": "${items}", "quantity": "1"}]`),
       "ordered_by": "02",
       "assigned_to": "01"
 
@@ -95,6 +83,7 @@ const addhandle = (e)=>{
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        width="500px"
       >
         <DialogTitle id="alert-dialog-title" style={{color: 'white', background: '#181818'}}>
           {"Add Order"}
@@ -111,7 +100,7 @@ const addhandle = (e)=>{
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} disabled fullWidth autoComplete='off' style={{background:'#181818'}} defaultValue={assignby} onChange={handleChange}/>
+              <TextField sx={{ input: { color: 'black', background: 'white' } }} disabled fullWidth autoComplete='off' style={{background:'#181818'}} defaultValue={assignby} onChange={(e) => setAssignby(e.target.value)}/>
             </Grid>
 
 
@@ -121,7 +110,7 @@ const addhandle = (e)=>{
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white'} }} variant="filled" fullWidth autoComplete='off' style={{background:'#181818'}} defaultValue={assignto} onChange={handleChange}/>
+              <TextField sx={{ input: { color: 'black', background: 'white'} }} variant="filled" fullWidth autoComplete='off' style={{background:'#181818'}} defaultValue={assignto} onChange={(e) => setAssignto(e.target.value)}/>
             </Grid>
             
 
@@ -131,7 +120,7 @@ const addhandle = (e)=>{
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={handleChange}/>
+              <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setOrderby(e.target.value)}/>
             </Grid>
 
 
@@ -141,7 +130,7 @@ const addhandle = (e)=>{
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={handleChange}/>
+              <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setLocation(e.target.value)}/>
             </Grid>
 
 
@@ -151,7 +140,7 @@ const addhandle = (e)=>{
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={handleChange}/>
+              <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setItems(e.target.value)}/>
             </Grid>
        
 

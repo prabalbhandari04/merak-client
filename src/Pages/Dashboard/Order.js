@@ -15,6 +15,7 @@ import Title from '../../Components/Atoms/Title';
 //Redux
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOrders} from '../../Redux/Actions/ordersActions';
+import {loadVariants} from '../../Redux/Actions/productsActions';
 
 // material -ui
 import { Container} from '@mui/material';
@@ -52,19 +53,21 @@ const Topbar = styledComponents.div`
 
 const Order = () => {
   const dispatch = useDispatch(); //Redux Dispatch
-  const {orders} = useSelector(state => state.data); //Redux State
+  const {orders} = useSelector(state => state.data1); //Redux State
+  const {variants} = useSelector(state => state.data);
   const [search, setSearch] = useState("");
 
   //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
   useEffect(() => {
     dispatch(loadOrders());
+    dispatch(loadVariants());
   }, [dispatch]);
   
   const handleChange = e => {
     setSearch(e.target.value);
   };
 
-  console.log(orders)
+  console.log(variants)
   return (
 <>
     <Container style={{marginTop: '30px'}}>
@@ -87,7 +90,7 @@ const Order = () => {
         <Grid container spacing={3} style={{marginBottom: '30px'}}>
 
           {orders && orders.map((order, index) => (
-            <Grid  key={index} item >
+            <Grid xs={12} key={index} item >
               <Card order={order}/>
             </Grid>
           ))}
