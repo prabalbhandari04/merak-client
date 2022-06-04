@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React,{useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadProducts} from '../../Redux/Actions/productsActions';
 import styledComponents from 'styled-components' //Styled components
