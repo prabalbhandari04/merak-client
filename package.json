@@ -19,6 +19,7 @@
     "react-redux": "^8.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "5.0.1",
+    "react-tiny-fab": "^4.0.4",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.5",
