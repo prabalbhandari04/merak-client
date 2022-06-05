@@ -68,16 +68,16 @@ const Order = () => {
   }, [dispatch]);
   
     //Filtering Products
-  const filteredProduct = products.filter(
-      product => {
-        return (
-          product
-          .name
-          .toLowerCase()
-          .includes(search.toLowerCase()) 
-        );
-      }
-    );
+  // const filteredProduct = products.filter(
+  //     product => {
+  //       return (
+  //         product
+  //         .name
+  //         .toLowerCase()
+  //         .includes(search.toLowerCase()) 
+  //       );
+  //     }
+  //   );
   
   const handleChange = e => {
     setSearch(e.target.value);
