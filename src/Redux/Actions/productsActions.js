@@ -124,13 +124,6 @@ export const addVariants = (variant) => {
 }
 
 //------------Api Call Post Products Variant(Do not touch)----------------------------
-export const loadVariants = () => {
-    return function (dispatch) {
-        axios.get(`https://merak-test.herokuapp.com/inventory/variant/`, {headers: headers}).then((res) => {
-            dispatch(getVariant(res.data));
-        }).catch((err) => console.log(err));
-    }
-}
 
 //--------------------GET variants----------------------------
 
