@@ -5,9 +5,13 @@ import axios from "axios";
 const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1MDM3MTQzLCJpYXQiOjE2NTMwMzcxNDMsImp0aSI6ImJkNjdlMzNmNjE3YzQ2NDI4NWUyNDU2YTkxMDI3NzQ0IiwidXNlcl9pZCI6MX0.FCHJiiWiW7s8kTW-h1wKen43dx-wyPN2YS7MUb23D_o"
 
 let headers = {
-        "Content-type": "application/json; charset=UTF-8",
+        "Content-type": "application/json; charset=UTF-8;",
         "Authorization": 'Bearer ' + token
 };
+
+
+
+
 
 
 
@@ -44,9 +48,15 @@ const variantAdded = () => ({
 
 
 //------------Get Variants----------------------------
-const getVariant = (variants) => ({
+const getVariants = (variants) => ({
     type: types.GET_VARIANTS,
     payload: variants,
+})
+
+//------------Get Variants Field----------------------------
+const getVariantsField = (variantsField) => ({
+    type: types.GET_VARIANTS_FIELD,
+    payload: variantsField,
 })
 
 
@@ -98,10 +108,15 @@ export const deleteProducts = (uuid) => {
 }
 
 
-//------------Api Call Post Products Variant(Do not touch)----------------------------
+//------------Api Call Post Products Variant----------------------------
 export const addVariants = (variant) => {
     return function (dispatch) {
-        axios.post(`https://merak-test.herokuapp.com/inventory/variant/`, variant, {headers: headers}).then((res) => {
+        axios.post(`https://merak-test.herokuapp.com/inventory/variant/`, variant, {
+            headers: {
+              "Content-type": 'multipart/form-data',
+              "Authorization": 'Bearer ' + token
+            }
+          }).then((res) => {
             dispatch(variantAdded());
             dispatch(loadProducts());
         }).catch((err) => console.log(err));
@@ -116,5 +131,28 @@ export const loadVariants = () => {
         }).catch((err) => console.log(err));
     }
 }
+
+//--------------------GET variants----------------------------
+
+export const loadVariants = () => {
+    return function (dispatch) {
+        axios.get(`https://merak-test.herokuapp.com/inventory/variant/`, {headers: headers}).then((res) => {
+            dispatch(getVariants(res.data));
+        }).catch((err) => console.log(err));
+    }
+}
+
+
+
+//--------------------GET variants Field----------------------------
+
+export const loadVariantsField = () => {
+    return function (dispatch) {
+        axios.get(`https://merak-test.herokuapp.com/inventory/variant_field/`, {headers: headers}).then((res) => {
+           dispatch(getVariantsField(res.data));
+        }).catch((err) => console.log(err));
+    }
+}
+
 
 

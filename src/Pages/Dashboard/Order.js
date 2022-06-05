@@ -4,6 +4,7 @@ import styledComponents from 'styled-components'
 //Component - Organisms 
 import CardList from '../../Components/Organisms/CardList'
 import Stats from '../../Components/Organisms/Stats'
+
 import Card from '../../Components/Molecules/OrderCard'
 
 //Component - Atoms
@@ -16,6 +17,7 @@ import Title from '../../Components/Atoms/Title';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOrders} from '../../Redux/Actions/ordersActions';
 import {loadVariants} from '../../Redux/Actions/productsActions';
+
 
 // material -ui
 import { Container} from '@mui/material';
@@ -45,23 +47,37 @@ const TxtField = styled(TextField)({
   },
 });
 
+
 const Topbar = styledComponents.div`
   display: flex;
   justify-content: space-between;
 `
 
-
 const Order = () => {
   const dispatch = useDispatch(); //Redux Dispatch
   const {orders} = useSelector(state => state.data1); //Redux State
   const {variants} = useSelector(state => state.data);
+
   const [search, setSearch] = useState("");
 
   //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
   useEffect(() => {
+
     dispatch(loadOrders());
     dispatch(loadVariants());
   }, [dispatch]);
+  
+    //Filtering Products
+  const filteredProduct = products.filter(
+      product => {
+        return (
+          product
+          .name
+          .toLowerCase()
+          .includes(search.toLowerCase()) 
+        );
+      }
+    );
   
   const handleChange = e => {
     setSearch(e.target.value);
@@ -74,6 +90,7 @@ const Order = () => {
         <Topbar>
         <Title title="Activity" /> 
         <TxtField id="outlined-basic" label="Search Activity" variant="outlined" sx={{ input: { color: 'white'}}} 
+
         InputLabelProps={{ style: { color: 'gray' } }} color='secondary' onChange = {handleChange} 
         InputProps={{
           endAdornment: (
@@ -83,6 +100,7 @@ const Order = () => {
            )
           }}
         />
+
         </Topbar>
 
         <Subtitle title="Order"/>
@@ -117,4 +135,5 @@ const Order = () => {
     </>
   )
 }
+
 export default Order;
