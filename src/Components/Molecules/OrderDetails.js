@@ -36,12 +36,6 @@ const OrderDetails = ({ order }) => {
   return (
 
     <Card sx={{ maxWidth: 700 }} elevation={0} style={{background: '#181818', color: '#00A7E3'}}>
-        {/* <CardMedia
-          component="img"
-          height="240"
-          image={image}
-          alt={product.title}
-        /> */}
 
         <CardContent style={{background: '#181818', color: '#00A7E3'}}>
         <Typography gutterBottom variant="body1" component="div" align="center"> 
@@ -52,23 +46,23 @@ const OrderDetails = ({ order }) => {
            <span style={{color: 'gray'}}> Ordered by: </span> {order.ordered_by.full_name} 
           </Typography>
           <br></br>
-          <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
+          <Typography variant="body1" style={{color: '#00A7E3'}} component="div">
            <span style={{color: 'gray'}}> Assigned to: </span> {()=>{if(!order.assigned_to.full_name){return""}}}
           </Typography>
           <br></br>
-          <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
+          <Typography variant="body1" style={{color: '#00A7E3'}} component="div">
            <span style={{color: 'gray'}}> Status: </span> {order.status}
           </Typography>
           <br></br>
-          <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
+          <Typography variant="body1" style={{color: '#00A7E3'}} component="div">
            <span style={{color: 'gray'}}> Invoice: </span> {order.invoice}
           </Typography>
           <br></br>
-          <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
-           <span style={{color: 'gray'}}> Ordered date: </span> {Date(order.ordered_date)}
+          <Typography variant="body1" style={{color: '#00A7E3'}} component="div">
+           <span style={{color: 'gray'}}> Ordered date: </span> {Date(`${order.ordered_date}`)}
           </Typography>
           <br></br>
-          <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
+          <Typography variant="body1" style={{color: '#00A7E3'}} component="div">
            <span style={{color: 'gray'}}> Delivery Location: </span>
           </Typography>
           <br></br>
@@ -77,13 +71,13 @@ const OrderDetails = ({ order }) => {
 
         <Stack direction="row">
           <Box sx={{width:'1rem'}}></Box>
-          <Typography variant="body1" color="text.secondary" style={{color: 'white'}}>Image</Typography>
+          <Typography variant="body1" style={{color: 'white'}}>Image</Typography>
           <Box sx={{width:'8rem'}}></Box>
-          <Typography variant="body1" color="text.secondary" style={{color: 'white'}}>Product Name</Typography>
+          <Typography variant="body1" style={{color: 'white'}}>Product Name</Typography>
           <Box sx={{width:'4rem'}}></Box>
-          <Typography variant="body1" color="text.secondary" style={{color: 'white'}}>Price(RS)</Typography>
+          <Typography variant="body1" style={{color: 'white'}}>Price(RS)</Typography>
           <Box sx={{width:'3rem'}}></Box>
-          <Typography variant="body1" color="text.secondary" style={{color: 'white'}}>Quantity</Typography>
+          <Typography variant="body1" style={{color: 'white'}}>Quantity</Typography>
         </Stack>
         <br></br>
 
@@ -93,17 +87,13 @@ const OrderDetails = ({ order }) => {
               <Container>
                 <Image src={order.product.image}></Image>
 
-                <div>
+
                   <Info>{order.product.sku}</Info>
-                </div>
 
-                <div>
                   <Info>{order.product.price}</Info>
-                </div>
 
-                <div>
                 <Info>{order.quantity}</Info>
-                </div>
+
               </Container>
             </Grid>
           ))}

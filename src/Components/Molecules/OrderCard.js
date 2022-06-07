@@ -116,12 +116,15 @@ const Card = ({ order }) => {
           <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
             {"Order Details"}
           </DialogTitle>
-          <DeleteIcon style={{color: 'red', margin:'10px' }} onClick={handleClickOpen2}/>
+          <Button>
+            <DeleteIcon style={{color: 'red', margin:'10px' }} onClick={handleClickOpen2}/>
+          </Button>
         </Container>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
-          <DialogContentText id="alert-dialog-description">
-            <OrderDetails order={order}/>
-          </DialogContentText>
+          <OrderDetails order={order}/>
+          {/* <DialogContentText id="alert-dialog-description">
+            
+          </DialogContentText> */}
         </DialogContent>
       </Dialog>
 

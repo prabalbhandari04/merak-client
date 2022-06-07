@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import styledComponents from 'styled-components'
 
 //Component - Organisms 
-import CardList from '../../Components/Organisms/CardList'
-import Stats from '../../Components/Organisms/Stats'
 import Card from '../../Components/Molecules/OrderCard'
 
 //Component - Atoms
@@ -19,13 +17,11 @@ import {loadVariants} from '../../Redux/Actions/productsActions';
 
 // material -ui
 import { Container} from '@mui/material';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 import Grid from '@mui/material/Grid';
-import Button from "@mui/material/Button";
 
 //-------Custom Styling----------------------------
 const TxtField = styled(TextField)({
@@ -67,7 +63,7 @@ const Order = () => {
     setSearch(e.target.value);
   };
 
-  console.log(variants)
+  console.log(orders)
   return (
 <>
     <Container style={{marginTop: '30px'}}>
