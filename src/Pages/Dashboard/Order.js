@@ -14,6 +14,8 @@ import Title from '../../Components/Atoms/Title';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOrders} from '../../Redux/Actions/ordersActions';
 import {loadVariants} from '../../Redux/Actions/productsActions';
+import {loadUsers} from '../../Redux/Actions/usersActions';
+
 
 // material -ui
 import { Container} from '@mui/material';
@@ -49,21 +51,23 @@ const Topbar = styledComponents.div`
 
 const Order = () => {
   const dispatch = useDispatch(); //Redux Dispatch
-  const {orders} = useSelector(state => state.data1); //Redux State
   const {variants} = useSelector(state => state.data);
+  const {orders} = useSelector(state => state.data1); //Redux State
+  const {users} = useSelector(state => state.data2);
   const [search, setSearch] = useState("");
 
   //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
   useEffect(() => {
     dispatch(loadOrders());
     dispatch(loadVariants());
+    dispatch(loadUsers());
   }, [dispatch]);
   
   const handleChange = e => {
     setSearch(e.target.value);
   };
 
-  console.log(orders)
+  console.log(users)
   return (
 <>
     <Container style={{marginTop: '30px'}}>
