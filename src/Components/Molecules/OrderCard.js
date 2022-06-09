@@ -6,8 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import styledComponents from 'styled-components';
 
 // Material Ui Components
-import { Box, Link, Card as Cards, Typography, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Link, Card as Cards, Typography, Stack } from '@mui/material';
 
 // Material Ui
 import Dialog from '@mui/material/Dialog';
@@ -22,7 +21,7 @@ import Button from '@mui/material/Button';
 
 
 //Redux
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {deleteOrders} from '../../Redux/Actions/ordersActions';
 
 // -----------Styling Product Image---------
@@ -60,7 +59,7 @@ const Card = ({ order }) => {
 
   const dispatch = useDispatch(); //Redux Dispatch
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (e) => {
     setOpen(true);
   };
 

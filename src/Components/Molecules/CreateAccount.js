@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import styledComponents from 'styled-components';
 
 import {useDispatch} from 'react-redux';
-
 import {createUsers} from '../../Redux/Actions/usersActions';
 
 const Wrapper = styledComponents.section`
@@ -47,17 +46,12 @@ const CreateAccount = ()=>{
     const createuser = (e)=>{
         e.preventDefault();
 
-        try{
-            dispatch(createUsers(
-            {
+        dispatch(createUsers({
             "first_name": firstname,
             "last_name":lastname,
             email,
             password,
-            }
-        ));}catch(err){
-            alert(err)
-        }
+        }));
 
 
         const token = localStorage.getItem('token')
