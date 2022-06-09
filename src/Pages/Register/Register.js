@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Container} from '@mui/material';
 
@@ -14,11 +14,20 @@ const Cont = styledComponents.div`
 `
 
 const Register = () => {
+
+  const [steps, setSteps] = useState(1)
+
   return (
       <>
         <Container style={{marginTop: '100px', marginLeft: '60px'}}>
             <Cont>
-                <CreateAccount /> 
+              {
+                steps === 1?
+                <CreateAccount /> :
+                steps === 2?
+                <AddTeam />:
+                <></>
+              }
                 <Switcher />
             </Cont>
 

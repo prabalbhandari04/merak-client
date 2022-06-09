@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Stack from '@mui/material/Stack';
 import {Grid,Typography} from "@material-ui/core";
 import Box from '@mui/material/Box';
@@ -47,7 +46,13 @@ const OrderDetails = ({ order }) => {
           </Typography>
           <br></br>
           <Typography variant="body1" style={{color: '#00A7E3'}} component="div">
-           <span style={{color: 'gray'}}> Assigned to: </span> {()=>{if(!order.assigned_to.full_name){return""}}}
+           <span style={{color: 'gray'}}> Assigned to: </span> 
+            {
+              order.assigned_to === null ?
+              <p></p>
+              :
+              <p>{order.assigned_to.full_name}</p>
+            }
           </Typography>
           <br></br>
           <Typography variant="body1" style={{color: '#00A7E3'}} component="div">

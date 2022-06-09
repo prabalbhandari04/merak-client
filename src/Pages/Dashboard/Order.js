@@ -67,7 +67,6 @@ const Order = () => {
     setSearch(e.target.value);
   };
 
-  console.log(users)
   return (
 <>
     <Container style={{marginTop: '30px'}}>
@@ -90,7 +89,7 @@ const Order = () => {
         <Grid container spacing={3} style={{marginBottom: '30px'}}>
 
           {orders && orders.map((order, index) => (
-            <Grid xs={12} key={index} item >
+            <Grid xs={12} sm={6} key={index} item >
               <Card order={order}/>
             </Grid>
           ))}
@@ -113,7 +112,7 @@ const Order = () => {
       </Grid> */}
 
       
-      <AddOrder/>
+      <AddOrder user={users} variant={variants}/>
     </>
   )
 }

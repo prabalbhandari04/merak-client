@@ -92,7 +92,15 @@ const Card = ({ order }) => {
           </Typography>
          
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-           <span style={{color: 'gray'}}> Assigned to: </span> {()=>{if(!order.assigned_to.full_name){return""}}}
+           <span style={{color: 'gray'}}> Assigned to: </span> 
+          {
+            order.assigned_to === null ?
+             <p></p>
+            :
+            <p>
+              {order.assigned_to.full_name}
+            </p>
+          }
           </Typography>
           
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
