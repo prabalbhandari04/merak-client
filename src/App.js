@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Inventory from "./Pages/Dashboard/Inventory";
 import Order from "./Pages/Dashboard/Order";
-import Register from "./Pages/Register/Register"
+import Register from "./Pages/Users/Register"
 
 import Home from "./Pages/Home/Home";
 

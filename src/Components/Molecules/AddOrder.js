@@ -21,7 +21,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import styledComponents from 'styled-components';
 
 //Redux
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import {addOrders} from '../../Redux/Actions/ordersActions';
 
@@ -70,7 +70,7 @@ const Info = styledComponents.h2`
   console.log(user.variant)
   
   const additems = ()=>{
-    if(items != ""){
+    if(items !== ""){
       setOrderprod([...orderprod, {"product": items, "quantity": quantity}])  
       setItems("")
       setMax("")
@@ -80,6 +80,11 @@ const Info = styledComponents.h2`
 
   const discarditems = ()=>{
     setItems("")
+  }
+
+  const removeitems = (prod)=>{
+    console.log(prod)
+
   }
 
 
@@ -138,7 +143,7 @@ const cancelhandel = (e)=>{
           <Grid container spacing={1} style={{color: 'white'}}>
 
             <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-              <Typography gutterBottom variant="body1" color='white' component="div">
+              <Typography gutterBottom variant="body1"  component="div">
                 <span style={{color: 'gray'}}> Assigned by: </span> 
               </Typography>
             </Grid>
@@ -252,7 +257,7 @@ const cancelhandel = (e)=>{
                   {user.variant?.map(option=> {
                     return(
                       <MenuItem key={option.sku} value={option.sku}>
-                      {option.sku ?? option.sku}
+                      {`${option.sku} (${option.price})` ?? option.sku}
                       </MenuItem>
                     );
                   })}
@@ -282,7 +287,9 @@ const cancelhandel = (e)=>{
                   <Info>{itm.product}</Info>
 
                   <Info>{`  (${itm.quantity})`}</Info>
-
+                  <Button onClick={removeitems(itm)}>
+                    <RemoveIcon style={{color: 'red'}}/>
+                  </Button>
               </Container>
             </Grid>
           ))}

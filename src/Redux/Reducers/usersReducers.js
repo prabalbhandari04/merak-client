@@ -3,6 +3,7 @@ import * as types from "../Constants/action-types";
 const initialState = {
     users: [],
     user: {},
+    loading: true,
 }
 
 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import {AllContext} from '../../context/allContext'
 
 import { Container} from '@mui/material';
 
@@ -15,7 +16,7 @@ const Cont = styledComponents.div`
 
 const Register = () => {
 
-  const [steps, setSteps] = useState(1)
+  const {steps} = useContext(AllContext)
 
   return (
       <>

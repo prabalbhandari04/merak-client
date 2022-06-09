@@ -4,13 +4,16 @@ import { Provider } from "react-redux";
 import './index.css';
 import App from './App';
 import store from './Redux/store';
+import AllProvider from './context/allContext'
 
 
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+      <AllProvider>
+        <App />
+      </AllProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

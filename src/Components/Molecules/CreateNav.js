@@ -1,4 +1,5 @@
 import React from 'react'
+import {AllContext} from '../../context/allContext'
 
 import styledComponents from 'styled-components'
 
@@ -23,11 +24,11 @@ const Sub = styledComponents.div`
 `
 
 const Switcher = () => {
-  const [direction, setDirection] = React.useState({
-    add: 'column',
-    team: 'column-reverse',
-    avatar: 'column-reverse'
-  })
+
+  const {direction} = React.useContext(AllContext)
+
+  
+
   return (
       <>
         <Container flexDirection={direction.add}>

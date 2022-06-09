@@ -19,14 +19,15 @@ const getUsers = (users) => ({
 
 
 //------------Post Users----------------------------
-const usersCreated = () => ({
+const usersCreated = (tokens) => ({
     type: types.CREATE_USERS,
+    // payload: tokens
 })
 
 //------------Put Users----------------------------
 const usersLogin = (tokens) => ({
     type: types.LOGIN_USERS,
-    payload: tokens
+    // payload: tokens
 })
 
 
@@ -45,6 +46,8 @@ export const loadUsers = () => {
 export const createUsers = (user) => {
     return function (dispatch) {
         axios.post(`https://merak-test.herokuapp.com/user/auth/register/`, user).then((res) => {
+            console.log(res.data)
+            localStorage.setItem('access_token', res.data.access_token);
             dispatch(usersCreated());
         }).catch((err) => console.log(err));
     }
