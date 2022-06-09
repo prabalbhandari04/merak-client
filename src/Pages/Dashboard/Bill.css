@@ -23,12 +23,12 @@ body, html {
   }
   
   .btn-light {
-    border-color: #dedede
+    border-color: #000000
   }
   
   .btn-light:hover {
-    border-color: #dedede;
-    background-color: #f3f3f3
+    border-color:#000000;
+    background-color:#000000
   }
   
   .shadow {

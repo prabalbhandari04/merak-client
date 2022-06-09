@@ -34,7 +34,7 @@ import FormControl from '@mui/material/FormControl';
 
 //Redux
 import {useSelector, useDispatch} from 'react-redux';
-import {addProducts, loadProducts, addVariants, loadVariantsField} from '../../Redux/Actions/productsActions';
+import {addProducts, loadProducts, addVariants, loadVariants} from '../../Redux/Actions/productsActions';
 //------------------------------------------------------------------------------------------------
 
 
@@ -74,7 +74,7 @@ const AddItem = () => {
   //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
   useEffect(() => {
     dispatch(loadProducts());
-    dispatch(loadVariantsField());
+    dispatch(loadVariants());
   }, [dispatch]);
 
   //------------------------------------------------------------------------------------------------
