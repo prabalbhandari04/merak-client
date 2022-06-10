@@ -211,6 +211,7 @@ const Inventory = () => {
     const handleChange = e => {
       setSearch(e.target.value);
     };
+    
 
 
 

@@ -15,8 +15,6 @@ let headers = {
 
 
 
-
-
 //------------Get Products----------------------------
 const getProducts = (products) => ({
     type: types.GET_PRODUCTS,
@@ -41,7 +39,7 @@ const productDeleted = () => ({
 })
 
 
-//------------Post Variants (do not touch)----------------------------
+//------------Post Variants ----------------------------
 const variantAdded = () => ({
     type: types.ADD_VARIANTS,
 })
@@ -58,6 +56,16 @@ const getVariantsField = (variantsField) => ({
     type: types.GET_VARIANTS_FIELD,
     payload: variantsField,
 })
+
+//------------Post Variants ----------------------------
+const variantFieldsAdded = () => ({
+    type: types.ADD_VARIANTS_FIELD,
+})
+
+
+
+
+
 
 
 
@@ -77,6 +85,7 @@ export const addProducts = (product) => {
         axios.post(`https://merak-test.herokuapp.com/inventory/product/`, product, {headers: headers}).then((res) => {
             dispatch(productAdded());
             dispatch(loadProducts()); //post garesi update herna hoye jabe
+            dispatch(loadVariantsField());
         }).catch((err) => console.log(err));
     }
 }
@@ -119,11 +128,11 @@ export const addVariants = (variant) => {
           }).then((res) => {
             dispatch(variantAdded());
             dispatch(loadProducts());
+            dispatch(loadVariantsField());
         }).catch((err) => console.log(err));
     }
 }
 
-//------------Api Call Post Products Variant(Do not touch)----------------------------
 
 //--------------------GET variants----------------------------
 
@@ -147,5 +156,16 @@ export const loadVariantsField = () => {
     }
 }
 
+
+//--------------------POST variants Field----------------------------
+export const addVariantsField = (variant) => {
+    return function (dispatch) {
+        axios.post(`https://merak-test.herokuapp.com/inventory/variant_field/`, variant, {headers: headers}).then((res) => {
+            dispatch(variantFieldsAdded());
+            dispatch(loadProducts());
+            dispatch(loadVariantsField());
+        }).catch((err) => console.log(err));
+    }
+}
 
 

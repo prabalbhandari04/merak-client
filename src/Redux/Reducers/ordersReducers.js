@@ -3,7 +3,6 @@ import * as types from "../Constants/action-types";
 const initialState = {
     orders: [],
     order: {},
-    // variant: {},
     loading: true,
 }
 
@@ -35,13 +34,7 @@ export const ordersReducers = (state = initialState, action) => {
                 loading: false,
             }
 
-    //For variant do not touch
-        
-        // case types.ADD_VARIANTS:
-        //     return {
-        //         ...state,
-        //         loading: false,
-        //     }
+    
         default:
             return state;
     }  

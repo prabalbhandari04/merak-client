@@ -76,7 +76,7 @@ const Card = ({ product }) => {
       <Box sx={{ pt: '100%', position: 'relative'}}>
           {variants.map((obj, index) => {
 
-          if (product.id === obj.product) { 
+          if (product.id === obj.product && obj.is_default === true) { 
             return (<span key={index}><ProductImgStyle alt={product.name} src={obj.image}/></span>)
           }  else {
             return null
