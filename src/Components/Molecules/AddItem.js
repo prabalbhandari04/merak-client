@@ -15,7 +15,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import {Grid,Typography} from "@material-ui/core";
+import {Grid,Typography, Avatar} from "@material-ui/core";
 import TextField from '@mui/material/TextField';
 //-------------------------------------------
 
@@ -29,12 +29,14 @@ import { Stepper, Step, StepLabel} from "@material-ui/core";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 //-----------------------------------------------
 
 //Redux
 import {useSelector, useDispatch} from 'react-redux';
-import {addProducts, loadProducts, addVariants, loadVariantsField} from '../../Redux/Actions/productsActions';
+import {addProducts, loadProducts, addVariants, loadVariantsField, addVariantsField} from '../../Redux/Actions/productsActions';
 //------------------------------------------------------------------------------------------------
 
 
@@ -100,20 +102,28 @@ const AddItem = () => {
   });
 
 
+  const [state3, setState3] = useState({
+    name2: '',
+    value2: '',
+  });
+
+
   const [state2, setState2] = useState({
     price: '',
     quantity: '',
     image: null,
-    is_default: true,
+    is_default: false,
     field: productVariant,
     product: productName,
   });
 
   const [imgPre, setImgPre] = useState(null);
+  const [imgPreview, setImgPreview] = useState(null);
 
 
   const {name,  description} = state;
-  const {price, quantity, image} = state2;
+  const {price, quantity, image, is_default} = state2;
+  const {name2, value2} = state3;
 
 
 
@@ -137,22 +147,34 @@ const AddItem = () => {
 
   const handleInputChange2 = (e) => {
     let {name, value} = e.target;
-    setState2({ price: price, quantity: quantity, image: image, is_default: true, field: productVariant, product: productName, [name]: value});
+    setState2({ price: price, quantity: quantity, image: image, is_default: is_default, field: productVariant, product: productName, [name]: value});
   }
 
 
+  const handleInputChange3 = (e) => {
+    let {name, value} = e.target;
+    setState3({...state3, [name]: value});
+  }
 
+
+//Changing state for image
   const handleInputChangeImage = (e) => {
    
     const img = e.target.files[0];
 
     setImgPre(img.name)
+    setImgPreview(URL.createObjectURL(img));
+
   
     setState2({...state2, image: img});
   }
 
+//Changing state for default variant
+  const handleChangeDefault = (event) => {
+    setState2({...state2, is_default: event.target.checked});
+  };
 
-  
+
 //--------------------------------------------------------------------------------------------------------------
 
 
@@ -173,6 +195,8 @@ const AddItem = () => {
   const handleClose = () => {
     setOpen(false);
     setOpen2(false);
+    setOpen3(false);
+
     setActiveStep(0);
     setState({
       name: '',
@@ -190,6 +214,13 @@ const AddItem = () => {
     setProductName('');
 
     setImgPre(null);
+
+    setImgPreview(null);
+
+    setState3({
+      name2: '',
+      value2: '',
+    })
 
   };
 
@@ -219,7 +250,7 @@ const AddItem = () => {
     form_data.append('price', price);
     form_data.append('quantity', quantity);
     form_data.append('image', image);
-    form_data.append('is_default', true);
+    form_data.append('is_default', is_default);
     productVariant.forEach(value => form_data.append('field', value.split('/')[0])) //multiple variant
     form_data.append('product', productName);
 
@@ -230,6 +261,24 @@ const AddItem = () => {
     
     handleClose()
 
+  }
+
+
+  const handleSubmit3 = (e) => {
+    e.preventDefault();
+
+    let field_data = {name: name2, value: value2};
+
+    dispatch(addVariantsField(field_data));
+    
+    setOpen3(false);
+
+    
+
+    setState3({
+      name2: '',
+      value2: '',
+    })
   }
 
 
@@ -339,6 +388,9 @@ function getStepContent(step) {
                               {val.name} ({val.value})
                             </MenuItem>
                           ))}
+                          <span style={{display: 'flex', justifyContent: 'center'}} >
+                          <Button onClick={handleClickOpen3}> <AddIcon /> &nbsp; Add Variant</Button>
+                          </span>
                         </Select>
                       </FormControl>
                 </Grid>
@@ -346,23 +398,46 @@ function getStepContent(step) {
 
 
                 <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="price" value={price} onChange={handleInputChange2} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Price" label="Price" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="price" value={price} onChange={handleInputChange2} InputLabelProps={{ style: { color: 'black' } }} type="number" InputProps={{ inputProps: { min: 1} }} placeholder="Price" label="Price" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
                 </Grid>
 
                 <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="quantity" value={quantity} onChange={handleInputChange2} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="quantity" value={quantity} onChange={handleInputChange2} InputLabelProps={{ style: { color: 'black' } }}  type="number" InputProps={{ inputProps: { min: 0} }} placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
                 </Grid> 
 
                 
-                <Grid item sx={{justifyContent: 'center', alignItems: 'center'}}>
+
+                <Grid xs={12} item >
+
+                <FormControlLabel
+                    control={
+                      <Checkbox
+                      style={{color: 'white'}}
+                    onChange={(e) => handleChangeDefault(e)}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                    
+                  /> 
+                    }
+                    label="is default" 
+                  />
+                
+                  </Grid>
+
+
+                  <Grid item xs={12} style={{display: 'flex', justifyContent: 'center'}}>
+                {imgPreview === null ? null : <Avatar  src={imgPreview} style={{ height: '100px', width: '100px', borderStyle: 'dotted', borderColor: 'gray' }}/>}
+                </Grid>
+                
+                <Grid item xs={12} >
                  
                     <Button component="label" style={{color: 'white', background: '#3f51b5'}}>
                     <AddIcon /> &nbsp;Image
                         <input accept="image/*" hidden type="file"  onChange={(e) => handleInputChangeImage(e)} />
                     </Button>
                     <span style={{marginLeft: '10px', color: 'white'}}>{imgPre === null ? <span>Select an image</span> : imgPre}</span>
-                    
                 </Grid> 
+
+               
             
             
           </Grid>
@@ -522,6 +597,9 @@ function getStepContent(step) {
                               {val.name} ({val.value})
                             </MenuItem>
                           ))}
+                          <span style={{display: 'flex', justifyContent: 'center'}} >
+                          <Button onClick={handleClickOpen3}> <AddIcon /> &nbsp; Add Variant</Button>
+                          </span>
                         </Select>
                       </FormControl>
                 </Grid>
@@ -529,12 +607,19 @@ function getStepContent(step) {
 
 
                 <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="price" value={price} onChange={handleInputChange2} InputLabelProps={{ style: { color: 'black' } }}  placeholder="Price" label="Price" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="price" value={price} onChange={handleInputChange2} InputLabelProps={{ style: { color: 'black' } }} type="number" InputProps={{ inputProps: { min: 1} }}  placeholder="Price" label="Price" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
                 </Grid>
 
                 <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="quantity" value={quantity} onChange={handleInputChange2} InputLabelProps={{ style: { color: 'black' } }}  type="number" placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="quantity" value={quantity} onChange={handleInputChange2} InputLabelProps={{ style: { color: 'black' } }}  type="number" InputProps={{ inputProps: { min: 0} }} placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
                 </Grid> 
+
+              
+
+
+                <Grid item xs={12} style={{display: 'flex', justifyContent: 'center', marginTop: '10px'}}>
+                {imgPreview === null ? null : <Avatar  src={imgPreview} style={{ height: '100px', width: '100px', borderStyle: 'dotted', borderColor: 'gray' }}/>}
+                </Grid>
 
                 
                 <Grid item sx={{justifyContent: 'center', alignItems: 'center'}}>
@@ -600,18 +685,18 @@ function getStepContent(step) {
                         
                     </Typography> 
               <>
-                      <form id="product-form-id" >
+                      <form id="product-form-id-field" onSubmit={handleSubmit3}>
                         <Grid container spacing={1} style={{color: 'white'}}>
 
 
 
 
                               <Grid item xs={12}>
-                                  <TextField sx={{ input: { color: 'black', background: 'white' } }}  InputLabelProps={{ style: { color: 'black' } }}  placeholder="Name" label="Name" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                                  <TextField sx={{ input: { color: 'black', background: 'white' } }}  InputLabelProps={{ style: { color: 'black' } }}  placeholder="Name" label="Name" variant="filled" name="name2" value={name2} onChange={handleInputChange3} fullWidth required autoComplete='off' style={{background:'#181818'}}/>
                               </Grid>
 
                               <Grid item xs={12}>
-                                  <TextField sx={{ input: { color: 'black', background: 'white' } }}  InputLabelProps={{ style: { color: 'black' } }}  placeholder="Value" label="Value" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                                  <TextField sx={{ input: { color: 'black', background: 'white' } }}  InputLabelProps={{ style: { color: 'black' } }}  placeholder="Value" label="Value" variant="filled" name="value2"  value={value2} onChange={handleInputChange3} fullWidth required autoComplete='off' style={{background:'#181818'}}/>
                               </Grid>
                           
                             
@@ -633,7 +718,7 @@ function getStepContent(step) {
 
         
 
-          <Button type="submit" form="product-form-id" style={{color: '#00A7E3'}} autoFocus>
+          <Button type="submit" form="product-form-id-field" style={{color: '#00A7E3'}} autoFocus>
           Save
           </Button>
           

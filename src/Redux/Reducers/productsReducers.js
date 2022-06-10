@@ -37,14 +37,7 @@ export const productsReducers = (state = initialState, action) => {
                 loading: false,
             }
 
-    //Variant GET
-
-        case types.GET_VARIANTS:
-            return {
-                ...state,
-                variants: action.payload,
-                loading: false,
-            };
+    
 
     //Vairant Field GET
         case types.GET_VARIANTS_FIELD:
@@ -53,6 +46,14 @@ export const productsReducers = (state = initialState, action) => {
                 variantsField: action.payload,
                 loading: false,
             };
+
+        case types.ADD_VARIANTS_FIELD:
+            return {
+                ...state,
+                loading: false,
+            }
+
+    //Variant GET and Post
         
         case types.ADD_VARIANTS:
             return {
