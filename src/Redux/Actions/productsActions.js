@@ -86,6 +86,7 @@ export const addProducts = (product) => {
             dispatch(productAdded());
             dispatch(loadProducts()); //post garesi update herna hoye jabe
             dispatch(loadVariantsField());
+            dispatch(loadVariants());
         }).catch((err) => console.log(err));
     }
 }
@@ -128,6 +129,7 @@ export const addVariants = (variant) => {
           }).then((res) => {
             dispatch(variantAdded());
             dispatch(loadProducts());
+            dispatch(loadVariants());
             dispatch(loadVariantsField());
         }).catch((err) => console.log(err));
     }
@@ -163,6 +165,7 @@ export const addVariantsField = (variant) => {
         axios.post(`https://merak-test.herokuapp.com/inventory/variant_field/`, variant, {headers: headers}).then((res) => {
             dispatch(variantFieldsAdded());
             dispatch(loadProducts());
+            dispatch(loadVariants());
             dispatch(loadVariantsField());
         }).catch((err) => console.log(err));
     }
