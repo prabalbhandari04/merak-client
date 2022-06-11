@@ -147,7 +147,7 @@ const AddItem = () => {
 
   const handleInputChange2 = (e) => {
     let {name, value} = e.target;
-    setState2({ price: price, quantity: quantity, image: image, is_default: is_default, field: productVariant, product: productName, [name]: value});
+    setState2({ price: price, quantity: quantity, image: image, is_default: false, field: productVariant, product: productName, [name]: value});
   }
 
 
