@@ -46,7 +46,7 @@ const Invoice = () => {
   
   return (
 <>
-        <h1>{orders[0]}</h1>
+       <h1>{orders[0]}</h1>
         
     </>
   )

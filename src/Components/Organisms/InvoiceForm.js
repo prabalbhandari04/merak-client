@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,9 +8,10 @@ import Card from 'react-bootstrap/Card';
 import InvoiceItem from '../Molecules/InvoiceItem';
 import InvoiceModal from '../Molecules/InvoiceModal';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Invoice from '../Organisms/Invoice';
 
 const bill = {
-    currency: '?',
+    currency: '₹',
     currentDate: '2022/01/20',
     invoiceNumber: '123',
     dateOfIssue: '01/01/2020',
@@ -21,12 +22,20 @@ const bill = {
     billFromAddress: '123 Main Street',
     billFromEmail: 'no@gmail.com',
     notes: 'Notes',
-    total: '1050.00',
-    subTotal: '1100.00',
-    taxRate: '10.00%',
-    taxAmmount: '100.00',
-    discountRate: '5%',
-    discountAmmount: '50.00',
+    total: '0.00',
+    subTotal: '0.00',
+    taxRate: '',
+    taxAmmount: '0.00',
+    discountRate: '',
+    discountAmmount: '0.00',
+    products: {
+      id : 1,
+      name : 'Product 1',
+      description : 'Product 1 description',
+      price : '100.00',
+      quantity : '1',
+    }
+    
   };
 
 class InvoiceForm extends React.Component {
@@ -54,11 +63,11 @@ class InvoiceForm extends React.Component {
     };
     this.state.items = [
       {
-        id: 0,
-        name: '',
-        description: '',
-        price: '1.00',
-        quantity: 1
+        id: bill.products.id,
+        name: bill.products.name,
+        description: bill.products.description,
+        price: bill.products.price,
+        quantity: bill.products.quantity
       }
     ];
     this.editField = this.editField.bind(this);
@@ -142,7 +151,9 @@ class InvoiceForm extends React.Component {
   };
   closeModal = (event) => this.setState({isOpen: false});
   render() {
-    return (<Form onSubmit={this.openModal}>
+    return (
+    
+    <Form onSubmit={this.openModal}>
       <Row>
         <Col md={8} lg={9}>
           <Card className="p-4 p-xl-5 my-3 my-xl-4">
@@ -261,6 +272,8 @@ class InvoiceForm extends React.Component {
           </div>
         </Col>
       </Row>
+      
+    <Invoice />
     </Form>)
   }
 }
