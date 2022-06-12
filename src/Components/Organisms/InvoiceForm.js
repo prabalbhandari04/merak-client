@@ -8,31 +8,49 @@ import Card from 'react-bootstrap/Card';
 import InvoiceItem from '../Molecules/InvoiceItem';
 import InvoiceModal from '../Molecules/InvoiceModal';
 import InputGroup from 'react-bootstrap/InputGroup';
-import Invoice from './Invoice';
 
-import Container from 'react-bootstrap/Container';
+const bill = {
+    currency: '?',
+    currentDate: '2022/01/20',
+    invoiceNumber: '123',
+    dateOfIssue: '01/01/2020',
+    billTo: 'John Doe',
+    billToAddress: '123 Main Street',
+    billToEmail: 'yes@gmai.com',
+    billFrom: 'Jane Doe',
+    billFromAddress: '123 Main Street',
+    billFromEmail: 'no@gmail.com',
+    notes: 'Notes',
+    total: '1050.00',
+    subTotal: '1100.00',
+    taxRate: '10.00%',
+    taxAmmount: '100.00',
+    discountRate: '5%',
+    discountAmmount: '50.00',
+  };
+
 class InvoiceForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
-      currency: '$',
-      currentDate: '',
-      invoiceNumber: 1,
-      dateOfIssue: '',
-      billTo: '',
-      billToEmail: '',
-      billToAddress: '',
-      billFrom: '',
-      billFromEmail: '',
-      billFromAddress: '',
-      notes: '',
-      total: '0.00',
-      subTotal: '0.00',
+      currency: bill.currency,
+      currentDate: bill.currentDate,
+      invoiceNumber: bill.invoiceNumber,
+      dateOfIssue: bill.dateOfIssue,
+      billTo: bill.billTo,
+      billToEmail: bill.billToEmail,
+      billToAddress: bill.billToAddress,
+      billFrom: bill.billFrom,
+      billFromEmail: bill.billFromEmail,
+      billFromAddress: bill.billFromAddress,
+      notes:bill.notes,
+      total: bill.total,
+      subTotal: bill.subTotal,
       taxRate: '',
-      taxAmmount: '0.00',
+      taxAmmount: bill.taxAmmount,
       discountRate: '',
-      discountAmmount: '0.00'
+      discountAmmount: bill.discountAmmount
     };
     this.state.items = [
       {
@@ -124,13 +142,9 @@ class InvoiceForm extends React.Component {
   };
   closeModal = (event) => this.setState({isOpen: false});
   render() {
-    return (
-     <Container>
-      
-    <Form onSubmit={this.openModal}>
+    return (<Form onSubmit={this.openModal}>
       <Row>
         <Col md={8} lg={9}>
-          <Invoice />
           <Card className="p-4 p-xl-5 my-3 my-xl-4">
             <div className="d-flex flex-row align-items-start justify-content-between mb-3">
               <div class="d-flex flex-column">
@@ -247,10 +261,7 @@ class InvoiceForm extends React.Component {
           </div>
         </Col>
       </Row>
-    </Form>
-    <Invoice /> 
-  </Container>
-    )
+    </Form>)
   }
 }
 

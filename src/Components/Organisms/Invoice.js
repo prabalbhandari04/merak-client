@@ -46,9 +46,29 @@ const Invoice = () => {
   
   return (
 <>
-    
+        <h1>{orders[0]}</h1>
         
     </>
   )
 }
 export default Invoice;
+
+// const bill = {
+//     currency: '@',
+//     currentDate: '@',
+//     invoiceNumber: '#123',
+//     dateOfIssue: '01/01/2020',
+//     billTo: 'John Doe',
+//     billToAddress: '123 Main Street',
+//     billToEmail: 'yes@gmai.com',
+//     billFrom: 'Jane Doe',
+//     billFromAddress: '123 Main Street',
+//     billFromEmail: 'no@gmail.com',
+//     notes: 'Notes',
+//     total: '1050.00',
+//     subTotal: '1100.00',
+//     taxRate: '10.00%',
+//     taxAmmount: '100.00',
+//     discountRate: '5%',
+//     discountAmmount: '50.00',
+//   };
