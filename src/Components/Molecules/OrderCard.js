@@ -18,7 +18,7 @@ import OrderDetails from './OrderDetails';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
-
+import DescriptionIcon from '@mui/icons-material/Description';
 
 
 //Redux
@@ -73,6 +73,12 @@ const OrderCard = ({ order }) => {
     dispatch(deleteOrders(uuid))
 
   }
+  const url = "http://localhost:3000"
+  const handleBill = (uuid) =>{
+    var win = window.open(url+"/bill/"+order.invoice , '_blank');
+    console.log(uuid)
+    win.focus();
+  }
 
 
 //   const { name, quantity} = product;
@@ -117,6 +123,9 @@ const OrderCard = ({ order }) => {
             {"Order Details"}
           </DialogTitle>
           <Button>
+            <DescriptionIcon style={{color: 'blue', margin:'10px' }} onClick={handleBill}/>
+          </Button>
+          <Button>  
             <DeleteIcon style={{color: 'red', margin:'10px' }} onClick={handleClickOpen2}/>
           </Button>
         </Container>

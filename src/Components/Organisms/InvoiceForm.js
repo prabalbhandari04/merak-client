@@ -8,7 +8,9 @@ import Card from 'react-bootstrap/Card';
 import InvoiceItem from '../Molecules/InvoiceItem';
 import InvoiceModal from '../Molecules/InvoiceModal';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Invoice from './Invoice';
 
+import Container from 'react-bootstrap/Container';
 class InvoiceForm extends React.Component {
   constructor(props) {
     super(props);
@@ -122,9 +124,13 @@ class InvoiceForm extends React.Component {
   };
   closeModal = (event) => this.setState({isOpen: false});
   render() {
-    return (<Form onSubmit={this.openModal}>
+    return (
+     <Container>
+      
+    <Form onSubmit={this.openModal}>
       <Row>
         <Col md={8} lg={9}>
+          <Invoice />
           <Card className="p-4 p-xl-5 my-3 my-xl-4">
             <div className="d-flex flex-row align-items-start justify-content-between mb-3">
               <div class="d-flex flex-column">
@@ -241,7 +247,10 @@ class InvoiceForm extends React.Component {
           </div>
         </Col>
       </Row>
-    </Form>)
+    </Form>
+    <Invoice /> 
+  </Container>
+    )
   }
 }
 

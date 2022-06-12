@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import styledComponents from 'styled-components'
 
 //Component - Organisms 
 import OrderCard from '../../Components/Molecules/OrderCard'
 import OrderList from '../../Components/Organisms/OrderList';
+import OrderFilter from '../../Components/Organisms/OrderFilter'
 //Component - Atoms
 import Subtitle from '../../Components/Atoms/Subtitle';
 import AddOrder from '../../Components/Molecules/AddOrder';
@@ -74,6 +75,32 @@ const Order = () => {
   };
 
   console.log(orders)
+
+
+
+  // Filter Component for Order
+
+  // filter constants,state and functions
+  const [orderList ] = useState([]);
+
+  const [selectedFilter,setSelectedFilter] = useState();
+
+  // Function to get filtered list
+  function getFilteredList() {
+    // Avoid filter when selectedCategory is null
+    if (!selectedFilter) {
+      return orderList;
+    }
+    return orderList.filter((item) => item.status === selectedFilter);
+  }
+
+  function handleCategoryChange(event) {
+    setSelectedFilter(event.target.value);
+  }
+  
+  // Avoid duplicate function calls with useMemo
+  const orderFilteredList = useMemo(getFilteredList, [selectedFilter, orderList]);
+  
   return (
 <>
     <Container style={{marginTop: '30px'}}>
@@ -89,12 +116,33 @@ const Order = () => {
            )
           }}
         />
+
+        {/* Filter Component */}
+      <div className="app">
+            <div className="filter-container">
+              <div>Filter by status:</div>
+              <div>
+                <select
+                  name="category-list"
+                  id="category-list"
+                  onChange={handleCategoryChange}
+                >
+                  <option value="P">Pending</option>
+                  <option value="CAN">Cancelled</option>
+                </select>
+              </div>
+              <div>
+          
+          </div>
+            </div>
+          </div>
         </Topbar>
 
         <Subtitle title="Order"/>
         
         <OrderList filteredOrder={filteredOrder}/>
-
+        
+        <OrderFilter orderFilteredList = {orderFilteredList}/> 
         
 
 
