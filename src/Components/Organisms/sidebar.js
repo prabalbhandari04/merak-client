@@ -57,39 +57,39 @@ const Navbar = () => {
             </div>
             <div className={`flex flex-col justify-center px-4 ${getJustify} w-full gap-y-8`}>
                 <Link to='/'>
-                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/dashboard')}`}>
+                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/overview')}`}>
                         <RiDashboardFill className='w-6 h-6'/>
                         { isOpen && <h3>Overview</h3>}
                     </div>
                 </Link>
                 <Link to='/requests'>
-                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/requests')}`}>
+                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/team')}`}>
                         <IoMdInformationCircle className='w-6 h-6'/>
-                        { isOpen && <h3>Requests</h3>}
+                        { isOpen && <h3>Teams</h3>}
                     </div>
                 </Link>
                 <Link to='/messages'>
-                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/messages')}`}>
+                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/expenses')}`}>
                         <AiFillMessage className='w-6 h-6'/>
-                        { isOpen && <h3>Messages</h3>}
+                        { isOpen && <h3>Expenses</h3>}
                     </div>
                 </Link>
                 <Link to='/partner'>
-                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/partner')}`}>
+                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/activity')}`}>
                         <MdPersonAddAlt1 className='w-6 h-6'/>
-                        { isOpen && <h3>Add Partners</h3>}
+                        { isOpen && <h3>Activity</h3>}
                     </div>
                 </Link>
                 <Link to='/setting'>
-                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/setting')}`}>
+                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/inventory')}`}>
                         <IoMdSettings className='w-6 h-6'/>
-                        { isOpen && <h3>Settings</h3>}
+                        { isOpen && <h3>Inventory</h3>}
                     </div>
                 </Link>
                 <Link to='/gallery'>
-                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/gallery')}`}>
+                    <div className={`flex gap-x-4 cursor-pointer ${getActive('/setting')}`}>
                         <RiGalleryFill className='w-6 h-6'/>
-                        { isOpen && <h3>Gallery</h3>}
+                        { isOpen && <h3>Setting</h3>}
                     </div>
                 </Link>
                 <div className='flex gap-x-4 cursor-pointer text-white' onClick={handleLogout}>
