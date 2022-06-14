@@ -35,9 +35,9 @@ const bill = {
       price : '100.00',
       quantity : '1',
     }
-    
   };
 
+  
 class InvoiceForm extends React.Component {
   constructor(props) {
     super(props);
