@@ -10,10 +10,12 @@ import { AiFillMessage, AiOutlineLogout } from 'react-icons/ai'
 import { MdPersonAddAlt1 } from 'react-icons/md'
 import { RiGalleryFill } from 'react-icons/ri'
 
+
+
 const Container = styledComponents.nav`
     width: ${props => props.width};
     position: fixed;
-    background-color: black;
+    background-color: #222222;
     height: 100vh;
     transition : all 0.3s ease-in-out;
     z-index: 40;
@@ -23,36 +25,43 @@ const Container = styledComponents.nav`
 `
 const Icon = styledComponents.div`
     position: absolute;
-    right: -2rem;
+    right: -1.5rem;
     top: 2rem;
-    width:3rem;
-    height:3rem;
-    background-color: #000B0F;
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
 `
+
 const Wrapper = styledComponents.div`
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     padding:0 1rem;
     width: 100%;
-    row-gap:2rem;
+    row-gap: 0.6rem;
     align-items: ${props => props.align};
     height: 100%;
+`
 
-    div{
+
+
+
+
+const Label = styledComponents.div`
+
         display: flex;
         column-gap: 1rem;
         cursor: pointer;
         align-items: center;
         color: ${props => props.color};
-
-    }
 `
+
+
 const Over =  styledComponents.div`
     font-size: 1.5rem; 
 `
@@ -85,7 +94,7 @@ const Navbar = () => {
             return '#B0B0B0'
         }
         else{
-            return 'white'
+            return '#b0b0b0'
         }
     }
     const handleLogout = () => {
@@ -95,64 +104,69 @@ const Navbar = () => {
 
     return (
         <Container width={width}>
+
             <Icon >
-                <Hamburger size={20} color="#fff" onToggle={handleNav}/>
+                <Hamburger size={20} color="black" onToggle={handleNav}/>
             </Icon>
+
+
             <Wrapper align = {`${getJustify}`}>
-                <Link to='/'>
-                    <div color={`${getActive("/overview")}`}>
+               
+                <Link to='/' style={{ textDecoration: 'none' }}>
+                    <Label color={`${getActive("/overview")}`}>
                         <Over>
                         <RiDashboardFill/>
                         </Over>
-                        { isOpen && <h3>Overview</h3>}  
-                    </div>
+                        { isOpen && <h3 >Overview</h3>}  
+                    </Label>
                 </Link>
-                <Link to='/requests'>
-                    <div color={`${getActive("/team")}`}>
+                <Link to='/requests' style={{ textDecoration: 'none' }}>
+                    <Label color={`${getActive("/team")}`}>
                         <Over>
                         <IoMdInformationCircle/>
                         </Over>
-                        { isOpen && <h3>Teams</h3>}
-                    </div>
+                        { isOpen && <h3 >Teams</h3>}
+                    </Label>
                 </Link>
-                <Link to='/messages'>
-                    <div color={`${getActive("/exxpenses")}`}>
+                <Link to='/messages' style={{ textDecoration: 'none' }}>
+                    <Label color={`${getActive("/exxpenses")}`}>
                     <Over>
                         <AiFillMessage />
                     </Over>
-                        { isOpen && <h3>Expenses</h3>}
-                    </div>
+                        { isOpen && <h3 >Expenses</h3>}
+                    </Label>
                 </Link>
-                <Link to='/partner'>
-                    <div color={`${getActive("/activity")}`}>
+                <Link to='/partner' style={{ textDecoration: 'none' }}>
+                    <Label color={`${getActive("/activity")}`}>
                         <Over>
                         <MdPersonAddAlt1 />
                         </Over>
-                        { isOpen && <h3>Activity</h3>}
-                    </div>
+                        { isOpen && <h3 >Activity</h3>}
+                    </Label>
                 </Link>
-                <Link to='/setting'>
-                    <div color={`${getActive("/inventory")}`}>
+                <Link to='/inventory' style={{ textDecoration: 'none' }}>
+                    <Label color={`${getActive("/inventory")}`}>
                         <Over>
                         <IoMdSettings/>
                         </Over>
-                        { isOpen && <h3>Inventory</h3>}
-                    </div>
+                        { isOpen && <h3 >Inventory</h3>}
+                    </Label>
                 </Link>
-                <Link to='/gallery'>
-                    <div color={`${getActive("/seetting")}`}>
+                <Link to='/gallery' style={{ textDecoration: 'none' }}>
+                    <Label color={`${getActive("/seetting")}`}>
                         <Over>
                         <RiGalleryFill/>
                         </Over>
-                        { isOpen && <h3>Setting</h3>}
-                    </div>
+                        { isOpen && <h3 >Setting</h3>}
+                    </Label>
                 </Link>
-                <div color={`${getActive("/overview")}`} onClick={handleLogout}>
+                <Label color={`${getActive("/overview")}`} onClick={handleLogout} >
                     <Over>
                     <AiOutlineLogout/>
                     </Over>
-                    { isOpen && <h3>Logout</h3>}
-                </div>
+                    { isOpen && <h3 >Logout</h3>}
+                </Label>
+                
             </Wrapper>          
         </Container>
     )
