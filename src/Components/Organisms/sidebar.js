@@ -12,11 +12,13 @@ import { RiGalleryFill } from 'react-icons/ri'
 
 const Container = styledComponents.nav`
     width: ${props => props.width};
-    position: relative;
+    position: fixed;
     background-color: black;
     height: 100vh;
     transition : all 0.3s ease-in-out;
     z-index: 40;
+    top:0;
+    left:0;
 
 `
 const Icon = styledComponents.div`
@@ -25,7 +27,7 @@ const Icon = styledComponents.div`
     top: 2rem;
     width:3rem;
     height:3rem;
-    background-color: black;
+    background-color: #000B0F;
     color: white;
     display: flex;
     align-items: center;
@@ -40,13 +42,19 @@ const Wrapper = styledComponents.div`
     width: 100%;
     row-gap:2rem;
     align-items: ${props => props.align};
+    height: 100%;
 
     div{
         display: flex;
         column-gap: 1rem;
         cursor: pointer;
+        align-items: center;
         color: ${props => props.color};
+
     }
+`
+const Over =  styledComponents.div`
+    font-size: 1.5rem; 
 `
 
 const Navbar = () => {
@@ -67,14 +75,14 @@ const Navbar = () => {
             return 'center'
         }
         else {
-            return 'start'
+            return 'center'
         }
     }
 
     let location = useLocation();
     const getActive = (path) => {
         if(location.pathname === path) {
-            return 'red'
+            return '#B0B0B0'
         }
         else{
             return 'white'
@@ -93,42 +101,56 @@ const Navbar = () => {
             <Wrapper align = {`${getJustify}`}>
                 <Link to='/'>
                     <div color={`${getActive("/overview")}`}>
-                        <RiDashboardFill className='w-6 h-6'/>
+                        <Over>
+                        <RiDashboardFill/>
+                        </Over>
                         { isOpen && <h3>Overview</h3>}  
                     </div>
                 </Link>
                 <Link to='/requests'>
                     <div color={`${getActive("/team")}`}>
-                        <IoMdInformationCircle className='w-6 h-6'/>
+                        <Over>
+                        <IoMdInformationCircle/>
+                        </Over>
                         { isOpen && <h3>Teams</h3>}
                     </div>
                 </Link>
                 <Link to='/messages'>
                     <div color={`${getActive("/exxpenses")}`}>
-                        <AiFillMessage className='w-6 h-6'/>
+                    <Over>
+                        <AiFillMessage />
+                    </Over>
                         { isOpen && <h3>Expenses</h3>}
                     </div>
                 </Link>
                 <Link to='/partner'>
                     <div color={`${getActive("/activity")}`}>
-                        <MdPersonAddAlt1 className='w-6 h-6'/>
+                        <Over>
+                        <MdPersonAddAlt1 />
+                        </Over>
                         { isOpen && <h3>Activity</h3>}
                     </div>
                 </Link>
                 <Link to='/setting'>
                     <div color={`${getActive("/inventory")}`}>
-                        <IoMdSettings className='w-6 h-6'/>
+                        <Over>
+                        <IoMdSettings/>
+                        </Over>
                         { isOpen && <h3>Inventory</h3>}
                     </div>
                 </Link>
                 <Link to='/gallery'>
                     <div color={`${getActive("/seetting")}`}>
-                        <RiGalleryFill className='w-6 h-6'/>
+                        <Over>
+                        <RiGalleryFill/>
+                        </Over>
                         { isOpen && <h3>Setting</h3>}
                     </div>
                 </Link>
                 <div color={`${getActive("/overview")}`} onClick={handleLogout}>
-                    <AiOutlineLogout className='w-6 h-6'/>
+                    <Over>
+                    <AiOutlineLogout/>
+                    </Over>
                     { isOpen && <h3>Logout</h3>}
                 </div>
             </Wrapper>          
