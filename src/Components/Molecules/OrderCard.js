@@ -6,8 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import styledComponents from 'styled-components';
 
 // Material Ui Components
-import { Box, Link, Card as Cards, Typography, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Link, Card as Cards, Typography, Stack } from '@mui/material';
 
 // Material Ui
 import Dialog from '@mui/material/Dialog';
@@ -44,6 +43,7 @@ const Container = styledComponents.div`
   align-item: center;
 `
 
+// <<<<<<< prabal
 const OrderCard = ({ order }) => {
 
   const [open, setOpen] = useState(false);
@@ -61,6 +61,25 @@ const OrderCard = ({ order }) => {
   const dispatch = useDispatch(); //Redux Dispatch
 
   const handleClickOpen = () => {
+// =======
+// const Card = ( {order} ) => {
+//   const [open, setOpen] = useState(false);
+
+//   const [open2, setOpen2] = useState(false);
+
+//   const handleClickOpen2 = () => {
+//     setOpen2(true);
+//   };
+
+//   const handleClose2 = () => {
+//     setOpen2(false);
+//   };
+
+//   const dispatch = useDispatch(); //Redux Dispatch
+
+//   const handleClickOpen = (e) => {
+//     e.preventDefault()
+// >>>>>>> order
     setOpen(true);
   };
 
@@ -73,13 +92,13 @@ const OrderCard = ({ order }) => {
     dispatch(deleteOrders(uuid))
 
   }
+
   const url = "http://localhost:3000"
   const handleBill = (uuid) =>{
     var win = window.open(url+"/bill/"+order.invoice , '_blank');
     console.log(uuid)
     win.focus();
   }
-
 
 //   const { name, quantity} = product;
 //   const image = product.variant[0].image;
@@ -98,7 +117,17 @@ const OrderCard = ({ order }) => {
           </Typography>
          
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-           <span style={{color: 'gray'}}> Assigned to: </span> {()=>{if(!order.assigned_to.full_name){return""}}}
+
+           <span style={{color: 'gray'}}> Assigned to: </span> 
+          {
+            order.assigned_to === null ?
+             <p></p>
+            :
+            <p>
+              {order.assigned_to.full_name}
+            </p>
+          }
+
           </Typography>
           
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
@@ -117,20 +146,29 @@ const OrderCard = ({ order }) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        fullWidth={true}
+        maxWidth="lg"
+        sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 600 } }}
       >
         <Container>
           <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
             {"Order Details"}
           </DialogTitle>
+
           <Button>
             <DescriptionIcon style={{color: 'blue', margin:'10px' }} onClick={handleBill}/>
           </Button>
           <Button>  
+
+          <Button disabled={order.status === "CANCELLED"? 'boolean': false}>
+
             <DeleteIcon style={{color: 'red', margin:'10px' }} onClick={handleClickOpen2}/>
           </Button>
         </Container>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
-          <OrderDetails order={order}/>
+
+          <OrderDetails order={order} />
+
           {/* <DialogContentText id="alert-dialog-description">
             
           </DialogContentText> */}

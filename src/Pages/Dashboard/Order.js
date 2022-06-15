@@ -2,9 +2,13 @@ import React, {useEffect, useState, useMemo} from 'react';
 import styledComponents from 'styled-components'
 
 //Component - Organisms 
+
 import OrderCard from '../../Components/Molecules/OrderCard'
 import OrderList from '../../Components/Organisms/OrderList';
 import OrderFilter from '../../Components/Organisms/OrderFilter'
+
+import Card from '../../Components/Molecules/OrderCard'
+
 //Component - Atoms
 import Subtitle from '../../Components/Atoms/Subtitle';
 import AddOrder from '../../Components/Molecules/AddOrder';
@@ -14,6 +18,10 @@ import Title from '../../Components/Atoms/Title';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOrders} from '../../Redux/Actions/ordersActions';
 import {loadVariants} from '../../Redux/Actions/productsActions';
+
+import {loadUsers} from '../../Redux/Actions/usersActions';
+
+
 
 // material -ui
 import { Container} from '@mui/material';
@@ -50,6 +58,7 @@ const Topbar = styledComponents.div`
 const Order = () => {
   const dispatch = useDispatch(); //Redux Dispatch
   const {orders} = useSelector(state => state.data1); //Redux State
+  const {users} = useSelector(state => state.data2);
   const {variants} = useSelector(state => state.data);
   const [search, setSearch] = useState("");
 
@@ -57,6 +66,7 @@ const Order = () => {
   useEffect(() => {
     dispatch(loadOrders());
     dispatch(loadVariants());
+    dispatch(loadUsers());
   }, [dispatch]);
   
   const filteredOrder = orders.filter(
@@ -139,11 +149,25 @@ const Order = () => {
         </Topbar>
 
         <Subtitle title="Order"/>
+
         
-        <OrderList filteredOrder={filteredOrder}/>
+//         <OrderList filteredOrder={filteredOrder}/>
         
-        <OrderFilter orderFilteredList = {orderFilteredList}/> 
+//         <OrderFilter orderFilteredList = {orderFilteredList}/> 
         
+
+
+        <Grid container spacing={3} style={{marginBottom: '30px'}}>
+
+          {orders && orders.map((order, index) => (
+            <Grid xs={12} sm={6} key={index} item >
+              <Card order={order}/>
+                <OrderList filteredOrder={filteredOrder}/>
+            </Grid>
+          ))}
+
+        </Grid>
+
 
 
       </Container>
@@ -160,8 +184,7 @@ const Order = () => {
           </Grid>
       </Grid> */}
 
-      
-      <AddOrder/>
+      <AddOrder />
     </>
   )
 }

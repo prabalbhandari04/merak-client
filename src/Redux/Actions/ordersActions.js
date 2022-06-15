@@ -61,6 +61,15 @@ export const addOrders = (product) => {
     }
 }
 
+export const putOrders = (uuid, product) => {
+    return function (dispatch) {
+        axios.patch(`${prox}https://merak-test.herokuapp.com/inventory/order/${uuid}/`, product, {headers: headers}).then((res) => {
+            //dispatch(orderAdded());
+            dispatch(loadOrders());
+        }).catch((err) => console.log(err));
+    }
+}
+
 
 //------------Api Call Post Products----------------------------
 export const deleteOrders = (uuid) => {

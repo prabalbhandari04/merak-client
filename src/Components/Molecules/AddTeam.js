@@ -4,8 +4,15 @@ import Subtitle from '../Atoms/Subtitle';
 
 import {Grid,Typography} from "@material-ui/core";
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 import styledComponents from 'styled-components';
+
+const Wrapper = styledComponents.section`
+    display: flex;
+    flex-direction: column;
+`
 
 
 const Container = styledComponents.div`
@@ -25,7 +32,9 @@ const AddTeam = ()=>{
     const [address, setAddress] = useState("")
 
     return(
-        <>
+
+        <Wrapper>
+
             <Subtitle title="Add Team Member" />
             <Container>
                 <form id="metadata-form-id">
@@ -79,7 +88,12 @@ const AddTeam = ()=>{
                     <Grid item xs={12} sm={6}>
                     <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setAddress(e.target.value)}/>
                     </Grid>
-                    
+                    <Box height="70px" />
+
+                    <Button variant="contained">
+                        Next
+                    </Button>                    
+
 
                 </Grid>
                 </form>
@@ -87,7 +101,8 @@ const AddTeam = ()=>{
 
                 
             </Container>
-        </>
+
+        </Wrapper>
 )}
 
 export default AddTeam
