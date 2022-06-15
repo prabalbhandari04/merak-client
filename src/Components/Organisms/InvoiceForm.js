@@ -10,6 +10,25 @@ import InvoiceModal from '../Molecules/InvoiceModal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Invoice from '../Organisms/Invoice';
 
+//Redux
+import {useSelector, useDispatch} from 'react-redux';
+import {loadOrders} from '../../Redux/Actions/ordersActions';
+import * as types from "../../Redux/Constants/action-types";
+import axios from "axios";
+
+//Authentication Header-------------------------------
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1MDM3MTQzLCJpYXQiOjE2NTMwMzcxNDMsImp0aSI6ImJkNjdlMzNmNjE3YzQ2NDI4NWUyNDU2YTkxMDI3NzQ0IiwidXNlcl9pZCI6MX0.FCHJiiWiW7s8kTW-h1wKen43dx-wyPN2YS7MUb23D_o"
+
+let headers = {
+        "Content-type": "application/json; charset=UTF-8",
+        "Authorization": 'Bearer ' + token
+};
+
+//Proxy URL to bypass Cors
+const prox = "https://kissasian1988.herokuapp.com/"
+//----------------------------------------------------
+
+
 const bill = {
     currency: '₹',
     currentDate: '2022/01/20',
@@ -61,6 +80,9 @@ class InvoiceForm extends React.Component {
       discountRate: '',
       discountAmmount: bill.discountAmmount
     };
+
+    this.state = {users:[]}
+    
     this.state.items = [
       {
         id: bill.products.id,
@@ -72,9 +94,13 @@ class InvoiceForm extends React.Component {
     ];
     this.editField = this.editField.bind(this);
   }
-  componentDidMount(prevProps) {
-    this.handleCalculateTotal()
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users').then(resp=>resp.json()).then(resp=>this.setState({users:resp}))
   }
+  // componentDidMount(prevProps) {
+  //   this.handleCalculateTotal()
+  // }
+
   handleRowDel(items) {
     var index = this.state.items.indexOf(items);
     this.state.items.splice(index, 1);
@@ -163,6 +189,12 @@ class InvoiceForm extends React.Component {
                   <div class="mb-2">
                     <span className="fw-bold">Current&nbsp;Date:&nbsp;</span>
                     <span className="current-date">{new Date().toLocaleDateString()}</span>
+
+                    {/* api wala call gareko @nischal  */}
+                    <div>
+                      <h1>Yes</h1>
+                      {this.state.users.map(user=><div key={user.id}>{user.id}.{user.name}</div>)}
+                      </div>
                   </div>
                 </div>
                 <div className="d-flex flex-row align-items-center">

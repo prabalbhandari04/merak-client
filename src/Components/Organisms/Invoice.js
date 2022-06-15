@@ -51,7 +51,7 @@ const Invoice = () => {
     </>
   )
 }
-export default Invoice;
+  export default Invoice;
 
 // const bill = {
 //     currency: '@',

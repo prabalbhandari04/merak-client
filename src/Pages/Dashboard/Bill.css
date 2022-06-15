@@ -1,6 +1,6 @@
 body, html {
     font-size: 0.9rem;
-    background: #f2f3f7
+    background: #000000;
   }
   body, .form-control {
     font-size: 0.9rem
@@ -74,7 +74,7 @@ body, html {
   .form-control::placeholder,
   .form-control::-ms-input-placeholder,
   .form-control:-ms-input-placeholder {
-    color: #9fa8b0
+    color: #ffffff
   }
   .form-control:focus {
     background: #f5f7f9;
