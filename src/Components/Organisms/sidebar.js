@@ -43,7 +43,7 @@ const Wrapper = styledComponents.div`
     justify-content: center;
     padding:0 1rem;
     width: 100%;
-    row-gap: 0.6rem;
+    row-gap: 1.5rem;
     align-items: ${props => props.align};
     height: 100%;
 `
@@ -117,31 +117,31 @@ const Navbar = () => {
                         <Over>
                         <RiDashboardFill/>
                         </Over>
-                        { isOpen && <h3 >Overview</h3>}  
+                        { isOpen && <>Overview</>}  
                     </Label>
                 </Link>
-                <Link to='/requests' style={{ textDecoration: 'none' }}>
+                <Link to='/teams' style={{ textDecoration: 'none' }}>
                     <Label color={`${getActive("/team")}`}>
                         <Over>
                         <IoMdInformationCircle/>
                         </Over>
-                        { isOpen && <h3 >Teams</h3>}
+                        { isOpen && <>Teams</>}
                     </Label>
                 </Link>
-                <Link to='/messages' style={{ textDecoration: 'none' }}>
+                <Link to='/expenses' style={{ textDecoration: 'none' }}>
                     <Label color={`${getActive("/exxpenses")}`}>
                     <Over>
                         <AiFillMessage />
                     </Over>
-                        { isOpen && <h3 >Expenses</h3>}
+                        { isOpen && <>Expenses</>}
                     </Label>
                 </Link>
-                <Link to='/partner' style={{ textDecoration: 'none' }}>
+                <Link to='/activity' style={{ textDecoration: 'none' }}>
                     <Label color={`${getActive("/activity")}`}>
                         <Over>
                         <MdPersonAddAlt1 />
                         </Over>
-                        { isOpen && <h3 >Activity</h3>}
+                        { isOpen && <>Activity</>}
                     </Label>
                 </Link>
                 <Link to='/inventory' style={{ textDecoration: 'none' }}>
@@ -149,22 +149,22 @@ const Navbar = () => {
                         <Over>
                         <IoMdSettings/>
                         </Over>
-                        { isOpen && <h3 >Inventory</h3>}
+                        { isOpen && <>Inventory</>}
                     </Label>
                 </Link>
-                <Link to='/gallery' style={{ textDecoration: 'none' }}>
+                <Link to='/setting' style={{ textDecoration: 'none' }}>
                     <Label color={`${getActive("/seetting")}`}>
                         <Over>
                         <RiGalleryFill/>
                         </Over>
-                        { isOpen && <h3 >Setting</h3>}
+                        { isOpen && <>Setting</>}
                     </Label>
                 </Link>
                 <Label color={`${getActive("/overview")}`} onClick={handleLogout} >
                     <Over>
                     <AiOutlineLogout/>
                     </Over>
-                    { isOpen && <h3 >Logout</h3>}
+                    { isOpen && <>Logout</>}
                 </Label>
                 
             </Wrapper>          

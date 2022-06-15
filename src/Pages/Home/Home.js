@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './home.css';
-import Navbar from '../../Components/Organisms/Sidebar';
+import Navbar from '../../Components/Organisms/sidebar';
 
 const Home = () => {
   return (
