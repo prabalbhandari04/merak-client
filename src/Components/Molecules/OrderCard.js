@@ -17,11 +17,11 @@ import OrderDetails from './OrderDetails';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
-
+import DescriptionIcon from '@mui/icons-material/Description';
 
 
 //Redux
-import {useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {deleteOrders} from '../../Redux/Actions/ordersActions';
 
 // -----------Styling Product Image---------
@@ -43,7 +43,9 @@ const Container = styledComponents.div`
   align-item: center;
 `
 
-const Card = ( {order} ) => {
+// <<<<<<< prabal
+const OrderCard = ({ order }) => {
+
   const [open, setOpen] = useState(false);
 
   const [open2, setOpen2] = useState(false);
@@ -58,8 +60,26 @@ const Card = ( {order} ) => {
 
   const dispatch = useDispatch(); //Redux Dispatch
 
-  const handleClickOpen = (e) => {
-    e.preventDefault()
+  const handleClickOpen = () => {
+// =======
+// const Card = ( {order} ) => {
+//   const [open, setOpen] = useState(false);
+
+//   const [open2, setOpen2] = useState(false);
+
+//   const handleClickOpen2 = () => {
+//     setOpen2(true);
+//   };
+
+//   const handleClose2 = () => {
+//     setOpen2(false);
+//   };
+
+//   const dispatch = useDispatch(); //Redux Dispatch
+
+//   const handleClickOpen = (e) => {
+//     e.preventDefault()
+// >>>>>>> order
     setOpen(true);
   };
 
@@ -71,6 +91,13 @@ const Card = ( {order} ) => {
     handleClose2()
     dispatch(deleteOrders(uuid))
 
+  }
+
+  const url = "http://localhost:3000"
+  const handleBill = (uuid) =>{
+    var win = window.open(url+"/bill/"+order.invoice , '_blank');
+    console.log(uuid)
+    win.focus();
   }
 
 //   const { name, quantity} = product;
@@ -90,6 +117,7 @@ const Card = ( {order} ) => {
           </Typography>
          
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+
            <span style={{color: 'gray'}}> Assigned to: </span> 
           {
             order.assigned_to === null ?
@@ -99,6 +127,7 @@ const Card = ( {order} ) => {
               {order.assigned_to.full_name}
             </p>
           }
+
           </Typography>
           
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
@@ -125,12 +154,21 @@ const Card = ( {order} ) => {
           <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
             {"Order Details"}
           </DialogTitle>
+
+          <Button>
+            <DescriptionIcon style={{color: 'blue', margin:'10px' }} onClick={handleBill}/>
+          </Button>
+          <Button>  
+
           <Button disabled={order.status === "CANCELLED"? 'boolean': false}>
+
             <DeleteIcon style={{color: 'red', margin:'10px' }} onClick={handleClickOpen2}/>
           </Button>
         </Container>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
+
           <OrderDetails order={order} />
+
           {/* <DialogContentText id="alert-dialog-description">
             
           </DialogContentText> */}
@@ -165,4 +203,4 @@ const Card = ( {order} ) => {
 
 
 
-export default Card;
+export default OrderCard;

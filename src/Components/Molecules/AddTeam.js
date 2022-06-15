@@ -14,6 +14,7 @@ const Wrapper = styledComponents.section`
     flex-direction: column;
 `
 
+
 const Container = styledComponents.div`
     display: flex;
     justify-content: space-between;
@@ -31,7 +32,9 @@ const AddTeam = ()=>{
     const [address, setAddress] = useState("")
 
     return(
+
         <Wrapper>
+
             <Subtitle title="Add Team Member" />
             <Container>
                 <form id="metadata-form-id">
@@ -85,12 +88,12 @@ const AddTeam = ()=>{
                     <Grid item xs={12} sm={6}>
                     <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setAddress(e.target.value)}/>
                     </Grid>
-
                     <Box height="70px" />
 
                     <Button variant="contained">
                         Next
                     </Button>                    
+
 
                 </Grid>
                 </form>
@@ -98,6 +101,7 @@ const AddTeam = ()=>{
 
                 
             </Container>
+
         </Wrapper>
 )}
 

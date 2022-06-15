@@ -7,7 +7,7 @@ import Card from '../Molecules/Card'
 
 
 
-const CardList = ({filteredProduct}) => {
+const Filter = ({filteredList}) => {
 
 
   return (
@@ -15,7 +15,7 @@ const CardList = ({filteredProduct}) => {
     
     <Grid container spacing={3} style={{marginBottom: '30px',marginTop : '30px'}}>
 
-      {filteredProduct && filteredProduct.map((product, index) => (
+      {filteredList && filteredList.map((product, index) => (
         <Grid  key={index} item xs={12} sm={6} md={3}>
           <Card product={product}/>
         </Grid>
@@ -30,4 +30,4 @@ const CardList = ({filteredProduct}) => {
 
   
 
-export default CardList 
+export default Filter 

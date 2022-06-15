@@ -39,10 +39,8 @@ font-size: 15px;
 color: white;
 `
 
-
 const AddOrder = () => {
   const [open, setOpen] = React.useState(false);
-
   const {users} = useSelector(state => state.data2);
   const {variants} = useSelector(state => state.data);
 
@@ -140,6 +138,21 @@ const cancelhandel = (e)=>{
   
 }
 
+const addhandle = (e)=>{
+  console.log(items)
+  e.preventDefault();
+
+  dispatch(addOrders(
+    {
+      "items": JSON.parse(`[{"product": "${items}", "quantity": "1"}]`),
+      "ordered_by": "02",
+      "assigned_to": "01"
+
+    }
+  ));
+  handleClose()
+} 
+
   return (
     <>
       <Dialog
@@ -156,7 +169,6 @@ const cancelhandel = (e)=>{
         </DialogTitle>
         <DialogContent style={{background: '#181818'}}>
         <Grid style={{ maxWidth: 800, padding: "5px 5px", margin: "0 auto" }}>
-
         <form id="metadata-form-id">
           <Grid container spacing={1} style={{color: 'white'}}>
 
@@ -173,37 +185,40 @@ const cancelhandel = (e)=>{
             <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
               <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
                 <span style={{color: 'gray'}}> Assigned to: </span> 
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 275, style: { color: 'black', background: 'white' } }} size="small">
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={assignto}
-                label="Assigned to"
-                style={{ background: 'white'}}
-                onChange={(e)=>{setAssignto(e.target.value);}}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-
-                {users?.map(option=> {
-                  return(
-                    <MenuItem key={option.display_name} value={option.id}>
-                    {option.display_name ?? option.value}
-                    </MenuItem>
-                  );
-                })}
-                
-              </Select>
-            </FormControl>
-
+              </Typography
             </Grid>
             
+
+            <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                <span style={{color: 'gray'}}> Ordered by: </span> 
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={6}> 
+              <FormControl variant="standard" sx={{ m: 1, minWidth: 275, style: { color: 'black', background: 'white' } }} size="small">
+                <Select
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  value={assignto}
+                  label="Assigned to"
+                  style={{ background: 'white'}}
+                  onChange={(e)=>{setAssignto(e.target.value);}}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+
+                  {users?.map(option=> {
+                    return(
+                      <MenuItem key={option.display_name} value={option.id}>
+                      {option.display_name ?? option.value}
+                      </MenuItem>
+                    );
+                  })}
+
+                </Select>
+              </FormControl>
+            </Grid>
 
             <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
               <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
@@ -246,6 +261,7 @@ const cancelhandel = (e)=>{
               <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
                 <span style={{color: 'gray'}}> Customer Location: </span> 
               </Typography>
+
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField sx={{ input: { color: 'black', background: 'white' }, padding:'5px' }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setLocation(e.target.value)}/>
@@ -280,26 +296,24 @@ const cancelhandel = (e)=>{
                     })}
                   </Select>
                 </FormControl>
-              </Grid>
-              
-              
-              <Grid item xs={12} sm={3}>
-                <TextField
-                  name="Quantity"
-                  type="number"
-                  inputProps={{ min: 1, max: max }}
-                  sx={{ input: { color: 'black', background: 'white', padding:'3px', marginTop: '7px'}}} 
-                  variant="filled"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                />
-                <Button onClick={additems}>
-                  <AddCircleIcon style={{color: 'blue' }}/>
-                </Button>
-                <Button onClick={discarditems}>
-                  <RemoveIcon style={{color: 'red'}}/>
-                </Button>
-              </Grid>
+
+            <Grid item xs={12} sm={3}>
+              <TextField
+                name="Quantity"
+                type="number"
+                inputProps={{ min: 1, max: max }}
+                sx={{ input: { color: 'black', background: 'white', padding:'3px', marginTop: '7px'}}} 
+                variant="filled"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
+              <Button onClick={additems}>
+                <AddCircleIcon style={{color: 'blue' }}/>
+              </Button>
+              <Button onClick={discarditems}>
+                <RemoveIcon style={{color: 'red'}}/>
+              </Button>
+            </Grid>
 
             {orderprod && orderprod.map((itm, index) => (
             <Grid  key={index} item >
@@ -320,6 +334,7 @@ const cancelhandel = (e)=>{
     </Grid>
         </DialogContent>
         <DialogActions style={{background: '#181818'}}>
+
           <Button onClick={cancelhandel} style={{color: 'white'}}>Cancel</Button>
           <Button onClick={addhandle} style={{color: 'white'}} autoFocus>
            Add

@@ -22,11 +22,11 @@ import styledComponents from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
 import {putOrders} from '../../Redux/Actions/ordersActions';
 
+
 const Image = styledComponents.img`
   width: 100px;
 
 `
-
 
 const OrderDetails = ( {order} ) => {
   const {users} = useSelector(state => state.data2);
@@ -56,6 +56,7 @@ const OrderDetails = ( {order} ) => {
     setNewitems(items)
   }
 
+
   const handleUpdate = ()=>{
     dispatch(putOrders(order.invoice, 
       {
@@ -70,6 +71,7 @@ const OrderDetails = ( {order} ) => {
 
     <Card sx={{ maxWidth: 900 }} elevation={0} style={{background: '#181818', color: '#00A7E3'}}>
 
+
         <CardContent style={{background: '#181818', color: '#00A7E3'}}>
         <Typography gutterBottom variant="body1" component="div" align="center"> 
            
@@ -77,6 +79,7 @@ const OrderDetails = ( {order} ) => {
 
           <Typography gutterBottom variant="body1" component="div">
            <span style={{color: 'gray'}}> Ordered by: </span> {order.ordered_by.full_name} 
+
           </Typography>
           <br></br>
           <Typography variant="body1" style={{color: '#00A7E3'}} component="div">
@@ -126,6 +129,7 @@ const OrderDetails = ( {order} ) => {
           <br></br>
         </CardContent>
 
+
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -163,6 +167,7 @@ const OrderDetails = ( {order} ) => {
         <Button style={{color: 'white' }} variant="contained" autoFocus onClick={handleUpdate} disabled={change === false? 'boolean': false}>
            Update
         </Button>
+
 
     </Card>
 )

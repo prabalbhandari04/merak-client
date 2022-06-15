@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import styledComponents from 'styled-components'
 
 //Component - Organisms 
 import CardList from '../../Components/Organisms/CardList'
 import Stats from '../../Components/Organisms/Stats'
+import CardFilter from '../../Components/Organisms/CardFilter'
 
 //Component - Atoms
 import Subtitle from '../../Components/Atoms/Subtitle';
@@ -54,6 +55,65 @@ const Topbar = styledComponents.div`
 
 const Inventory = () => {
 
+
+  // filter constants,state and functions
+  const [productList, ] = useState([]);
+
+  const [selectedCategory,] = useState();
+  const [selectedPrice,] = useState();
+
+  // Function to get filtered list
+  function getFilteredList() {
+    // Avoid filter when selectedCategory is null
+    if (!selectedCategory) {
+      return productList;
+    }
+    return productList.filter((item) => item.category === selectedCategory);
+  }
+
+  // Function to get filtered list
+  function getFilteredListPrice() {
+    // Avoid filter when selectedCategory is null
+    if (!selectedPrice) {
+      return productList;
+    }
+    return productList.filter((item) => item.price === selectedPrice);
+  }
+
+  function arrayUnique(array) {
+    var a = array.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                a.splice(j--, 1);
+        }
+    }
+
+    return a;
+}
+
+  // Avoid duplicate function calls with useMemo
+  const filteredLists = useMemo(getFilteredList, [selectedCategory, productList]);
+  const filteredListPrice = useMemo(getFilteredListPrice, [selectedPrice, productList]);
+  
+  // const totalFilter = arrayUnique(filteredLists.concat(filteredListPrice));
+
+  const temp = filteredLists.concat(filteredListPrice)
+  const temp2 = arrayUnique(temp)
+  const filteredList=  temp2;
+  
+  // function handleCategoryChange(event) {
+  //   setSelectedCategory(event.target.value);
+  // }
+
+  // function handlePriceChange(event) {
+  //   setSelectedPrice(event.target.value);
+  // }
+
+  // Filter code ends 
+
+
+
   const dispatch = useDispatch(); //Redux Dispatch
   const {products} = useSelector(state => state.data); //Redux State
   const [search, setSearch] = useState("");
@@ -103,6 +163,37 @@ const Inventory = () => {
           }}
         />
 
+      {/* Filter Component */}
+      {/* <div className="app">
+            <div className="filter-container">
+              <div>Filter by Category:</div>
+              <div>
+                <select
+                  name="category-list"
+                  id="category-list"
+                  onChange={handleCategoryChange}
+                >
+                  <option value="">All</option>
+                  <option value="Grocery">Grocery</option>
+                  <option value="Electronics">Electronics</option>
+                </select>
+              </div>
+              <div>
+          <select
+              name="price-list"
+              id="price-list"
+              onChange={handlePriceChange}
+              style = {{marginLeft: '10px', marginRight: '10px', marginTop: '10px', marginBottom: '10px'}}
+            >
+              <option value="">All</option>
+              <option value="500">Rs 500</option>
+              <option value="1000">Rs 1000</option>
+              <option value="1500">Rs 1000-1500</option>
+            </select>
+          </div>
+            </div>
+          </div> */}
+
       </Topbar>
 
         
@@ -119,9 +210,11 @@ const Inventory = () => {
         <Subtitle title="To be Delivered" />
 
         <Box sx={{ m: '2rem' }} />   
+
+        <CardFilter filteredList = {filteredList}/>     
        
         <CardList filteredProduct={filteredProduct}/>
-
+ 
         <Subtitle title="To be Packed" />  
 
         <Box sx={{ m: '2rem' }} /> 

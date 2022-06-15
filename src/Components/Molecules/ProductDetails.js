@@ -1,4 +1,5 @@
-import React from 'react'
+
+import React, {useEffect} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,26 +8,41 @@ import Typography from '@mui/material/Typography';
   
   
 
+//Redux
+import {useSelector, useDispatch} from 'react-redux';
+import { loadVariants } from '../../Redux/Actions/productsActions';
+
 
 const ProductDetails = ({ product }) => { 
+
+
+  const dispatch = useDispatch(); //Redux Dispatch
+  const {variants} = useSelector(state => state.data); //Redux State
+ 
+
+  //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
+  useEffect(() => {
+    dispatch(loadVariants());
+  }, [dispatch]);
+
 
   return (
 
     <Card sx={{ maxWidth: 345 }} elevation={0} style={{background: '#181818', color: '#00A7E3'}}>
-       {product.default_image != null ?
-        <CardMedia
+       {variants.map((obj, index) => {
+
+        if (product.id === obj.product) { 
+          return (<span key={index}><CardMedia
           component="img"
           height="240"
-          image={`https://merak-test.herokuapp.com${product.default_image}`}
+          image={obj.image}
           alt={product.title}
-        />
-        :
-        <CardMedia
-          component="img"
-          height="240"
-          image="https://spectrumpaint.com/store/media/10071/pv/50_rhinosatin-1604334194.jpg"
-          alt={product.title}
-        />}
+        /></span>)
+        }  else {
+          return null
+        }
+
+    })}
         <br></br>
         <CardContent style={{background: '#181818', color: '#00A7E3'}}>
           <Typography gutterBottom variant="body1" component="div">
@@ -38,11 +54,25 @@ const ProductDetails = ({ product }) => {
           </Typography>
           <br></br>
           <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
-           <span style={{color: 'gray'}}> Price: </span> Rs {product.default_price}
+          {variants.map((obj, index) => {
+              if (product.id === obj.product) { 
+                return <span key={index}><span style={{color: 'gray'}}> Price: </span> Rs {obj.price}</span>
+              }  else {
+                return null   
+              }
+   
+          })}
           </Typography>
           <br></br>
           <Typography variant="body1" color="text.secondary" style={{color: '#00A7E3'}} component="div">
-           <span style={{color: 'gray'}}> Quantity: </span> {product.quantity}pcs
+          {variants.map((obj, index) => {
+              if (product.id === obj.product) { 
+                return <span key={index}><span style={{color: 'gray'}}> Quantity: </span> {obj.quantity} pcs</span>
+              }  else {
+                return null   
+              }
+   
+          })}
           </Typography>
         </CardContent>
 
