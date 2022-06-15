@@ -4,6 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
 import {Grid,Typography} from "@material-ui/core";
 import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 import styledComponents from 'styled-components';
 
@@ -27,10 +30,17 @@ const Info = styledComponents.h2`
   
 
 
-const OrderDetails = ({ order }) => {
+const OrderDetails = ( orders ) => {
+  const order = orders.order
+  // console.log(orders.order.assigned_to.full_name)
 
-  // const image = order.variant[0].image;
-  // const price = order.variant[0].price;
+  const [assignto, setAssignto] = React.useState('');
+
+  console.log(orders.order.assigned_to)
+
+  if(orders.order.assigned_to != null){
+    setAssignto(orders.order.assigned_to.full_name)
+  }
 
   return (
 
@@ -47,12 +57,32 @@ const OrderDetails = ({ order }) => {
           <br></br>
           <Typography variant="body1" style={{color: '#00A7E3'}} component="div">
            <span style={{color: 'gray'}}> Assigned to: </span> 
-            {
-              order.assigned_to === null ?
-              <p></p>
-              :
-              <p>{order.assigned_to.full_name}</p>
-            }
+           <FormControl variant="standard" sx={{ m: 1, minWidth: 275, style: { color: 'black', background: 'white' } }} size="small">
+              <Select
+                labelId="demo-select-small"
+                id="demo-select-small"
+                defaultValue={assignto}
+                value={assignto}
+                label="Assigned to"
+                style={{ background: 'white'}}
+                onChange={(e)=>{setAssignto(e.target.value);}}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+
+                {orders.user?.map(option=> {
+                  return(
+                    <MenuItem key={option.display_name} value={option.id}>
+                    {option.display_name ?? option.value}
+                    </MenuItem>
+                  );
+                })}
+                
+              </Select>
+            </FormControl>
+
+            
           </Typography>
           <br></br>
           <Typography variant="body1" style={{color: '#00A7E3'}} component="div">

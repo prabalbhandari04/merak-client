@@ -25,25 +25,25 @@ import {useDispatch} from 'react-redux';
 
 import {addOrders} from '../../Redux/Actions/ordersActions';
 
+const Container = styledComponents.div`
+border: 2px solid black;
+border-radius: 10px;
+max-width: 500;
+display: flex;
+justify-content: space-between;
+padding: 2px 8px;
+`
+
+const Info = styledComponents.h2`
+font-size: 15px;
+color: white;
+`
+
 
 const AddOrder = (user) => {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch(); //Redux Dispatch
-
-  const Container = styledComponents.div`
-  border: 2px solid black;
-  border-radius: 10px;
-  max-width: 500;
-  display: flex;
-  justify-content: space-between;
-  padding: 2px 8px;
-`
-
-const Info = styledComponents.h2`
-  font-size: 15px;
-  color: white;
-`
 
   const opensessame = () =>{ 
     handleClickOpen()
@@ -66,13 +66,13 @@ const Info = styledComponents.h2`
     const [max, setMax] = React.useState(1);
     const [items, setItems] = React.useState('');
     const [quantity, setQuantity] = React.useState(1);
-    
-  console.log(user.variant)
   
-  const additems = ()=>{
+  const additems = (e)=>{
+    e.preventDefault()
     if(items !== ""){
       setOrderprod([...orderprod, {"product": items, "quantity": quantity}])  
       setItems("")
+      setQuantity(1)
       setMax("")
     }
 
@@ -80,20 +80,19 @@ const Info = styledComponents.h2`
 
   const discarditems = ()=>{
     setItems("")
+    setQuantity(1)
   }
 
   const removeitems = (prod)=>{
     console.log(prod)
-
   }
 
 
 const changes = (e)=>{
-  setItems(e.target.value)
-  setMax(6)
-  // setMax(user.variant.quantity)
+  setItems(e.target.value[0])
+  setMax(e.target.value[1])
+  setQuantity(1)
 
-  console.log(max)
 }
 
 const addhandle = (e)=>{
@@ -117,7 +116,7 @@ const cancelhandel = (e)=>{
   setLocation("")
   setOrderprod([])
   setItems("")
-  setQuantity("")
+  setQuantity(1)
   setMax("")
 
   handleClose()
@@ -211,7 +210,7 @@ const cancelhandel = (e)=>{
 
                   {user.user?.map(option=> {
                     return(
-                      <MenuItem key={option.display_name} value={option.id}>
+                      <MenuItem key={option.display_name} value={[option.id, option.max]}>
                       {option.display_name ?? option.value}
                       </MenuItem>
                     );
@@ -256,7 +255,7 @@ const cancelhandel = (e)=>{
 
                   {user.variant?.map(option=> {
                     return(
-                      <MenuItem key={option.sku} value={option.sku}>
+                      <MenuItem key={option.sku} value={[option.sku, option.quantity]}>
                       {`${option.sku} (${option.price})` ?? option.sku}
                       </MenuItem>
                     );
@@ -270,6 +269,7 @@ const cancelhandel = (e)=>{
                 inputProps={{ min: 1, max: max }}
                 sx={{ input: { color: 'black', background: 'white', padding:'3px', marginTop: '7px'}}} 
                 variant="filled"
+                value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
               />
               <Button onClick={additems}>
@@ -287,8 +287,8 @@ const cancelhandel = (e)=>{
                   <Info>{itm.product}</Info>
 
                   <Info>{`  (${itm.quantity})`}</Info>
-                  <Button onClick={removeitems(itm)}>
-                    <RemoveIcon style={{color: 'red'}}/>
+                  <Button >
+                    <RemoveIcon style={{color: 'red'}} />
                   </Button>
               </Container>
             </Grid>

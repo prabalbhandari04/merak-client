@@ -56,8 +56,8 @@ export const createUsers = (user) => {
 
 //------------Api Call Update Products----------------------------
 export const loginUsers = (credential) => {
-    return function (dispatch) {
-        axios.post(`https://merak-test.herokuapp.com/user/auth/login/`, credential).then((res) => {
+    return async function (dispatch) {
+        await axios.post(`https://merak-test.herokuapp.com/user/auth/login/`, credential).then((res) => {
             localStorage.setItem('access_token', res.data.refresh);
             localStorage.setItem('refresh_token', res.data.refresh);
             dispatch(usersLogin(res.data));

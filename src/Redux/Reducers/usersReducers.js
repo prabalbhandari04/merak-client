@@ -25,7 +25,6 @@ export const usersReducers = (state = initialState, action) => {
         case types.LOGIN_USERS:
             return {
                 ...state,
-                users: action.payload,
                 loading: false,
             }
 

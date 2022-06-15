@@ -43,8 +43,7 @@ const Container = styledComponents.div`
   align-item: center;
 `
 
-const Card = ({ order }) => {
-
+const Card = ( orders ) => {
   const [open, setOpen] = useState(false);
 
   const [open2, setOpen2] = useState(false);
@@ -60,6 +59,7 @@ const Card = ({ order }) => {
   const dispatch = useDispatch(); //Redux Dispatch
 
   const handleClickOpen = (e) => {
+    e.preventDefault()
     setOpen(true);
   };
 
@@ -73,6 +73,7 @@ const Card = ({ order }) => {
 
   }
 
+  const order = orders.order
 
 //   const { name, quantity} = product;
 //   const image = product.variant[0].image;
@@ -123,12 +124,12 @@ const Card = ({ order }) => {
           <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
             {"Order Details"}
           </DialogTitle>
-          <Button>
+          <Button disabled={order.status === "CANCELLED"? 'text': false}>
             <DeleteIcon style={{color: 'red', margin:'10px' }} onClick={handleClickOpen2}/>
           </Button>
         </Container>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
-          <OrderDetails order={order}/>
+          <OrderDetails order={orders.order} user={orders.user}/>
           {/* <DialogContentText id="alert-dialog-description">
             
           </DialogContentText> */}

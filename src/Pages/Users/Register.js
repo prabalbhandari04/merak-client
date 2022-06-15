@@ -11,7 +11,7 @@ import styledComponents from 'styled-components'
 
 const Cont = styledComponents.div`
     display: flex;
-    column-gap: 4rem;
+    column-gap: 3rem;
 `
 
 const Register = () => {

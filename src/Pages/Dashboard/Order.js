@@ -90,7 +90,7 @@ const Order = () => {
 
           {orders && orders.map((order, index) => (
             <Grid xs={12} sm={6} key={index} item >
-              <Card order={order}/>
+              <Card order={order} user={users}/>
             </Grid>
           ))}
 

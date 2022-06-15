@@ -7,6 +7,11 @@ import {Grid,Typography} from "@material-ui/core";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import FilledInput from '@mui/material/FilledInput';
 
 import styledComponents from 'styled-components';
 
@@ -20,7 +25,7 @@ const Wrapper = styledComponents.section`
 const Container = styledComponents.div`
     display: flex;
     justify-content: space-between;
-    max-width: 60%;
+    max-width: 100%;
     padding-top: 5rem;
 `
 
@@ -42,6 +47,12 @@ const CreateAccount = ()=>{
     const {setSteps, setDirection} = useContext(AllContext)
 
     const dispatch = useDispatch(); //Redux Dispatch
+
+    const [hidden, setHidden] = useState(false)
+
+    const handleClickShowPassword = () => {
+        setHidden(!hidden)
+      };
 
     const createuser = (e)=>{
         e.preventDefault();
@@ -109,7 +120,21 @@ const CreateAccount = ()=>{
                     </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth autoComplete='off' style={{background:'#181818'}} onChange={(e) => setPassword(e.target.value)}/>
+                    <FilledInput sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} type={hidden ? 'text' : 'password'} variant="filled" fullWidth autoComplete='off' style={{background:'#181818'}} onChange={(e) => setPassword(e.target.value)} value={password}
+                        endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                            
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            
+                            edge="end"
+                            >
+                            {hidden ? <Visibility style={{color: 'white' }}/> : <VisibilityOff style={{color: 'white' }}/>}
+                            </IconButton>
+                        </InputAdornment>
+                        }
+                        />
                     </Grid>
                     
 
