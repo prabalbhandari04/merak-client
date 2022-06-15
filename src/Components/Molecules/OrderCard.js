@@ -43,7 +43,7 @@ const Container = styledComponents.div`
   align-item: center;
 `
 
-const Card = ( orders ) => {
+const Card = ( {order} ) => {
   const [open, setOpen] = useState(false);
 
   const [open2, setOpen2] = useState(false);
@@ -72,8 +72,6 @@ const Card = ( orders ) => {
     dispatch(deleteOrders(uuid))
 
   }
-
-  const order = orders.order
 
 //   const { name, quantity} = product;
 //   const image = product.variant[0].image;
@@ -119,17 +117,20 @@ const Card = ( orders ) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        fullWidth={true}
+        maxWidth="lg"
+        sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 600 } }}
       >
         <Container>
           <DialogTitle id="alert-dialog-title" style={{background: '#181818', color: 'gray'}}>
             {"Order Details"}
           </DialogTitle>
-          <Button disabled={order.status === "CANCELLED"? 'text': false}>
+          <Button disabled={order.status === "CANCELLED"? 'boolean': false}>
             <DeleteIcon style={{color: 'red', margin:'10px' }} onClick={handleClickOpen2}/>
           </Button>
         </Container>
         <DialogContent style={{background: '#181818', color: 'gray'}}>
-          <OrderDetails order={orders.order} user={orders.user}/>
+          <OrderDetails order={order} />
           {/* <DialogContentText id="alert-dialog-description">
             
           </DialogContentText> */}

@@ -51,9 +51,9 @@ const Topbar = styledComponents.div`
 
 const Order = () => {
   const dispatch = useDispatch(); //Redux Dispatch
-  const {variants} = useSelector(state => state.data);
   const {orders} = useSelector(state => state.data1); //Redux State
   const {users} = useSelector(state => state.data2);
+  const {variants} = useSelector(state => state.data);
   const [search, setSearch] = useState("");
 
   //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
@@ -90,7 +90,7 @@ const Order = () => {
 
           {orders && orders.map((order, index) => (
             <Grid xs={12} sm={6} key={index} item >
-              <Card order={order} user={users}/>
+              <Card order={order}/>
             </Grid>
           ))}
 
@@ -112,7 +112,7 @@ const Order = () => {
       </Grid> */}
 
       
-      <AddOrder user={users} variant={variants}/>
+      <AddOrder />
     </>
   )
 }

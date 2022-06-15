@@ -21,7 +21,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import styledComponents from 'styled-components';
 
 //Redux
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {addOrders} from '../../Redux/Actions/ordersActions';
 
@@ -40,8 +40,11 @@ color: white;
 `
 
 
-const AddOrder = (user) => {
+const AddOrder = () => {
   const [open, setOpen] = React.useState(false);
+
+  const {users} = useSelector(state => state.data2);
+  const {variants} = useSelector(state => state.data);
 
   const dispatch = useDispatch(); //Redux Dispatch
 
@@ -62,13 +65,15 @@ const AddOrder = (user) => {
     const [orderby, setOrderby] = React.useState('');
     const [location, setLocation] = React.useState('');
     const [orderprod, setOrderprod] = React.useState([])
-
+    
     const [max, setMax] = React.useState(1);
     const [items, setItems] = React.useState('');
     const [quantity, setQuantity] = React.useState(1);
-  
-  const additems = (e)=>{
-    e.preventDefault()
+    
+    React.useEffect(() => {
+    }, [setOrderprod, orderprod])
+
+  const additems = (e)=>{  
     if(items !== ""){
       setOrderprod([...orderprod, {"product": items, "quantity": quantity}])  
       setItems("")
@@ -84,7 +89,10 @@ const AddOrder = (user) => {
   }
 
   const removeitems = (prod)=>{
-    console.log(prod)
+    const itm = orderprod
+    const id = itm.findIndex((prd)=>{if(prd.product === prod){return prd}})
+    itm.splice(id, 1)
+    setOrderprod(itm)
   }
 
 
@@ -106,7 +114,16 @@ const addhandle = (e)=>{
       "assigned_to": assignto
 
     }
-  ));
+  ))
+
+  setAssignto("")
+  setOrderby("")
+  setLocation("")
+  setOrderprod([])
+  setItems("")
+  setQuantity(1)
+  setMax("")
+  
   handleClose()
 } 
 
@@ -130,13 +147,15 @@ const cancelhandel = (e)=>{
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        width="20rem"
+        fullWidth={true}
+        maxWidth="lg"
+        sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 600 } }}
       >
         <DialogTitle id="alert-dialog-title" style={{color: 'white', background: '#181818'}}>
           {"Add Order"}
         </DialogTitle>
         <DialogContent style={{background: '#181818'}}>
-        <Grid style={{ maxWidth: 600, padding: "5px 5px", margin: "0 auto" }}>
+        <Grid style={{ maxWidth: 800, padding: "5px 5px", margin: "0 auto" }}>
 
         <form id="metadata-form-id">
           <Grid container spacing={1} style={{color: 'white'}}>
@@ -172,7 +191,7 @@ const cancelhandel = (e)=>{
                   <em>None</em>
                 </MenuItem>
 
-                {user.user?.map(option=> {
+                {users?.map(option=> {
                   return(
                     <MenuItem key={option.display_name} value={option.id}>
                     {option.display_name ?? option.value}
@@ -208,9 +227,9 @@ const cancelhandel = (e)=>{
                     <em>None</em>
                   </MenuItem>
 
-                  {user.user?.map(option=> {
+                  {users?.map(option=> {
                     return(
-                      <MenuItem key={option.display_name} value={[option.id, option.max]}>
+                      <MenuItem key={option.display_name} value={option.id}>
                       {option.display_name ?? option.value}
                       </MenuItem>
                     );
@@ -232,54 +251,55 @@ const cancelhandel = (e)=>{
               <TextField sx={{ input: { color: 'black', background: 'white' }, padding:'5px' }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setLocation(e.target.value)}/>
             </Grid>
 
-
             <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
               <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
                 <span style={{color: 'gray'}}> Product Ordered: </span> 
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={6}>
 
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 175, style: { color: 'black', background: 'white' } }} size="small">
-                <Select
-                  labelId="demo-select-small"
-                  id="demo-select-small"
-                  value={items}
-                  label="Products"
-                  style={{ background: 'white'}}
-                  onChange={changes}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
+            <Grid item  xs={12} sm={3}>
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 175, style: { color: 'black', background: 'white' } }} size="small">
+                  <Select
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    value={items}
+                    label="Products"
+                    style={{ background: 'white'}}
+                    onChange={changes}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
 
-                  {user.variant?.map(option=> {
-                    return(
-                      <MenuItem key={option.sku} value={[option.sku, option.quantity]}>
-                      {`${option.sku} (${option.price})` ?? option.sku}
-                      </MenuItem>
-                    );
-                  })}
-                  
-                </Select>
-              </FormControl>
-              <TextField
-                name="Quantity"
-                type="number"
-                inputProps={{ min: 1, max: max }}
-                sx={{ input: { color: 'black', background: 'white', padding:'3px', marginTop: '7px'}}} 
-                variant="filled"
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-              />
-              <Button onClick={additems}>
-                <AddCircleIcon style={{color: 'blue' }}/>
-              </Button>
-              <Button onClick={discarditems}>
-                <RemoveIcon style={{color: 'red'}}/>
-              </Button>
-
-            </Grid>
+                    {variants?.map(option=> {
+                      return(
+                        <MenuItem key={option.sku} value={[option.sku, option.quantity]}>
+                        {`${option.sku} (${option.price})` ?? option.sku}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </Grid>
+              
+              
+              <Grid item xs={12} sm={3}>
+                <TextField
+                  name="Quantity"
+                  type="number"
+                  inputProps={{ min: 1, max: max }}
+                  sx={{ input: { color: 'black', background: 'white', padding:'3px', marginTop: '7px'}}} 
+                  variant="filled"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                />
+                <Button onClick={additems}>
+                  <AddCircleIcon style={{color: 'blue' }}/>
+                </Button>
+                <Button onClick={discarditems}>
+                  <RemoveIcon style={{color: 'red'}}/>
+                </Button>
+              </Grid>
 
             {orderprod && orderprod.map((itm, index) => (
             <Grid  key={index} item >
@@ -287,7 +307,7 @@ const cancelhandel = (e)=>{
                   <Info>{itm.product}</Info>
 
                   <Info>{`  (${itm.quantity})`}</Info>
-                  <Button >
+                  <Button onClick={()=>{removeitems(itm.product)}}>
                     <RemoveIcon style={{color: 'red'}} />
                   </Button>
               </Container>
