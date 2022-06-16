@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Button from "@mui/material/Button";
-
+import TextField from '@mui/material/TextField';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -30,18 +30,21 @@ const Image = styledComponents.img`
 
 const OrderDetails = ( {order} ) => {
   const {users} = useSelector(state => state.data2);
- const [itms, setItms] = React.useState(order.items)
-
- console.log(order)
+  const [itms, setItms] = React.useState(order.items)
   
   const [assignto, setAssignto] = React.useState(order.assigned_to.pk);
   const [change, setChange] = React.useState(false)
   const [newitems, setNewitems] = React.useState([])
 
   const dispatch = useDispatch();
-  console.log(assignto)
+
+  const handleChange = (id, val)=>{
+    console.log(id)
+    console.log(val)
+  }
 
   const handleRemove = (id) =>{
+    console.log(id)
     const itm = order.items
     const idd = itm.findIndex((prd)=>{if(prd.product.id === id){return prd}})
     itm.splice(idd, 1)
@@ -152,11 +155,21 @@ const OrderDetails = ( {order} ) => {
                   </TableCell>
                   <TableCell align="right">{ordered.product.sku}</TableCell>
                   <TableCell align="right">{ordered.product.price}</TableCell>
-                  <TableCell align="right">{ordered.quantity}</TableCell>
                   <TableCell align="right">
-                  <Button onClick={()=>{handleRemove(ordered.product.id)}} disabled={order.status === "CANCELLED"? 'boolean': false}>
-                    <RemoveIcon style={{color: 'red'}}/>
-                  </Button>
+                  <TextField
+                    name="Quantity"
+                    type="number"
+                    inputProps={{ min: 1, max: 5 }}
+                    sx={{ input: { color: 'black', background: 'white', padding:'3px', marginTop: '7px'}}} 
+                    variant="filled"
+                    defaultValue={ordered.quantity}
+                    onChange={(e) => handleChange(ordered.product.id, e.target.value)}
+                  />
+                  </TableCell>
+                  <TableCell align="right">
+                    <Button onClick={()=>{handleRemove(ordered.product.id)}} disabled={order.status === "CANCELLED"? 'boolean': false}>
+                      <RemoveIcon style={{color: 'red'}}/>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

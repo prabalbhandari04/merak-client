@@ -159,12 +159,13 @@ const cancelhandel = (e)=>{
           <Grid container spacing={1} style={{color: 'white'}}>
 
             <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-              <Typography gutterBottom variant="body1"  component="div">
+              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
                 <span style={{color: 'gray'}}> Assigned by: </span> 
               </Typography>
             </Grid>
+
             <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white', padding:'5px' } }} disabled fullWidth autoComplete='off' style={{background:'#181818'}} defaultValue={assignby} onChange={(e) => setAssignby(e.target.value)}/>
+              <TextField sx={{ input: { color: 'black', background: 'white', padding:'5px', margin:'4px'} }} disabled fullWidth autoComplete='off' style={{background:'#181818'}} defaultValue={assignby} onChange={(e) => setAssignby(e.target.value)}/>
             </Grid>
 
 
@@ -175,7 +176,7 @@ const cancelhandel = (e)=>{
             </Grid>
             
             <Grid item xs={12} sm={6}> 
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 275, style: { color: 'black', background: 'white' } }} size="small">
+              <FormControl variant="standard" sx={{ m: 1, style: { color: 'black', background: 'white'}, margin:'4px' }} size="small" fullWidth>
                 <Select
                   labelId="demo-select-small"
                   id="demo-select-small"
@@ -200,6 +201,7 @@ const cancelhandel = (e)=>{
               </FormControl>
             </Grid>
 
+
             <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
               <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
                 <span style={{color: 'gray'}}> Ordered by: </span> 
@@ -207,8 +209,7 @@ const cancelhandel = (e)=>{
             </Grid>
             
             <Grid item xs={12} sm={6}>
-
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 275, style: { color: 'black', background: 'white' } }} size="small">
+              <FormControl variant="standard" sx={{ m: 1, minWidth: 275, style: { color: 'black', background: 'white' }, margin:'4px' }} size="small" fullWidth>
                 <Select
                   labelId="demo-select-small"
                   id="demo-select-small"
@@ -231,20 +232,8 @@ const cancelhandel = (e)=>{
                   
                 </Select>
               </FormControl>
-
-              {/* <TextField sx={{ input: { color: 'black', background: 'white' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setOrderby(e.target.value)}/> */}
             </Grid>
 
-
-            <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                <span style={{color: 'gray'}}> Customer Location: </span> 
-              </Typography>
-
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField sx={{ input: { color: 'black', background: 'white' }, padding:'5px' }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setLocation(e.target.value)}/>
-            </Grid>
 
             <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
               <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
@@ -252,8 +241,8 @@ const cancelhandel = (e)=>{
               </Typography>
             </Grid>
 
-            <Grid item  xs={12} sm={3}>
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 175, style: { color: 'black', background: 'white' } }} size="small">
+            <Grid item  xs={12} sm={6}>
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 175, style: { color: 'black', background: 'white' }, margin:'4px' }} size="small">
                   <Select
                     labelId="demo-select-small"
                     id="demo-select-small"
@@ -275,16 +264,16 @@ const cancelhandel = (e)=>{
                     })}
                   </Select>
                 </FormControl>
-	    </Grid>
-            <Grid item xs={12} sm={3}>
+
               <TextField
                 name="Quantity"
                 type="number"
                 inputProps={{ min: 1, max: max }}
-                sx={{ input: { color: 'black', background: 'white', padding:'3px', marginTop: '7px'}}} 
+                sx={{ maxWidth:"50px", input: { color: 'black', background: 'white', padding:'3px', margin: '4px'}}} 
                 variant="filled"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
+                
               />
               <Button onClick={additems}>
                 <AddCircleIcon style={{color: 'blue' }}/>

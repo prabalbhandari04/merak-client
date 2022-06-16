@@ -84,10 +84,6 @@ const Order = () => {
     setSearch(e.target.value);
   };
 
-  console.log(orders)
-
-
-
   // Filter Component for Order
 
   // filter constants,state and functions
