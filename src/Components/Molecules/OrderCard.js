@@ -158,7 +158,6 @@ const OrderCard = ({ order }) => {
           <Button>
             <DescriptionIcon style={{color: 'blue', margin:'10px' }} onClick={handleBill}/>
           </Button>
-          <Button>  
 
           <Button disabled={order.status === "CANCELLED"? 'boolean': false}>
 

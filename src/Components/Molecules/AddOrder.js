@@ -70,7 +70,7 @@ const AddOrder = () => {
     
     React.useEffect(() => {
     }, [setOrderprod, orderprod])
-
+    
   const additems = (e)=>{  
     if(items !== ""){
       setOrderprod([...orderprod, {"product": items, "quantity": quantity}])  
@@ -138,20 +138,6 @@ const cancelhandel = (e)=>{
   
 }
 
-const addhandle = (e)=>{
-  console.log(items)
-  e.preventDefault();
-
-  dispatch(addOrders(
-    {
-      "items": JSON.parse(`[{"product": "${items}", "quantity": "1"}]`),
-      "ordered_by": "02",
-      "assigned_to": "01"
-
-    }
-  ));
-  handleClose()
-} 
 
   return (
     <>
@@ -185,15 +171,9 @@ const addhandle = (e)=>{
             <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
               <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
                 <span style={{color: 'gray'}}> Assigned to: </span> 
-              </Typography
-            </Grid>
-            
-
-            <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                <span style={{color: 'gray'}}> Ordered by: </span> 
               </Typography>
             </Grid>
+            
             <Grid item xs={12} sm={6}> 
               <FormControl variant="standard" sx={{ m: 1, minWidth: 275, style: { color: 'black', background: 'white' } }} size="small">
                 <Select
@@ -225,9 +205,8 @@ const addhandle = (e)=>{
                 <span style={{color: 'gray'}}> Ordered by: </span> 
               </Typography>
             </Grid>
+            
             <Grid item xs={12} sm={6}>
-                
-
 
               <FormControl variant="standard" sx={{ m: 1, minWidth: 275, style: { color: 'black', background: 'white' } }} size="small">
                 <Select
@@ -290,13 +269,13 @@ const addhandle = (e)=>{
                     {variants?.map(option=> {
                       return(
                         <MenuItem key={option.sku} value={[option.sku, option.quantity]}>
-                        {`${option.sku} (${option.price})` ?? option.sku}
+                        {`${option.sku}  (${option.price})` ?? option.sku}
                         </MenuItem>
                       );
                     })}
                   </Select>
                 </FormControl>
-
+	    </Grid>
             <Grid item xs={12} sm={3}>
               <TextField
                 name="Quantity"

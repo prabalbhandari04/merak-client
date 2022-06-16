@@ -151,9 +151,7 @@ const Order = () => {
         <Subtitle title="Order"/>
 
         
-//         <OrderList filteredOrder={filteredOrder}/>
-        
-//         <OrderFilter orderFilteredList = {orderFilteredList}/> 
+
         
 
 
@@ -162,7 +160,7 @@ const Order = () => {
           {orders && orders.map((order, index) => (
             <Grid xs={12} sm={6} key={index} item >
               <Card order={order}/>
-                <OrderList filteredOrder={filteredOrder}/>
+
             </Grid>
           ))}
 
