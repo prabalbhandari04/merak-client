@@ -8,9 +8,9 @@ const Container = styledComponents.div`
   display: flex;
   flex-direction: ${props => props.flexDirection};
   align-items: center;
-  gap: 3rem;
+  gap: 5rem;
 
-  h3{
+  h4{
     width: max-content;
     height: max-content;
     transform: rotate(-90deg);
@@ -34,17 +34,17 @@ const Switcher = () => {
         <Container flexDirection={direction.add}>
             <Sub />
 
-            <h3>Account Details</h3>
+            <h4>Account Details</h4>
         </Container>
         <Container flexDirection={direction.team}>
             <Sub />
 
-            <h3>Add Team</h3>
+            <h4>Add Team</h4>
         </Container>
         <Container flexDirection={direction.avatar}>
             <Sub />
 
-            <h3>Confirm</h3>
+            <h4>Confirm</h4>
         </Container>
       </>
   )

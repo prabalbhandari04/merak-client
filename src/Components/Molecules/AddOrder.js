@@ -16,6 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { MdKeyboardArrowUp } from 'react-icons/md';
 //-------------------------------------------
 
 import styledComponents from 'styled-components';
@@ -37,6 +38,11 @@ padding: 2px 8px;
 const Info = styledComponents.h2`
 font-size: 15px;
 color: white;
+`
+
+const Stf = styledComponents.div`
+  display: flex;
+  flex-direction: column;
 `
 
 const AddOrder = () => {
@@ -95,10 +101,22 @@ const AddOrder = () => {
 
 
 const changes = (e)=>{
-  setItems(e.target.value[0])
-  setMax(e.target.value[1])
+  setItems(e.target.value)
+  // setMax(e.target.value[1])
   setQuantity(1)
 
+}
+
+const plus = ()=>{
+  if(quantity < 10 ){
+    setQuantity(quantity + 1)
+  }
+}
+
+const minus = ()=>{
+  if(quantity != 1 ){
+    setQuantity(quantity - 1)
+  }
 }
 
 const addhandle = (e)=>{
@@ -257,7 +275,7 @@ const cancelhandel = (e)=>{
 
                     {variants?.map(option=> {
                       return(
-                        <MenuItem key={option.sku} value={[option.sku, option.quantity]}>
+                        <MenuItem key={option.sku} value={option.sku}>
                         {`${option.sku}  (${option.price})` ?? option.sku}
                         </MenuItem>
                       );
@@ -265,22 +283,27 @@ const cancelhandel = (e)=>{
                   </Select>
                 </FormControl>
 
-              <TextField
-                name="Quantity"
-                type="number"
-                inputProps={{ min: 1, max: max }}
-                sx={{ maxWidth:"50px", input: { color: 'black', background: 'white', padding:'3px', margin: '4px'}}} 
-                variant="filled"
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-                
-              />
-              <Button onClick={additems}>
-                <AddCircleIcon style={{color: 'blue' }}/>
-              </Button>
-              <Button onClick={discarditems}>
-                <RemoveIcon style={{color: 'red'}}/>
-              </Button>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <TextField
+                  name="Quantity"
+                  inputProps={{ min: 1, max: max }}
+                  sx={{ maxWidth:"50px", input: { color: 'black', background: 'white', padding:'3px', margin: '4px'}}} 
+                  variant="filled"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  disabled
+                />
+                <Stf>
+                  <MdKeyboardArrowUp onClick={plus}/>
+                  <MdKeyboardArrowUp style={{transform: 'rotate(180deg)'}} onClick={minus}/>
+                </Stf>
+                <Button onClick={additems}>
+                  <AddCircleIcon style={{color: 'blue' }}/>
+                </Button>
+                <Button onClick={discarditems}>
+                  <RemoveIcon style={{color: 'red'}}/>
+                </Button>
+              </div>
             </Grid>
 
             {orderprod && orderprod.map((itm, index) => (

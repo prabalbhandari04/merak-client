@@ -45,7 +45,6 @@ const Container = styledComponents.div`
 
 // <<<<<<< prabal
 const OrderCard = ({ order }) => {
-
   const [open, setOpen] = useState(false);
 
   const [open2, setOpen2] = useState(false);
@@ -113,7 +112,15 @@ const OrderCard = ({ order }) => {
           </Typography>
           <br></br>
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-           <span style={{color: 'gray'}}> Ordered by: </span> {order.ordered_by.full_name} 
+           <span style={{color: 'gray'}}> Ordered by: </span>
+            {
+              order.ordered_by === null ?
+              <p></p>
+              :
+              <p>
+                {order.ordered_by.full_name}
+              </p>
+            }
           </Typography>
          
           <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">

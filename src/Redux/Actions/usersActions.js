@@ -46,7 +46,6 @@ export const loadUsers = () => {
 export const createUsers = (user) => {
     return function (dispatch) {
         axios.post(`https://merak-test.herokuapp.com/user/auth/register/`, user).then((res) => {
-            console.log(res.data)
             localStorage.setItem('access_token', res.data.access_token);
             dispatch(usersCreated());
         }).catch((err) => console.log(err));

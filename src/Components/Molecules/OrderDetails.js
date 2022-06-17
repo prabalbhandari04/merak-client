@@ -8,6 +8,7 @@ import Select from '@mui/material/Select';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
+import { MdKeyboardArrowUp } from 'react-icons/md';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -27,43 +28,69 @@ const Image = styledComponents.img`
   width: 100px;
 
 `
+const Stf = styledComponents.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const OrderDetails = ( {order} ) => {
   const {users} = useSelector(state => state.data2);
   const [itms, setItms] = React.useState(order.items)
   
-  const [assignto, setAssignto] = React.useState(order.assigned_to.pk);
+  const [assignto, setAssignto] = React.useState(()=>{
+    if(order.assigned_to){
+       return order.assigned_to.pk
+    }
+
+  });
   const [change, setChange] = React.useState(false)
-  const [newitems, setNewitems] = React.useState([])
 
   const dispatch = useDispatch();
 
-  const handleChange = (id, val)=>{
-    console.log(id)
-    console.log(val)
+  const plus = (ord)=>{
+    const dum = itms
+    const idd = dum.findIndex((prd)=>{if(prd === ord){return prd}})
+    if(ord.quantity < ord.product.quantity){
+      ord.quantity = ord.quantity + 1
+
+      dum.splice(idd, 1, ord)
+      setItms(dum)
+      setChange(true)
+    }
+  }
+  
+  const minus = (ord)=>{
+    const dum = itms
+    const idd = dum.findIndex((prd)=>{if(prd === ord){return prd}})
+    if(ord.quantity > 1){
+      ord.quantity = ord.quantity - 1
+
+      dum.splice(idd, 1, ord)
+      setItms(dum)
+      setChange(true)
+    }
   }
 
   const handleRemove = (id) =>{
-    console.log(id)
     const itm = order.items
     const idd = itm.findIndex((prd)=>{if(prd.product.id === id){return prd}})
     itm.splice(idd, 1)
-    // console.log(itm)
-    const items = []
-
-    itm.forEach((ob)=>{
-      items.push({"product": ob.product.id, "quantity": ob.quantity})
-    })
+    
     setChange(true)
     setItms(itm)
-    setNewitems(items)
   }
 
 
-  const handleUpdate = ()=>{
+  const handleUpdate = async ()=>{
+    const itm = order.items
+    const items = []
+    await itm.forEach((ob)=>{
+      items.push({"product": ob.product.id, "quantity": ob.quantity})
+    })
+
     dispatch(putOrders(order.invoice, 
       {
-        "items": newitems,
+        "items": items,
         "ordered_by": order.ordered_by.pk,
         "assigned_to": assignto
       }
@@ -81,8 +108,15 @@ const OrderDetails = ( {order} ) => {
           </Typography>
 
           <Typography gutterBottom variant="body1" component="div">
-           <span style={{color: 'gray'}}> Ordered by: </span> {order.ordered_by.full_name} 
-
+           <span style={{color: 'gray'}}> Ordered by: </span> 
+           {
+              order.ordered_by === null ?
+              <p></p>
+              :
+              <p>
+                {order.ordered_by.full_name}
+              </p>
+            }
           </Typography>
           <br></br>
           <Typography variant="body1" style={{color: '#00A7E3'}} component="div">
@@ -94,7 +128,7 @@ const OrderDetails = ( {order} ) => {
                 value= {assignto}
                 label="Assigned to"
                 style={{ background: 'white'}}
-                onChange={(e)=>{setAssignto(e.target.value); }}
+                onChange={(e)=>{setAssignto(e.target.value); setChange(true);}}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -156,15 +190,24 @@ const OrderDetails = ( {order} ) => {
                   <TableCell align="right">{ordered.product.sku}</TableCell>
                   <TableCell align="right">{ordered.product.price}</TableCell>
                   <TableCell align="right">
-                  <TextField
-                    name="Quantity"
-                    type="number"
-                    inputProps={{ min: 1, max: 5 }}
-                    sx={{ input: { color: 'black', background: 'white', padding:'3px', marginTop: '7px'}}} 
-                    variant="filled"
-                    defaultValue={ordered.quantity}
-                    onChange={(e) => handleChange(ordered.product.id, e.target.value)}
-                  />
+                    <div style={{display: 'flex', justifyContent:'right'}}>
+                      <TextField
+                        name="Quantity"
+                        inputProps={{ min: 1, max: 10 }}
+                        sx={{ maxWidth:"50px", input: { color: 'black', background: 'white', padding:'3px', margin: '4px'}}} 
+                        variant="filled"
+                        value={ordered.quantity}
+                        disabled
+                      />
+                      <Stf>
+                        <Button onClick={()=>{plus(ordered)}}>
+                          <MdKeyboardArrowUp />
+                        </Button>
+                        <Button onClick={()=>{minus(ordered)}}>
+                          <MdKeyboardArrowUp style={{transform: 'rotate(180deg)'}} />
+                        </Button>
+                      </Stf>
+                    </div>
                   </TableCell>
                   <TableCell align="right">
                     <Button onClick={()=>{handleRemove(ordered.product.id)}} disabled={order.status === "CANCELLED"? 'boolean': false}>

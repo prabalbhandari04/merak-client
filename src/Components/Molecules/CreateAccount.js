@@ -62,10 +62,9 @@ const CreateAccount = ()=>{
             "last_name":lastname,
             email,
             password,
-        }));
-
-
-        const token = localStorage.getItem('token')
+        }))
+        
+        const token = localStorage.getItem('access_token')
 
         if(token){
             setSteps(2)
@@ -75,6 +74,7 @@ const CreateAccount = ()=>{
                 avatar: 'column-reverse'
               })
         }
+
     }
 
     return(
