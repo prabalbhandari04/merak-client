@@ -6,7 +6,7 @@ const Home = () => {
   return (
 
     <div className='container'>
-      <h1>Merak | Home</h1>
+      <h1>Merak</h1>
       <Link to="/inventory" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Inventory</h3></Link>
       <Link to="/order" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Order</h3></Link>
       <Link to="/register" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Register</h3></Link>
