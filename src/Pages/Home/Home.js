@@ -12,6 +12,7 @@ const Home = () => {
       <Link to="/register" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Register</h3></Link>
       <Link to="/login" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Login</h3></Link>
       <Link to="/bill" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Invoice</h3></Link>
+      <Link to="/start" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Get Started</h3></Link>
 
     </div>
   )
