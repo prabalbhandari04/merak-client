@@ -1,6 +1,7 @@
 body, html {
     font-size: 0.9rem;
-    background: #000000;
+    background: #181818;
+    color: #fff;
   }
   body, .form-control {
     font-size: 0.9rem

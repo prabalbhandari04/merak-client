@@ -84,10 +84,6 @@ const Order = () => {
     setSearch(e.target.value);
   };
 
-  console.log(orders)
-
-
-
   // Filter Component for Order
 
   // filter constants,state and functions
@@ -151,9 +147,7 @@ const Order = () => {
         <Subtitle title="Order"/>
 
         
-//         <OrderList filteredOrder={filteredOrder}/>
-        
-//         <OrderFilter orderFilteredList = {orderFilteredList}/> 
+
         
 
 
@@ -162,7 +156,7 @@ const Order = () => {
           {orders && orders.map((order, index) => (
             <Grid xs={12} sm={6} key={index} item >
               <Card order={order}/>
-                <OrderList filteredOrder={filteredOrder}/>
+
             </Grid>
           ))}
 

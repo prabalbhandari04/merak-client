@@ -35,7 +35,7 @@ const usersLogin = (tokens) => ({
 //------------Api Call Get Products----------------------------
 export const loadUsers = () => {
     return function (dispatch) {
-        axios.get(`https://merak-test.herokuapp.com/user/`, {headers: headers}).then((res) => {
+        axios.get(`https://merak-test.onrender.com/user/profile`, {headers: headers}).then((res) => {
             dispatch(getUsers(res.data));
         }).catch((err) => console.log(err));
     }
@@ -46,7 +46,6 @@ export const loadUsers = () => {
 export const createUsers = (user) => {
     return function (dispatch) {
         axios.post(`https://merak-test.herokuapp.com/user/auth/register/`, user).then((res) => {
-            console.log(res.data)
             localStorage.setItem('access_token', res.data.access_token);
             dispatch(usersCreated());
         }).catch((err) => console.log(err));
