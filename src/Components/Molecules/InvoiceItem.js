@@ -44,7 +44,7 @@ class ItemRow extends React.Component {
   render() {
     return (
       <tr>
-        <td style={{width: '100%'}}>
+        <td>
           <EditableField
             onItemizedItemEdit={this.props.onItemizedItemEdit}
             cellData={{
@@ -64,7 +64,7 @@ class ItemRow extends React.Component {
             id: this.props.item.id
           }}/>
         </td>
-        <td style={{minWidth: '70px'}}>
+        <td>
           <EditableField
           onItemizedItemEdit={this.props.onItemizedItemEdit}
           cellData={{
@@ -76,7 +76,7 @@ class ItemRow extends React.Component {
             id: this.props.item.id,
           }}/>
         </td>
-        <td style={{minWidth: '130px'}}>
+        <td>
           <EditableField
             onItemizedItemEdit={this.props.onItemizedItemEdit}
             cellData={{
@@ -91,8 +91,8 @@ class ItemRow extends React.Component {
             id: this.props.item.id,
           }}/>
         </td>
-        <td className="text-center" style={{minWidth: '50px'}}>
-          <BiTrash onClick={this.onDelEvent.bind(this)} style={{height: '33px', width: '33px', padding: '7.5px'}} className="text-white mt-1 btn btn-danger"/>
+        <td className="text-center" >
+          <BiTrash onClick={this.onDelEvent.bind(this)} className="text-white mt-1 btn btn-danger"/>
         </td>
       </tr>
     );
