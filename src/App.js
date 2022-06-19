@@ -1,8 +1,9 @@
 import React from "react";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route,Routes,useLocation} from 'react-router-dom';
 import Inventory from "./Pages/Dashboard/Inventory";
 import Order from "./Pages/Dashboard/Order";
-import Bill from "./Pages/Dashboard/Bill";
+import Invoice from "./Pages/Invoice/Invoice";
+import InvoiceDetails from "./Pages/Invoice/InvoiceDetails";
 import Register from "./Pages/Users/Register"
 import Login from "./Pages/Users/Login"
 import Home from "./Pages/Home/Home";
@@ -19,7 +20,7 @@ const App = () => {
      <Route path="/" exact component={Home}/>
      <Route path="/inventory" exact component={Inventory}/>
      <Route path='/order' exact component={Order}/>
-     <Route path='/bill' exact component={Bill}/>
+     <Route path='/invoice' exact component={Invoice}/>
      <Route path='/start' exact component={Start}/>
      <Route path='/organization' exact component={Organizations}/>
      <Route path='/teams' exact component={Teams}/>

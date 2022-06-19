@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import store from './Redux/store';
 import AllProvider from './context/allContext'
+import { AppProvider } from './context/AppContext';
 
 
 
@@ -12,7 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <AllProvider>
+      <AppProvider>
         <App />
+      </AppProvider>
       </AllProvider>
     </Provider>
   </React.StrictMode>,
