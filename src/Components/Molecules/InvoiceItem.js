@@ -20,10 +20,10 @@ class InvoiceItem extends React.Component {
         <Table>
           <thead>
             <tr>
-              <th>ITEM</th>
-              <th>QTY</th>
-              <th>PRICE/RATE</th>
-              <th className="text-center">ACTION</th>
+              <th className="bg-dark text-light text-center">ITEM</th>
+              <th className="bg-dark text-light text-center">QTY</th>
+              <th className="bg-dark text-light text-center">PRICE/RATE</th>
+              <th className="bg-dark text-light text-center">ACTION</th>
             </tr>
           </thead>
           <tbody>
@@ -91,7 +91,7 @@ class ItemRow extends React.Component {
             id: this.props.item.id,
           }}/>
         </td>
-        <td className="text-light text-center" style={{minWidth: '50px'}}>
+        <td className="text-center" style={{minWidth: '50px'}}>
           <BiTrash onClick={this.onDelEvent.bind(this)} style={{height: '33px', width: '33px', padding: '7.5px'}} className="text-white mt-1 btn btn-danger"/>
         </td>
       </tr>

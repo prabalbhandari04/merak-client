@@ -9,9 +9,6 @@ body, html {
   body,
   html,
   #root,
-  .App {
-    min-height: 100vh
-  }
   .btn {
     font-size: 0.9rem;
     font-weight: 500;
