@@ -45,7 +45,7 @@ const Heading = styled.h1`
 const InvoicesCount = styled.p`
   font-size: 0.75rem;
   font-weight: 500;
-  color: white;
+  color: #02cadb;
   text-spacing: -0.25px;
 `;
 

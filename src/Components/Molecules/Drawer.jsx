@@ -54,7 +54,7 @@ function Drawer({ children, isOpen }) {
     <Dialog open={isOpen} onClose={() => dispatch({ type: CLOSE_DRAWER })}>
       <Overlay />
       <DrawerWrapper>
-        <div>
+        <div >
           {isEditingInvoice && (
             <Dialog.Title className="sr-only">Edit Invoice {editInvoiceID}</Dialog.Title>
           )}
