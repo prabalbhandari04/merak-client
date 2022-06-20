@@ -20,6 +20,11 @@ const App = () => {
   const { isDrawerOpen } = useContext(AppContext);
   return (
     <div>
+      <div>
+      <Drawer isOpen={isDrawerOpen}>
+            <InvoiceFormContainer/>
+      </Drawer>
+      </div>
   <Router>
    <Switch >
      <Route path="/" exact component={Home}/>
@@ -35,11 +40,10 @@ const App = () => {
      <Route path="/register" exact component={Register}/>
      <Route path="/login" exact component={Login}/>
      <Route exact path='*'component={Home}/> 
+     
    </Switch>
    </Router>
-   <Drawer isOpen={isDrawerOpen}>
-          <InvoiceFormContainer/>
-    </Drawer>
+      
    </div>
   );
 }
