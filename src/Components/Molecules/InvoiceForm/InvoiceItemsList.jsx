@@ -23,7 +23,7 @@ margin-top: 0.5rem;
 .error {
   font-size: 0.625rem;
   font-weight: 600;
-  color: white;
+  color: red;
   display: block;
   margin-top: 2rem;
 }
@@ -67,9 +67,9 @@ const DeleteButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-  color:white;
+  color:red;
   &:hover {
-    color: white;
+    color: red;
   }
 `;
 

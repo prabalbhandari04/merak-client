@@ -84,7 +84,7 @@ const Amount = styled.span`
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.8px;
-  color: white};
+  color: green;
   @media screen and (min-width: ${deviceSize.md}) {
     text-align: right;
   }

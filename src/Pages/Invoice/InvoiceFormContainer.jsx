@@ -11,19 +11,7 @@ import { CLOSE_DRAWER, ADD_INVOICE, UPDATE_INVOICE, CANCEL_INVOICE_EDIT } from '
 
 import { convertDateToString, convertStringToDate } from '../../utils/utils';
 
-const FormHeading = styled.span`
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 3rem;
-  span {
-    &:before {
-      content: '#';
-      color: #888eb0;
-    }
-  }
-`;
+
 
 const initialValues = {
   id: '',
@@ -154,12 +142,6 @@ function FormContainer() {
 
   return (
     <>
-      {invoice && (
-        <FormHeading>
-          Edit <span>{invoice.id}</span>
-        </FormHeading>
-      )}
-      {!invoice && <FormHeading>New Invoice</FormHeading>}
       <InvoiceForm
         validationSchema={validationSchema}
         initialValues={invoice || initialValues}

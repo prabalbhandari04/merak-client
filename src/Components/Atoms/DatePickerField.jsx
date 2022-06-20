@@ -15,12 +15,12 @@ const DatePickerStyling = createGlobalStyle`
       color:black;
       border-radius:0.5rem;
       border:none;
-      background-color:black;
+      background-color:white;
   }
   .react-datepicker__header--custom {
       padding:0;
       border:none;
-      background-color:black;
+      background-color:white;
   }
 
   .react-datepicker__header--custom .react-datepicker__day-names {
@@ -41,7 +41,7 @@ const DatePickerStyling = createGlobalStyle`
 
   .react-datepicker__day--keyboard-selected,
   .react-datepicker__day--selected {
-      background-color:black;
+      background-color:white;
       color:#ffffff;
   }
 
@@ -73,18 +73,14 @@ const InputLabel = styled.label`
 
 const DatePickerInput = styled(DatePicker)`
   width: 100%;
-  height: 3rem;
-  background: black url(${IconCalendar}) no-repeat calc(100% - 16px)
+  height: 10% ;
+  padding : 5px;
+  background: white url(${IconCalendar}) no-repeat calc(100% - 16px)
     center;
-  border-width: 1px;
-  border-style: solid;
-  border-color:black;
-  border-radius: 0.25rem;
-  padding: 0.9375rem 2.625rem 0.9375rem 1.25rem;
   font-family: Spartan, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
-  color: white;
+  color: black;
   letter-spacing: -0.25px;
   cursor: pointer;
   &:focus {

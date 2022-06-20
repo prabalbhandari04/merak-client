@@ -19,17 +19,14 @@ const InputLabel = styled.label`
 
 const TextInput = styled.input`
   width: 100%;
-  height: 3rem;
-  border-width: 1px;
-  border-style: solid;
-  background-color: black;
+  height: 2rem;
+  background-color: white;
   border-color: black;
   border-radius: 0.25rem;
-  padding: 0.9375rem 1.25rem;
   font-family: Spartan, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
-  color: white;
+  color: black;
   letter-spacing: -0.25px;
   &:focus {
     outline: none;

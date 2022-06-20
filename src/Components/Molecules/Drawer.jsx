@@ -19,15 +19,14 @@ const DrawerWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  padding-top: 4.5rem;
-  z-index: 7010;
+  width: auto;
+  height:600px;
+  z-index: 9000;
   & > div {
-    background-color: ${({ theme }) => theme.drawer.bg};
+    background-color: black;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
+    overflow-x: auto;
     overflow-y: auto;
     padding: 2rem 1.5rem;
   }

@@ -25,7 +25,7 @@ const InvoiceStatusText = styled.div`
   margin: auto;
   font-size: 0.75rem;
   font-weight: 700;
-  color: white;
+  color: ${props => (props.status === 'paid' ? 'green' : 'red')};
   letter-spacing: -0.25px;
   text-transform: capitalize;
   &:before {

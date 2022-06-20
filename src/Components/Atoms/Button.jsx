@@ -15,10 +15,10 @@ const ButtonBase = styled.button`
   cursor: pointer;
   user-select: none;
   background-color:black;
-  color: white;
+  color: #02cadb;
   &:hover {
     background-color: black;
-    color: white;
+    color: #17c2d1;
   }
 `;
 
