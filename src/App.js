@@ -11,16 +11,18 @@ import FilterTest from "./Pages/Dashboard/FilterTest";
 import Organizations from "./Pages/Organizations/Organizations";
 import Teams from "./Pages/Organizations/Teams";
 import Start from "./Pages/Organizations/Start";
-
+import InvoiceFormContainer from "./Pages/Invoice/InvoiceFormContainer";
 
 const App = () => {
   return (
   <Router>
-   <Switch>
+   <Switch >
      <Route path="/" exact component={Home}/>
      <Route path="/inventory" exact component={Inventory}/>
      <Route path='/order' exact component={Order}/>
      <Route path='/invoice' exact component={Invoice}/>
+      <Route path='/:invoiceId' exact component={InvoiceDetails}/>
+      <Route path='/invoice-create'exact component={InvoiceFormContainer} />
      <Route path='/start' exact component={Start}/>
      <Route path='/organization' exact component={Organizations}/>
      <Route path='/teams' exact component={Teams}/>

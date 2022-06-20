@@ -1,14 +1,14 @@
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { Dialog } from '@headlessui/react';
 
-import Button from './Button';
+import Button from '../Atoms/Button';
 
 import { AppContext } from '../../context/AppContext';
 
-import { DELETE_INVOICE } from '../actions';
+import { DELETE_INVOICE } from '../../Redux/Constants/action-types';
 
 const Overlay = styled(Dialog.Overlay)`
   position: fixed;
@@ -54,11 +54,11 @@ const ButtonContainer = styled.div`
 
 function DeleteInvoiceModal({ id, isOpen, closeModal }) {
   const { dispatch } = useContext(AppContext);
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const deleteInvoice = () => {
     dispatch({ type: DELETE_INVOICE, payload: id });
-    navigate('/');
+    history.push('/');
   };
 
   return (

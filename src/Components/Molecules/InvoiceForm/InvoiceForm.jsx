@@ -3,12 +3,12 @@ import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 
-import TextField from '../TextField';
-import Button from '../Button';
+import TextField from '../../Atoms/TextField';
+import Button from '../../Atoms/Button';
 import InvoiceItemsList from './InvoiceItemsList';
-import DatePickerField from '../DatePickerField';
+import DatePickerField from '../../Atoms/DatePickerField';
 
-import deviceSize from '../../styles/breakpoints';
+import deviceSize from '../../../styles/breakpoints';
 
 const FieldSet = styled.fieldset`
   border: none;

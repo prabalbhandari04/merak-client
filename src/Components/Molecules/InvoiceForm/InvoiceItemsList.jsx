@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { FieldArray, useFormikContext } from 'formik';
 
 import InvoiceListItemTotal from './InvoiceListItemTotal';
-import Button from '../Button';
-import TextField from '../TextField';
+import Button from '../../Atoms/Button';
+import TextField from '../../Atoms/TextField';
 
-import deviceSize from '../../styles/breakpoints';
+import deviceSize from '../../../styles/breakpoints';
 
-import { ReactComponent as DeleteIcon } from '../../assets/icon-delete.svg';
+import { ReactComponent as DeleteIcon } from '../../../assets/icon-delete.svg';
 
 const Wrapper = styled.div`
 margin-top: 0.5rem;

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
 
-import InvoiceForm from './InvoiceForm';
+import InvoiceForm from '../../Components/Molecules/InvoiceForm/InvoiceForm';
 
 import { AppContext } from '../../context/AppContext';
 
-import { CLOSE_DRAWER, ADD_INVOICE, UPDATE_INVOICE, CANCEL_INVOICE_EDIT } from '../../actions';
+import { CLOSE_DRAWER, ADD_INVOICE, UPDATE_INVOICE, CANCEL_INVOICE_EDIT } from '../../Redux/Constants/action-types';
 
 import { convertDateToString, convertStringToDate } from '../../utils/utils';
 
