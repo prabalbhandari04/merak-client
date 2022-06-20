@@ -24,7 +24,7 @@ const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: ${({ theme }) => theme.deleteModal.bg};
+  background-color: black;
   border-radius: 0.5rem;
   padding: 2rem;
   z-index: 7002;
@@ -33,13 +33,13 @@ const ModalContainer = styled.div`
 const ModalHeading = styled(Dialog.Title)`
   font-size: 1.25rem;
   font-weight: 700;
-  color: ${({ theme }) => theme.deleteModal.heading};
+  color: red;
   margin-bottom: 0.75rem;
 `;
 
 const ModalMessage = styled(Dialog.Description)`
   font-size: 0.75rem;
-  color: ${({ theme }) => theme.deleteModal.body};
+  color: red;
   letter-spacing: -0.23px;
   margin-bottom: 1.5rem;
   line-height: 1.8;

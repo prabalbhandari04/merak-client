@@ -7,7 +7,7 @@
     "paymentTerms": 1,
     "clientName": "Jensen Huang",
     "clientEmail": "jensenh@mail.com",
-    "status": "paid",
+    "status": "pending",
     "senderAddress": {
       "street": "19 Union Terrace",
       "city": "London",
