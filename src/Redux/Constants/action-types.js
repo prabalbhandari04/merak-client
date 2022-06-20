@@ -16,3 +16,19 @@ export const ADD_ORDERS = "ADD_ORDERS";
 export const UPDATE_ORDERS = "UPDATE_ORDERS";
 export const DELETE_ORDERS = "DELETE_ORDERS";
 
+
+//Organizations and Teams
+
+export const GET_ORGANIZATIONS = "GET_ORGANIZATIONS";
+export const ADD_ORGANIZATIONS = "ADD_ORGANIZATIONS";
+export const UPDATE_ORGANIZATIONS = "UPDATE_ORGANIZATIONS";
+export const DELETE_ORGANIZATIONS = "DELETE_ORGANIZATIONS";
+
+export const ADD_TEAMS = "ADD_TEAMS";
+
+//USers
+
+export const CREATE_USERS = "ADD_USERS";
+export const LOGIN_USERS = "LOGIN_USERS";
+export const GET_USERS = "GET_USERS";
+

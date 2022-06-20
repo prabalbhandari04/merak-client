@@ -1,40 +1,27 @@
 {
-  "name": "merak-client",
-  "version": "0.1.0",
+  "name": "merak",
+  "author": "merak",
+  "version": "3.3.0",
+  "description": "merak dashboard",
   "private": true,
-  "dependencies": {
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/lab": "^4.0.0-alpha.53",
-    "@mui/icons-material": "^5.5.1",
-    "@mui/material": "^5.5.2",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.27.2",
-    "prop-types": "^15.8.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-redux": "^8.0.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "5.0.1",
-    "react-tiny-fab": "^4.0.4",
-    "redux": "^4.2.0",
-    "redux-thunk": "^2.4.1",
-    "styled-components": "^5.3.5",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js,.jsx ./src",
+    "lint:fix": "eslint --fix --ext .js,.jsx ./src",
+    "clear-all": "rm -rf build node_modules",
+    "re-start": "rm -rf build node_modules && yarn install && yarn start",
+    "re-build": "rm -rf build node_modules && yarn install && yarn build"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
     ]
   },
   "browserslist": {
@@ -48,5 +35,60 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@iconify/react": "^3.1.4",
+    "@material-ui/core": "^4.12.4",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.5.0",
+    "axios": "^0.27.2",
+    "change-case": "^4.1.2",
+    "date-fns": "^2.28.0",
+    "framer-motion": "^6.2.8",
+    "history": "^5.3.0",
+    "nprogress": "^0.2.0",
+    "numeral": "^2.0.6",
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-helmet-async": "^1.2.3",
+    "react-hook-form": "^7.32.2",
+    "react-icons": "^4.4.0",
+    "react-intersection-observer": "^8.33.1",
+    "react-lazy-load-image-component": "^1.5.1",
+    "react-redux": "^8.0.2",
+    "react-router": "^6.2.2",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "^5.0.0",
+    "react-slick": "^0.29.0",
+    "react-tiny-fab": "^4.0.4",
+    "redux-thunk": "^2.4.1",
+    "simplebar": "^5.3.6",
+    "simplebar-react": "^2.3.6",
+    "stylis": "^4.0.13",
+    "stylis-plugin-rtl": "^2.1.1",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/eslint-parser": "^7.17.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-config-react-app": "^7.0.0",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
   }
 }

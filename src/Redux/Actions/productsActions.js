@@ -1,10 +1,11 @@
-import * as types from "../Constants/action-types";
 import axios from "axios";
+import * as types from "../constants/action-types";
 
-//Authentication Header-------------------------------
+
+// Authentication Header-------------------------------
 const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1MDM3MTQzLCJpYXQiOjE2NTMwMzcxNDMsImp0aSI6ImJkNjdlMzNmNjE3YzQ2NDI4NWUyNDU2YTkxMDI3NzQ0IiwidXNlcl9pZCI6MX0.FCHJiiWiW7s8kTW-h1wKen43dx-wyPN2YS7MUb23D_o"
 
-let headers = {
+const headers = {
         "Content-type": "application/json; charset=UTF-8;",
         "Authorization": 'Bearer ' + token
 };
@@ -15,49 +16,49 @@ let headers = {
 
 
 
-//------------Get Products----------------------------
+// ------------Get Products----------------------------
 const getProducts = (products) => ({
     type: types.GET_PRODUCTS,
     payload: products,
 })
 
 
-//------------Post Products----------------------------
+// ------------Post Products----------------------------
 const productAdded = () => ({
     type: types.ADD_PRODUCTS,
 })
 
-//------------Put Products----------------------------
+// ------------Put Products----------------------------
 const productUpdated = () => ({
     type: types.UPDATE_PRODUCTS,
 })
 
-//------------Delete Products----------------------------
+// ------------Delete Products----------------------------
 
 const productDeleted = () => ({
     type: types.DELETE_PRODUCTS,
 })
 
 
-//------------Post Variants ----------------------------
+// ------------Post Variants ----------------------------
 const variantAdded = () => ({
     type: types.ADD_VARIANTS,
 })
 
 
-//------------Get Variants----------------------------
+// ------------Get Variants----------------------------
 const getVariants = (variants) => ({
     type: types.GET_VARIANTS,
     payload: variants,
 })
 
-//------------Get Variants Field----------------------------
+// ------------Get Variants Field----------------------------
 const getVariantsField = (variantsField) => ({
     type: types.GET_VARIANTS_FIELD,
     payload: variantsField,
 })
 
-//------------Post Variants ----------------------------
+// ------------Post Variants ----------------------------
 const variantFieldsAdded = () => ({
     type: types.ADD_VARIANTS_FIELD,
 })
@@ -68,11 +69,10 @@ const variantFieldsAdded = () => ({
 
 
 
-
 //------------Api Call Get Products----------------------------
 export const loadProducts = () => {
     return function (dispatch) {
-        axios.get(`https://merak-test.herokuapp.com/inventory/product/`, {headers: headers}).then((res) => {
+        axios.get(`https://merak-test.onrender.com/inventory/product/`, {headers: headers}).then((res) => {
             dispatch(getProducts(res.data));
         }).catch((err) => console.log(err));
     }
@@ -82,7 +82,7 @@ export const loadProducts = () => {
 //------------Api Call Post Products----------------------------
 export const addProducts = (product) => {
     return function (dispatch) {
-        axios.post(`https://merak-test.herokuapp.com/inventory/product/`, product, {headers: headers}).then((res) => {
+        axios.post(`https://merak-test.onrender.com/inventory/product/`, product, {headers: headers}).then((res) => {
             dispatch(productAdded());
             dispatch(loadProducts()); //post garesi update herna hoye jabe
             dispatch(loadVariantsField());
@@ -95,7 +95,7 @@ export const addProducts = (product) => {
 //------------Api Call Update Products----------------------------
 export const updateProducts = ({uuid, updated}) => {
     return function (dispatch) {
-        axios.put(`https://merak-test.herokuapp.com/inventory/product/${uuid}/`, updated, {headers: headers}).then((res) => {
+        axios.put(`https://merak-test.onrender.com/inventory/product/${uuid}/`, updated, {headers: headers}).then((res) => {
             dispatch(productUpdated());
             dispatch(loadProducts());
         }).catch((err) => console.log(err));
@@ -109,7 +109,7 @@ export const updateProducts = ({uuid, updated}) => {
 
 export const deleteProducts = (uuid) => {
     return function (dispatch) {
-        axios.delete(`https://merak-test.herokuapp.com/inventory/product/${uuid}/`, {headers: headers}).then((res) => {
+        axios.delete(`https://merak-test.onrender.com/inventory/product/${uuid}/`, {headers: headers}).then((res) => {
             dispatch(productDeleted());
             dispatch(loadProducts());
         }).catch((err) => console.log(err));
@@ -121,7 +121,7 @@ export const deleteProducts = (uuid) => {
 //------------Api Call Post Products Variant----------------------------
 export const addVariants = (variant) => {
     return function (dispatch) {
-        axios.post(`https://merak-test.herokuapp.com/inventory/variant/`, variant, {
+        axios.post(`https://merak-test.onrender.com/inventory/variant/`, variant, {
             headers: {
               "Content-type": 'multipart/form-data',
               "Authorization": 'Bearer ' + token
@@ -140,7 +140,7 @@ export const addVariants = (variant) => {
 
 export const loadVariants = () => {
     return function (dispatch) {
-        axios.get(`https://merak-test.herokuapp.com/inventory/variant/`, {headers: headers}).then((res) => {
+        axios.get(`https://merak-test.onrender.com/inventory/variant/`, {headers: headers}).then((res) => {
             dispatch(getVariants(res.data));
         }).catch((err) => console.log(err));
     }
@@ -152,7 +152,7 @@ export const loadVariants = () => {
 
 export const loadVariantsField = () => {
     return function (dispatch) {
-        axios.get(`https://merak-test.herokuapp.com/inventory/variant_field/`, {headers: headers}).then((res) => {
+        axios.get(`https://merak-test.onrender.com/inventory/variant_field/`, {headers: headers}).then((res) => {
            dispatch(getVariantsField(res.data));
         }).catch((err) => console.log(err));
     }
@@ -162,7 +162,7 @@ export const loadVariantsField = () => {
 //--------------------POST variants Field----------------------------
 export const addVariantsField = (variant) => {
     return function (dispatch) {
-        axios.post(`https://merak-test.herokuapp.com/inventory/variant_field/`, variant, {headers: headers}).then((res) => {
+        axios.post(`https://merak-test.onrender.com/inventory/variant_field/`, variant, {headers: headers}).then((res) => {
             dispatch(variantFieldsAdded());
             dispatch(loadProducts());
             dispatch(loadVariants());
