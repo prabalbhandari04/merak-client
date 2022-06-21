@@ -32,7 +32,6 @@ const App = () => {
      <Route path='/order' exact component={Order}/>
      <Route path='/invoice' exact component={Invoice}/>
       <Route path='/:invoiceId' exact component={InvoiceDetails}/>
-      <Route path='/invoice-create'exact component={InvoiceFormContainer} />
      <Route path='/start' exact component={Start}/>
      <Route path='/organization' exact component={Organizations}/>
      <Route path='/teams' exact component={Teams}/>

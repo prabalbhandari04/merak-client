@@ -2,13 +2,24 @@ import { Formik, Form } from 'formik';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
-
+import React, {useEffect, useState, useMemo} from 'react';
+import {Typography} from "@material-ui/core";
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { MdKeyboardArrowUp } from 'react-icons/md';
 import TextField from '../../Atoms/TextField';
 import Button from '../../Atoms/Button';
 import InvoiceItemsList from './InvoiceItemsList';
 import DatePickerField from '../../Atoms/DatePickerField';
-
+import Card from '../../Molecules/OrderCard';
 import deviceSize from '../../../styles/breakpoints';
+//Redux
+import {useSelector, useDispatch} from 'react-redux';
+import {loadOrders} from '../../../Redux/Actions/ordersActions';
+import {loadVariants} from '../../../Redux/Actions/productsActions';
+import {loadUsers} from '../../../Redux/Actions/usersActions';
 
 const FieldSet = styled.fieldset`
   border: none;
@@ -72,7 +83,28 @@ const FormBottom = styled.div`
 `;
 
 function InvoiceForm({ initialValues, validationSchema, onSubmit, saveInvoice, discard }) {
+
+  const dispatch = useDispatch(); //Redux Dispatch
+  const {orders} = useSelector(state => state.data1);
+  const {users} = useSelector(state => state.data2);
+
+ 
+
+  const [assignto, setAssignto] = React.useState(()=>{
+    if(orders.assigned_to){
+       return orders.assigned_to.pk
+    }
+
+  });
+  const [change, setChange] = React.useState(false)
+
+  //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
+  useEffect(() => {
+    dispatch(loadOrders());
+  }, [dispatch]);
+
   return (
+    
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -81,6 +113,19 @@ function InvoiceForm({ initialValues, validationSchema, onSubmit, saveInvoice, d
       {({ values, errors, setFieldValue, resetForm }) => {
         return (
           <Form>
+          {/* <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+
+          <span style={{color: 'gray'}}> Assigned to: </span> 
+          {
+          orders.assigned_to === null ?
+            <p></p>
+          :
+          <p>
+            {orders.assigned_to.full_name}
+          </p>
+          }
+
+          </Typography> */}
             <FieldSet>
               <Legend>Bill From</Legend>
               <FormTextField

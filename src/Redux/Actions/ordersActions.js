@@ -16,7 +16,7 @@ let headers = {
 
 
 
-//------------Get Ouders----------------------------
+//------------Get Orders----------------------------
 const getOrders = (orders) => ({
     type: types.GET_ORDERS,
     payload: orders,

@@ -94,7 +94,7 @@ const OrderCard = ({ order }) => {
 
   const url = "http://localhost:3000"
   const handleBill = (uuid) =>{
-    var win = window.open(url+"/bill/"+order.invoice , '_blank');
+    var win = window.open(url+"/RT3080" , '_blank');
     console.log(uuid)
     win.focus();
   }
