@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './home.css';
-
+import AddCustomer from '../../Components/Molecules/AddCustomer';
 const Home = () => {
   return (
 
     <div className='container'>
       <h1>Merak</h1>
+      <AddCustomer />
       <Link to="/inventory" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Inventory</h3></Link>
       <Link to="/order" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Order</h3></Link>
       <Link to="/register" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Register</h3></Link>

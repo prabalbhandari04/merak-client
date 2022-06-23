@@ -18,8 +18,7 @@ const Overlay = styled(Dialog.Overlay)`
 const DrawerWrapper = styled.div`
   position: fixed;
   top: 0;
-  right: 0;
-  width: 900px;
+  left:0;
   height:600px;
   z-index: 9000;
   & > div {

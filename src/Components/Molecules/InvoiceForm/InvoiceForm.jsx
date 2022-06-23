@@ -87,8 +87,17 @@ function InvoiceForm({ initialValues, validationSchema, onSubmit, saveInvoice, d
   const dispatch = useDispatch(); //Redux Dispatch
   const {orders} = useSelector(state => state.data1);
   const {users} = useSelector(state => state.data2);
-
- 
+  // console.log(orders)
+  const orderList = useMemo(() => {
+    return orders.map(order => {
+      return {
+        value: order.invoice
+      }
+    }
+    )
+  }
+  , [orders]);
+  console.log(orderList);
 
   const [assignto, setAssignto] = React.useState(()=>{
     if(orders.assigned_to){
@@ -113,19 +122,18 @@ function InvoiceForm({ initialValues, validationSchema, onSubmit, saveInvoice, d
       {({ values, errors, setFieldValue, resetForm }) => {
         return (
           <Form>
-          {/* <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+              {/* <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+        <span style={{color: 'gray'}}> Assigned to: </span> 
+        {
+        orders[0] === null ?
+          <p></p>
+        :
+        <p>
+          {orders[0]}
+        </p>
+        }
+        </Typography> */}
 
-          <span style={{color: 'gray'}}> Assigned to: </span> 
-          {
-          orders.assigned_to === null ?
-            <p></p>
-          :
-          <p>
-            {orders.assigned_to.full_name}
-          </p>
-          }
-
-          </Typography> */}
             <FieldSet>
               <Legend>Bill From</Legend>
               <FormTextField

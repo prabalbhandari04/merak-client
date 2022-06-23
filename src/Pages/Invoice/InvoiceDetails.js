@@ -162,7 +162,7 @@ function InvoiceDetails() {
 
   return (
     <MainContainer>
-      <BackButton to="/invoice">
+      <BackButton to="/">
         <img src={IconArrowLeft} alt="" />
         Go back
       </BackButton>
