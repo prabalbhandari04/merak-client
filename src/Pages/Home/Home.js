@@ -15,6 +15,7 @@ const Home = () => {
       <Link to="/invoice" style={{textDecoration: 'none', color: 'gray'}}><h3>Check Invoices</h3></Link>
       <Link to="/start" style={{textDecoration: 'none', color: 'gray'}}><h3>Go to Get Started</h3></Link>
 
+
     </div>
   )
 }

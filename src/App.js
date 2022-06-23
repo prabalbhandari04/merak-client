@@ -13,8 +13,8 @@ import Teams from "./Pages/Organizations/Teams";
 import Start from "./Pages/Organizations/Start";
 import InvoiceFormContainer from "./Pages/Invoice/InvoiceFormContainer";
 import Drawer from "./Components/Molecules/Drawer";
-import GlobalStyle from './styles/globalStyles';
 import { AppContext } from './context/AppContext';
+import LocationSearchModal from "./Components/Molecules/LocationSearchModal";
 
 const App = () => {
   const { isDrawerOpen } = useContext(AppContext);
@@ -29,6 +29,7 @@ const App = () => {
    <Switch >
      <Route path="/" exact component={Home}/>
      <Route path="/inventory" exact component={Inventory}/>
+      <Route path="/map" exact component={LocationSearchModal}/>
      <Route path='/order' exact component={Order}/>
      <Route path='/invoice' exact component={Invoice}/>
       <Route path='/:invoiceId' exact component={InvoiceDetails}/>

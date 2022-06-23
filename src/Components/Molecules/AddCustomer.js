@@ -1,14 +1,14 @@
-import React from "react";
-import Box from "@mui/material/Box";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
+import LocationMap from "./LocationSearchModal";
 import { DialogActions } from "@mui/material";
-import ProductForm from "../Atoms/ProductForm";
 
 const style = {
   position: "absolute",
@@ -23,11 +23,42 @@ const style = {
   p: 4,
 };
 
+
+function ChildModal() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <React.Fragment>
+      <Button  onClick={handleOpen} style={{color: 'white'}} autoFocus>
+              
+              Add Your Location
+             </Button>
+      <Modal
+        hideBackdrop
+        open={open}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style }}>
+          <LocationMap />
+          <Button onClick={handleClose}>Close</Button>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+}
 const AddCustomer = () => {
   const [assignby, setAssignby] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
 
   const cancelhandel = () => {
     alert ("cancel");
@@ -166,16 +197,8 @@ const AddCustomer = () => {
               </Typography>
             </Grid>
             <Grid item xs={6} sm={6}>
-            <TextField
-                        sx={{ input: { color: "black", background: "white" } }}
-                        InputLabelProps={{ style: { color: "black" } }}
-                        placeholder="Location"
-                        label="Location"
-                        variant="filled"
-                        fullWidth
-                        required
-                        autoComplete="on"
-                    /></Grid>
+            <ChildModal />
+            </Grid>
             </Grid>
             </form>
           </Grid>
@@ -188,7 +211,6 @@ const AddCustomer = () => {
           </Button>
         </DialogActions>
           </Box>
-          
         </Modal>
       </div>
     </div>
