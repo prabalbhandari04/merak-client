@@ -31,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "e2e":"cucumber-js"
   },
   "eslintConfig": {
     "extends": [
@@ -50,5 +51,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^8.3.1",
+    "chai": "^4.3.6",
+    "chromedriver": "^103.0.0",
+    "redux-devtools-extension": "^2.13.9",
+    "selenium-webdriver": "^4.3.0"
   }
 }
