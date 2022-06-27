@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar } from '@mui/material';
@@ -14,27 +15,32 @@ const MENU_OPTIONS = [
     linkTo: '/',
   },
   {
-    label: 'Profile',
-    linkTo: '/',
-  },
-  {
     label: 'Settings',
-    linkTo: '/',
+    linkTo: '/dashboard/account',
   },
 ];
 
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(null);
 
-  const handleOpen = (event) => {
-    setOpen(event.currentTarget);
+  const handleOpen = (e) => {
+    setOpen(e.currentTarget);
   };
 
   const handleClose = () => {
     setOpen(null);
   };
+
+  const handleLogOut = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    navigate("/auth/login");
+  }
 
   return (
     <>
@@ -85,15 +91,18 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} to={option.linkTo} onClick={handleClose}>
-              {option.label}
+           
+           <RouterLink key={option.label} style={{textDecoration: 'none', color: 'white'}} to={option.linkTo}>
+            <MenuItem key={option.label}  onClick={handleClose}>
+              {option.label} 
             </MenuItem>
+            </RouterLink>
           ))}
         </Stack>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem sx={{ m: 1 }}>Logout</MenuItem>
+        <MenuItem sx={{ m: 1 }} onClick={handleLogOut}>Logout</MenuItem>
       </MenuPopover>
     </>
   );

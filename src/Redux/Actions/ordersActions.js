@@ -2,7 +2,7 @@ import * as types from "../constants/action-types";
 import axios from "axios";
 
 //Authentication Header-------------------------------
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1MDM3MTQzLCJpYXQiOjE2NTMwMzcxNDMsImp0aSI6ImJkNjdlMzNmNjE3YzQ2NDI4NWUyNDU2YTkxMDI3NzQ0IiwidXNlcl9pZCI6MX0.FCHJiiWiW7s8kTW-h1wKen43dx-wyPN2YS7MUb23D_o"
+const token = localStorage.getItem('access_token')
 
 let headers = {
         "Content-type": "application/json; charset=UTF-8",
@@ -23,21 +23,21 @@ const getOrders = (orders) => ({
 })
 
 
-//------------Post Ouders----------------------------
-const ordersAdd = () => ({
-    type: types.ADD_ORDERS,
-})
+// //------------Post Ouders----------------------------
+// const ordersAdd = () => ({
+//     type: types.ADD_ORDERS,
+// })
 
-//------------Put Ouders----------------------------
-const ordersUpdate = () => ({
-    type: types.UPDATE_ORDERS,
-})
+// //------------Put Ouders----------------------------
+// const ordersUpdate = () => ({
+//     type: types.UPDATE_ORDERS,
+// })
 
-//------------Delete Ouders----------------------------
+// //------------Delete Ouders----------------------------
 
-const ordersDelete = () => ({
-    type: types.DELETE_ORDERS,
-})
+// const ordersDelete = () => ({
+//     type: types.DELETE_ORDERS,
+// })
 
 
 //------------Api Call Get Products----------------------------

@@ -5,6 +5,10 @@ import DashboardLayout from '../layouts/dashboard';
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // components
 import LoadingScreen from '../components/LoadingScreen';
+import AccountSettings from 'src/pages/AccountSettings';
+import Login from '../pages/user/Login';
+import Register from '../pages/user/Register';
+import AuthGuard from './authguard';
 
 
 // ----------------------------------------------------------------------
@@ -24,16 +28,44 @@ export default function Router() {
   return useRoutes([
     {
       path: '/',
-      element: <Navigate to="/dashboard/one" replace />,
+      element: <Navigate to="/dashboard" replace />,
     },
+
+    //Routes User
+
     {
-      path: '/dashboard',
-      element: <DashboardLayout />,
+      path: 'auth',
+      children: [
+        {
+          path: 'login',
+          element: (    
+            localStorage.getItem('access_token') === null ? <Login/> : <Navigate to="/dashboard/inventory" replace />
+          ),
+        },
+        {
+          path: 'register',
+          element: (    
+            localStorage.getItem('access_token') === null ? <Register/> : <Navigate to="/dashboard/inventory" replace />
+          ),
+        },
+        
+      ],
+    },
+
+
+
+    {
+      path: 'dashboard',
+      element: (
+        <AuthGuard>
+          <DashboardLayout />
+        </AuthGuard>
+      ),
       children: [
         { element: <Navigate to="/dashboard/inventory" replace />, index: true },
         { path: 'inventory', element: <Inventory /> },
         { path: 'order', element: <Order /> },
-     
+        { path: 'account', element: <AccountSettings/> },
       ],
     },
     {
