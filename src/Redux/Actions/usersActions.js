@@ -71,7 +71,7 @@ const errorRegister = (errorMessageRegister) => ({
 //------------Api Call Get users----------------------------
 export const loadUsers = () => {
     return function (dispatch) {
-        axios.get(`https://merak-test.onrender.com/user/get_profile`, {headers: headers}).then((res) => {
+        axios.get(`https://merak-test.onrender.com/user/profile`, {headers: headers}).then((res) => {
             dispatch(getUsers(res.data));
         }).catch((err) => console.log(err));
 

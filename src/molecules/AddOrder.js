@@ -40,6 +40,8 @@ const AddOrder = () => {
   const {users} = useSelector(state => state.data2);
   const {variants} = useSelector(state => state.data);
 
+  
+
   const dispatch = useDispatch(); //Redux Dispatch
 
   const opensessame = () =>{ 
@@ -111,7 +113,7 @@ const minus = ()=>{
 
 const addhandle = (e)=>{
 
-  console.log(e)
+  
   
   e.preventDefault();
   

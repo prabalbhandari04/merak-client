@@ -9,6 +9,7 @@ import AccountSettings from 'src/pages/AccountSettings';
 import Login from '../pages/user/Login';
 import Register from '../pages/user/Register';
 import AuthGuard from './authguard';
+import GettingStarted from '../pages/GettingStarted';
 
 
 // ----------------------------------------------------------------------
@@ -66,8 +67,25 @@ export default function Router() {
         { path: 'inventory', element: <Inventory /> },
         { path: 'order', element: <Order /> },
         { path: 'account', element: <AccountSettings/> },
+       
       ],
     },
+
+
+    {
+      path: 'new',
+      element: (
+        <AuthGuard>
+          <GettingStarted />
+        </AuthGuard>
+      ),
+      children: [
+        { element: <Navigate to="get-started" replace />, index: true },
+        { path: 'get-started', element: <GettingStarted /> },
+      ],
+    },
+
+
     {
       path: '*',
       element: <LogoOnlyLayout />,

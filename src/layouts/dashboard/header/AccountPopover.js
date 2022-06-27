@@ -7,6 +7,12 @@ import { Box, Divider, Typography, Stack, MenuItem, Avatar } from '@mui/material
 import MenuPopover from '../../../components/MenuPopover';
 import { IconButtonAnimate } from '../../../components/animate';
 
+
+
+// redux
+import {useSelector, useDispatch} from 'react-redux';
+import {loadUser} from '../../../redux/actions/usersActions';
+
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
@@ -25,6 +31,10 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
 
   const navigate = useNavigate();
+
+  
+  const { user } = useSelector(state => state.data2); //Redux State
+  console.log(user)
 
   const [open, setOpen] = useState(null);
 
@@ -80,10 +90,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            Admin
+            {user.display_name}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            merak@gmail.com
+           example@example.com
           </Typography>
         </Box>
 

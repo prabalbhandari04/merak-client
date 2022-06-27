@@ -41,7 +41,7 @@ export default function RegisterForm() {
         password,
     })).then(() => {
       if(localStorage.getItem('access_token') !== null) {
-        navigate("/get-started")
+        navigate("/new/get-started")
     } else {
    
   }
