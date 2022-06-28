@@ -5,6 +5,7 @@ const initialState = {
     user: {}, //single user
     errorMessageLogin: '',
     errorMessageRegister: [],
+    errorMessageProfile: '',
     loading: true,
 }
 
@@ -54,6 +55,14 @@ export const usersReducers = (state = initialState, action) => {
                 errormessage: action.payload,
                 loading: false,
             }
+
+        
+        case types.SET_ERROR_PROFILE:
+        return {
+            ...state,
+            errorMessageProfile: action.payload,
+            loading: false,
+        }
         
         case types.SET_ERROR_LOGIN:
             return {

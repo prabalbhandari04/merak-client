@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 
 // @mui
-import { Grid, Container, Typography} from '@mui/material';
+import { Grid, Container, Typography, Alert} from '@mui/material';
 
 // redux
 import {useSelector, useDispatch} from 'react-redux';
 import {loadProducts} from '../redux/actions/productsActions';
+
 
 import Stats from '../organisms/Stats';
 
@@ -21,6 +22,7 @@ import AddItem from '../molecules/AddItem';
 
 
 
+
 // ----------------------------------------------------------------------
 
 const Inventory = () => {
@@ -30,6 +32,8 @@ const Inventory = () => {
   const dispatch = useDispatch(); //Redux Dispatch
   const {products} = useSelector(state => state.data); //Redux State
   const [search, ] = useState("");
+
+  const { errorMessageProfile } = useSelector(state => state.data2); //Redux State
 
   //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)
   useEffect(() => {
@@ -57,6 +61,14 @@ const Inventory = () => {
   return (
     <Page title="Inventory">
       <Container maxWidth={themeStretch ? false : 'xl'}>
+
+      {errorMessageProfile && 
+            <>
+            <Alert severity="warning" >
+            {errorMessageProfile}
+            </Alert>
+            </>
+   }
 
         <Typography variant="h3" component="h1" paragraph>
           Inventory

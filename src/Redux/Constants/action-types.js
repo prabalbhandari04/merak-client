@@ -38,3 +38,7 @@ export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 //errro handling login register
 export const SET_ERROR_LOGIN = "SET_ERROR_LOGIN";
 export const SET_ERROR_REGISTER = "SET_ERROR_REGISTER";
+
+
+//error handling profile
+export const SET_ERROR_PROFILE = "SET_ERROR_PROFILE";

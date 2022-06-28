@@ -50,6 +50,7 @@ const usersLogin = (tokens) => ({
     // payload: tokens
 })
 
+//------------error----------------------------
 const errorLogin = (errorMessageLogin) => ({
     type: types.SET_ERROR_LOGIN,
     payload: errorMessageLogin,
@@ -58,6 +59,11 @@ const errorLogin = (errorMessageLogin) => ({
 const errorRegister = (errorMessageRegister) => ({
     type: types.SET_ERROR_REGISTER,
     payload: errorMessageRegister,
+})
+
+const errorProfile = (errorMessageProfile) => ({
+    type: types.SET_ERROR_PROFILE,
+    payload: errorMessageProfile,
 })
 
 
@@ -84,7 +90,10 @@ export const loadUser = () => {
     return function (dispatch) {
         axios.get(`https://merak-test.onrender.com/user/auth/get_profile`, {headers: headers}).then((res) => {
             dispatch(getUser(res.data));
-        }).catch((err) => console.log(err));
+        }).catch((err) => {
+            const errorMessage = err.response.data.detail;
+            dispatch(errorProfile(errorMessage));
+        });
 
     }
 }

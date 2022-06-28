@@ -1,8 +1,9 @@
 import React from 'react';
 
 // @mui
-import { Container, Tab, Box, Tabs, Typography } from '@mui/material';
+import { Container, Tab, Box, Tabs, Typography, Alert } from '@mui/material';
 
+import {useSelector} from 'react-redux';
 
 
 
@@ -25,6 +26,9 @@ import AccountChangePassword from '../organisms/AccountChangePassword';
 const AccountSettings = () => {
 
   const { themeStretch } = useSettings();
+
+
+  const { errorMessageProfile } = useSelector(state => state.data2); //Redux State
 
   const { currentTab, onChangeTab } = useTabs('general');
 
@@ -49,6 +53,14 @@ const AccountSettings = () => {
     <Typography variant="h3" component="h1" paragraph>
          Account
         </Typography>
+
+        {errorMessageProfile && 
+            <>
+            <Alert severity="warning" >
+            {errorMessageProfile}
+            </Alert>
+            </>
+   }
      
 
       <Tabs
