@@ -24,7 +24,6 @@ export default function AccountGeneral() {
   const dispatch = useDispatch(); //Redux Dispatch
   const { user } = useSelector(state => state.data2); //Redux State
 
-  console.log(user)
   
 
   //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)

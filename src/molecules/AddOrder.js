@@ -1,17 +1,17 @@
-import * as React from "react";
+import React, { useState } from "react";
 
 import { Fab, Action } from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
 
 //--------------Icons------------------------
 import AddIcon from "@mui/icons-material/Add";
-import AddTaskIcon from '@mui/icons-material/AddTask';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 //---------------Mui Dialog -----------------
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
+import Alert from '@mui/material/Alert';
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import {Grid,Typography} from "@material-ui/core";
@@ -56,19 +56,20 @@ const AddOrder = () => {
     setOpen(false);
   };
 
-    const [assignby, setAssignby] = React.useState('your_user_name');
-    const [assignto, setAssignto] = React.useState('');
-    const [orderby, setOrderby] = React.useState('');
-    const [location, setLocation] = React.useState('');
-    const [orderprod, setOrderprod] = React.useState([])
     
-    const [max, setMax] = React.useState(1);
-    const [items, setItems] = React.useState('');
-    const [quantity, setQuantity] = React.useState(1);
+    const [assignto, setAssignto] = useState('');
+    const [orderby, setOrderby] = useState('');
+    const [location, setLocation] = useState('');
+    const [orderprod, setOrderprod] = useState([])
+    
+    const [max, setMax] = useState(1);
+    const [items, setItems] = useState('');
+    const [quantity, setQuantity] = useState(1);
     
     React.useEffect(() => {
     }, [setOrderprod, orderprod])
     
+
   const additems = (e)=>{  
     if(items !== ""){
       setOrderprod([...orderprod, {"product": items, "quantity": quantity}])  
@@ -79,16 +80,16 @@ const AddOrder = () => {
 
   }
 
-  const discarditems = ()=>{
-    setItems("")
-    setQuantity(1)
-  }
 
-  const removeitems = (prod)=>{
-    const itm = orderprod
-    const id = itm.findIndex((prd)=>{if(prd.product === prod){return prd}})
-    itm.splice(id, 1)
-    setOrderprod(itm)
+  const removeitems = (prod) => {
+   
+    const id = orderprod.findIndex((prd) => 
+      {if(prd.product === prod)
+        {return prd}
+      })
+      
+    orderprod.splice(id, 1)
+    setOrderprod([...orderprod])
   }
 
 
@@ -284,22 +285,14 @@ const cancelhandel = (e)=>{
                   <Button onClick={additems}>
                     <AddCircleIcon style={{color: 'white' }}/>
                   </Button>
-                  <Button onClick={discarditems}>
-                    <RemoveIcon style={{color: 'red'}}/>
-                  </Button>
-                
+               
            
 
               {orderprod && orderprod.map((itm, index) => (
-              <Grid  key={index} item >
-                <div style={{border: '2px solid black', borderRadius: '10px', maxWidth: '500', display: 'flex', justifyContent: 'space-between', padding: '2px 8px'}}>
-                    <h2 style={{fontSize: '15px', color: 'white'}}>{itm.product}</h2>
+              <Grid  key={index} item style={{display:'flex',justifyContent: 'center'}}>
 
-                    <h2 style={{fontSize: '15px', color: 'white'}}>{`  (${itm.quantity})`}</h2>
-                    <Button onClick={()=>{removeitems(itm.product)}}>
-                      <RemoveIcon style={{color: 'red'}} />
-                    </Button>
-                </div>
+                <Alert icon={false} severity="info" onClose={() => {removeitems(itm.product)}}>{itm.product} ({itm.quantity})</Alert>
+                    
               </Grid>
             ))}
 

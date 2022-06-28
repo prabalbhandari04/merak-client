@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
@@ -32,9 +32,12 @@ export default function AccountPopover() {
 
   const navigate = useNavigate();
 
-  
+  const dispatch = useDispatch(); //Redux Dispatch
   const { user } = useSelector(state => state.data2); //Redux State
-  console.log(user)
+  
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
 
   const [open, setOpen] = useState(null);
 

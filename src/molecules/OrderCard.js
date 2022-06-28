@@ -168,7 +168,7 @@ const OrderCard = ({ order }) => {
               <ListItemIcon  style={{color: 'white'}}>
                 <DeleteIcon style={{ color: 'red' }}/>
               </ListItemIcon>
-              <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} style={{ color: 'red' }}/>
+              <ListItemText primary="Cancel" primaryTypographyProps={{ variant: 'body2' }} style={{ color: 'red' }}/>
             </MenuItem>
 
           </Menu>
@@ -197,17 +197,17 @@ const OrderCard = ({ order }) => {
             aria-describedby="alert-dialog-description"
           >
             <DialogTitle id="alert-dialog-title" >
-              {"Delete this product?"}
+              {"Cancel this order?"}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description" style={{color: 'white'}}>
-                Are you sure you want to delete the Order
+                Are you sure you want to cancel the Order
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose2} style={{color: 'white'}}>Cancel</Button>
+              <Button onClick={handleClose2} style={{color: 'white'}}>No</Button>
               <Button autoFocus style={{ color: 'red' }} onClick={() => handleDelete(order.invoice)}>
-                Delete
+                Yes
               </Button>
             </DialogActions>
           </Dialog>
