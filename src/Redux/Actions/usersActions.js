@@ -90,6 +90,7 @@ export const loadUser = () => {
     return function (dispatch) {
         axios.get(`https://merak-test.onrender.com/user/auth/get_profile`, {headers: headers}).then((res) => {
             dispatch(getUser(res.data));
+            dispatch(errorProfile(''));
         }).catch((err) => {
             const errorMessage = err.response.data.detail;
             dispatch(errorProfile(errorMessage));

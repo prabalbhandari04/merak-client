@@ -35,6 +35,11 @@ const teamsAdded = () => ({
 })
 
 
+const errorOrganization = (errorMessageOrganization) => ({
+    type: types.SET_ERROR_ORGANIZATION,
+    payload: errorMessageOrganization,
+})
+
 
 
 //------------Api Call Post Organizations----------------------------
@@ -50,10 +55,20 @@ export const loadOrganizations = () => {
 
 
 export const addOrganizations = (organization) => {
-    return function (dispatch) {
-        axios.post(`https://merak-test.onrender.com/user/organization/`, organization, {headers: headers}).then((res) => {
+    return async function (dispatch) {
+        await axios.post(`https://merak-test.onrender.com/user/organization/`, organization, {headers: headers}).then((res) => {
             dispatch(organizationsAdded());
-        }).catch((err) => console.log(err.response.data));
+            dispatch(errorOrganization(''));
+        }).catch((err) => {
+            const errorMessageOrganization = err.response.data.detail;
+            const errorMessage = err.response.data.message;
+
+            if (errorMessageOrganization !== undefined) {
+                dispatch(errorOrganization(errorMessageOrganization)); //error handling for unverified email
+            } else {
+                dispatch(errorOrganization(errorMessage)); //for verified email
+            }
+        });
     }
 }
 
@@ -65,6 +80,11 @@ export const addTeams = (team) => {
     return function (dispatch) {
         axios.post(`https://merak-test.onrender.com/user/team/`, team, {headers: headers}).then((res) => {
             dispatch(teamsAdded());
-        }).catch((err) => console.log(err.response.data));
+            dispatch(errorOrganization(''));
+        }).catch((err) => {
+        
+            const errorMessage = err.response.data.members;
+            dispatch(errorOrganization(errorMessage));
+        });
 }
 }

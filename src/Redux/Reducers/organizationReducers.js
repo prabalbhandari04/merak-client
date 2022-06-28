@@ -3,6 +3,7 @@ import * as types from "../constants/action-types";
 const initialState = {
     organizations: [],
     organization: {},
+    errorMessageOrganization: '',
     loading: true,
 }
 
@@ -46,6 +47,14 @@ export const organizationReducers = (state = initialState, action) => {
         case types.ADD_TEAMS:
             return {
                 ...state,
+                loading: false,
+            }
+
+
+        case types.SET_ERROR_ORGANIZATION:
+            return {
+                ...state,
+                errorMessageOrganization: action.payload,
                 loading: false,
             }
 

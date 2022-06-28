@@ -13,7 +13,7 @@ const GettingStarted = () => {
 
 
   return (
-    <Page title="User: Cards">
+    <Page title="Getting Started">
       <Container maxWidth={themeStretch ? false : 'xl'}>
 
       <Typography variant="h3" sx={{ mb: 8, mt: 13 }} style={{display: 'flex', justifyContent: 'center'}}>

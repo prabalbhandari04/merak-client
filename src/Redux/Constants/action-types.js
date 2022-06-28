@@ -42,3 +42,7 @@ export const SET_ERROR_REGISTER = "SET_ERROR_REGISTER";
 
 //error handling profile
 export const SET_ERROR_PROFILE = "SET_ERROR_PROFILE";
+
+
+//error handling organization
+export const SET_ERROR_ORGANIZATION = "SET_ERROR_ORGANIZATION";

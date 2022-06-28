@@ -10,6 +10,8 @@ import Login from '../pages/user/Login';
 import Register from '../pages/user/Register';
 import AuthGuard from './authguard';
 import GettingStarted from '../pages/GettingStarted';
+import Organization from '../pages/organization/Organization';
+import Team from '../pages/organization/Team';
 
 
 // ----------------------------------------------------------------------
@@ -74,14 +76,13 @@ export default function Router() {
 
     {
       path: 'new',
-      element: (
-        <AuthGuard>
-          <GettingStarted />
-        </AuthGuard>
-      ),
+     
       children: [
-        { element: <Navigate to="get-started" replace />, index: true },
-        { path: 'get-started', element: <GettingStarted /> },
+        { element: <Navigate to="/404" replace />, index: true },
+        { path: 'get-started', element: (<AuthGuard><GettingStarted /></AuthGuard>) },
+        { path: 'organization', element: (<AuthGuard><Organization/></AuthGuard>) },   
+        { path: 'team', element: (<AuthGuard><Team/></AuthGuard>) },   
+        
       ],
     },
 
