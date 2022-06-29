@@ -43,6 +43,7 @@ const LoginForm = () => {
       
       if(localStorage.getItem('access_token') !== null) {
           navigate("/dashboard")
+          window.location.reload();
       } else {
      
     }

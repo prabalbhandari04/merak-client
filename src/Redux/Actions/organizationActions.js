@@ -28,7 +28,10 @@ const organizationsAdded = () => ({
 })
 
 
-
+const getTeams = (teams) => ({
+    type: types.GET_TEAMS,
+    payload: teams,
+})
 
 const teamsAdded = () => ({
     type: types.ADD_TEAMS,
@@ -74,15 +77,26 @@ export const addOrganizations = (organization) => {
 
 
 
-//------------Api Call Post Teams----------------------------
+//------------Api Call Teams----------------------------
+
+
+export const loadTeams = () => {
+    return function (dispatch) {
+        axios.get(`https://merak-test.onrender.com/user/team/`, {headers: headers}).then((res) => {
+            dispatch(getTeams(res.data));
+        }).catch((err) => console.log(err.response.data));
+
+    }
+}
+
 
 export const addTeams = (team) => {
     return function (dispatch) {
         axios.post(`https://merak-test.onrender.com/user/team/`, team, {headers: headers}).then((res) => {
             dispatch(teamsAdded());
+            dispatch(loadTeams());
             dispatch(errorOrganization(''));
         }).catch((err) => {
-        
             const errorMessage = err.response.data.members;
             dispatch(errorOrganization(errorMessage));
         });

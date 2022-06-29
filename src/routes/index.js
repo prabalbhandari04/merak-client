@@ -12,6 +12,7 @@ import AuthGuard from './authguard';
 import GettingStarted from '../pages/GettingStarted';
 import Organization from '../pages/organization/Organization';
 import Team from '../pages/organization/Team';
+import Teams from '../pages/Teams';
 
 
 // ----------------------------------------------------------------------
@@ -69,7 +70,7 @@ export default function Router() {
         { path: 'inventory', element: <Inventory /> },
         { path: 'order', element: <Order /> },
         { path: 'account', element: <AccountSettings/> },
-       
+        { path: 'teams', element: <Teams/> },
       ],
     },
 

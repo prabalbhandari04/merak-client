@@ -42,6 +42,7 @@ export default function RegisterForm() {
     })).then(() => {
       if(localStorage.getItem('access_token') !== null) {
         navigate("/new/get-started")
+        window.location.reload();
     } else {
    
   }

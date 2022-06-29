@@ -63,8 +63,6 @@ const Order = () => {
 
   const dispatch = useDispatch(); //Redux Dispatch
   const {orders} = useSelector(state => state.data1); //Redux State
-  const {users} = useSelector(state => state.data2);
-  const {variants} = useSelector(state => state.data);
   const [search, setSearch] = useState("");
 
   //Fetching All Products - loadProducts le redux ko -> Action ma (dispatch gareko) Api call gareko cha (GET)

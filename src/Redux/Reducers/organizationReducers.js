@@ -4,6 +4,7 @@ const initialState = {
     organizations: [],
     organization: {},
     errorMessageOrganization: '',
+    teams: [],
     loading: true,
 }
 
@@ -43,6 +44,13 @@ export const organizationReducers = (state = initialState, action) => {
 
 
         //------------------Team CRUD------------------
+
+        case types.GET_TEAMS:
+            return {
+                ...state,
+                teams: action.payload,
+                loading: false,
+            };
 
         case types.ADD_TEAMS:
             return {

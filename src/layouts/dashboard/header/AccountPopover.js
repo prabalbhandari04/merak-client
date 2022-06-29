@@ -53,6 +53,7 @@ export default function AccountPopover() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     navigate("/auth/login");
+    window.location.reload();
   }
 
   return (

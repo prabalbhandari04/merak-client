@@ -67,6 +67,7 @@
     "react-scripts": "^5.0.0",
     "react-slick": "^0.29.0",
     "react-tiny-fab": "^4.0.4",
+    "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "simplebar": "^5.3.6",
     "simplebar-react": "^2.3.6",
