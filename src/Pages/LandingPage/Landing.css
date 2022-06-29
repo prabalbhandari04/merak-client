@@ -1,0 +1,30 @@
+.swiper {
+    width: 350px;
+    height: 400px;
+    display: flex;
+  }
+  
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .swiper-slide:nth-child(1n) {
+    background-color: #252525
+  }
+  
+  .swiper-slide:nth-child(2n) {
+    background-color: #424242
+  }
+  
+  .swiper-slide:nth-child(3n) {
+    background-color: #5c5b5b
+  }
+  
+
+  
