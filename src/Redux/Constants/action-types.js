@@ -47,3 +47,7 @@ export const SET_ERROR_PROFILE = "SET_ERROR_PROFILE";
 
 //error handling organization
 export const SET_ERROR_ORGANIZATION = "SET_ERROR_ORGANIZATION";
+
+
+//Success Message
+export const SET_SUCCESS_LOGIN = "SET_SUCCESS_LOGIN";

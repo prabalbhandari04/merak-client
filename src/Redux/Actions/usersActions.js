@@ -66,7 +66,10 @@ const errorProfile = (errorMessageProfile) => ({
     payload: errorMessageProfile,
 })
 
-
+const successLogin = (successMessage) => ({
+    type: types.SET_SUCCESS_LOGIN,
+    payload: successMessage,
+})
 
 
 
@@ -154,6 +157,7 @@ export const loginUsers = (credential) => {
             localStorage.setItem('refresh_token', res.data.refresh);
             dispatch(usersLogin(res.data));
             dispatch(errorLogin(''));
+            dispatch(successLogin('Login Successful'));
         }).catch((err) => {
             const errorMessage = err.response.data.detail;
             dispatch(errorLogin(errorMessage));

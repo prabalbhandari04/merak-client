@@ -106,9 +106,7 @@ export default function Login() {
               
             </Stack>
 
-            {/* <Alert severity="info" sx={{ mb: 3 }}>
-              Alert example
-            </Alert> */}
+            
 
             <LoginForm />
 

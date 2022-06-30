@@ -265,7 +265,7 @@ const AddItem = () => {
   const handleSubmit3 = (e) => {
     e.preventDefault();
 
-    let field_data = {name: name2, value: value2};
+    let field_data = {name: name2, field_name: name2, value: value2};
 
 
     dispatch(addVariantsField(field_data));
