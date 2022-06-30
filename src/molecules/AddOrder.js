@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Fab, Action } from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
@@ -36,7 +36,7 @@ import {addOrders} from '../redux/actions/ordersActions';
 
 
 const AddOrder = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const {users} = useSelector(state => state.data2);
   const {variants} = useSelector(state => state.data);
 
@@ -62,11 +62,12 @@ const AddOrder = () => {
     const [location, setLocation] = useState('');
     const [orderprod, setOrderprod] = useState([])
     
-    const [max, setMax] = useState(1);
-    const [items, setItems] = useState('');
-    const [quantity, setQuantity] = useState(1);
     
-    React.useEffect(() => {
+    const [items, setItems] = useState('');
+    const [quantity, setQuantity] = useState('');
+    const [maxquantity, setMaxquantity] = useState('');
+    
+    useEffect(() => {
     }, [setOrderprod, orderprod])
     
 
@@ -74,8 +75,8 @@ const AddOrder = () => {
     if(items !== ""){
       setOrderprod([...orderprod, {"product": items, "quantity": quantity}])  
       setItems("")
-      setQuantity(1)
-      setMax("")
+      setQuantity("")
+      setMaxquantity("")
     }
 
   }
@@ -94,14 +95,23 @@ const AddOrder = () => {
 
 
 const changes = (e)=>{
+  
+
+  var filteredQuantity = variants.filter(function( obj ) {
+    return obj.sku === e.target.value;
+  });
+
+  setMaxquantity(filteredQuantity[0].quantity);
+  
+
+
   setItems(e.target.value)
-  // setMax(e.target.value[1])
   setQuantity(1)
 
 }
 
 const plus = ()=>{
-  if(quantity < 10 ){
+  if(quantity < maxquantity ){
     setQuantity(quantity + 1)
   }
 }
@@ -133,8 +143,8 @@ const addhandle = (e)=>{
   setLocation("")
   setOrderprod([])
   setItems("")
-  setQuantity(1)
-  setMax("")
+  setQuantity("")
+  setMaxquantity("")
   
   handleClose()
 } 
@@ -145,12 +155,14 @@ const cancelhandel = (e)=>{
   setLocation("")
   setOrderprod([])
   setItems("")
-  setQuantity(1)
-  setMax("")
+  setQuantity("")
+  setMaxquantity("")
 
   handleClose()
   
 }
+
+
 
 
   return (
@@ -275,7 +287,7 @@ const cancelhandel = (e)=>{
            
                   
                   <Grid xs={12} sm={6} item>
-                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} disabled InputLabelProps={{ style: { color: 'black' } }}  type="number" InputProps={{ inputProps: { min: 0, max: max} }} placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
+                    <TextField sx={{ input: { color: 'black', background: 'white' } }} name="quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} disabled InputLabelProps={{ style: { color: 'black' } }}  type="number" InputProps={{ inputProps: { min: 0, max: maxquantity} }} placeholder="Quantity" label="Quantity" variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}}/>
                   </Grid> 
 
                   <div style={{display: 'flex', flexDirection: 'column', paddingTop: '11px', cursor: 'pointer'}}>
