@@ -5,6 +5,7 @@ const initialState = {
     organization: {},
     errorMessageOrganization: '',
     teams: [],
+    team: {},
     loading: true,
 }
 
@@ -58,6 +59,17 @@ export const organizationReducers = (state = initialState, action) => {
                 loading: false,
             }
 
+        case types.UPDATE_TEAMS:
+            return {
+                ...state,
+                loading: false,
+            }
+
+        case types.DELETE_TEAMS:
+            return {
+                ...state,
+                loading: false,
+            }
 
         case types.SET_ERROR_ORGANIZATION:
             return {

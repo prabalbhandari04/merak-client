@@ -291,8 +291,17 @@ const cancelhandel = (e)=>{
                   </Grid> 
 
                   <div style={{display: 'flex', flexDirection: 'column', paddingTop: '11px', cursor: 'pointer'}}>
+                    {quantity === '' ?  
+                    <>
+                      <MdKeyboardArrowUp size="20px"/>
+                      <MdKeyboardArrowUp style={{transform: 'rotate(180deg)'}} size="20px"/>
+                      </>
+                    : 
+                    <>
                     <MdKeyboardArrowUp onClick={plus} size="20px"/>
                     <MdKeyboardArrowUp style={{transform: 'rotate(180deg)'}} onClick={minus} size="20px"/>
+                    </>}
+                    
                   </div>
                   <Button onClick={additems}>
                     <AddCircleIcon style={{color: 'white' }}/>

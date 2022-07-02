@@ -38,6 +38,16 @@ const teamsAdded = () => ({
 })
 
 
+// ------------Put Teams----------------------------
+const teamUpdated = () => ({
+    type: types.UPDATE_TEAMS,
+})
+
+
+const teamDeleted = () => ({
+    type: types.DELETE_TEAMS,
+})
+
 const errorOrganization = (errorMessageOrganization) => ({
     type: types.SET_ERROR_ORGANIZATION,
     payload: errorMessageOrganization,
@@ -101,4 +111,25 @@ export const addTeams = (team) => {
             dispatch(errorOrganization(errorMessage));
         });
 }
+}
+
+
+export const updateTeams = ({id, data}) => {
+    return function (dispatch) {
+        axios.put(`https://merak-test.onrender.com/user/team/${id}/`, data, {headers: headers}).then((res) => {
+            dispatch(teamUpdated());
+            dispatch(loadTeams());
+        }).catch((err) => console.log(err));
+    }
+}
+
+
+export const deleteTeams = (id) => {
+    return function (dispatch) {
+        axios.delete(`https://merak-test.onrender.com/user/team/${id}/`, {headers: headers}).then((res) => {
+            dispatch(teamDeleted());
+            dispatch(loadTeams());
+        }).catch((err) => console.log(err));
+    }
+
 }

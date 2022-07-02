@@ -26,7 +26,8 @@ export const DELETE_ORGANIZATIONS = "DELETE_ORGANIZATIONS";
 
 export const GET_TEAMS = "GET_TEAMS";
 export const ADD_TEAMS = "ADD_TEAMS";
-
+export const UPDATE_TEAMS = "UPDATE_TEAMS";
+export const DELETE_TEAMS = "DELETE_TEAMS";
 //USers
 
 export const CREATE_USERS = "ADD_USERS";

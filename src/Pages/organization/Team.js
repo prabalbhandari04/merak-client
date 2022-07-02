@@ -160,7 +160,7 @@ const Team = () => {
                       labelId="team-leader-select-label"
                       id="team-leader-select"
                       value={teamLeader}
-                      label="Select Organization"
+                      label="Select Team Leader"
                       onChange={handleChangeTeamLeader}    
                     >
                       {users.map(val => {

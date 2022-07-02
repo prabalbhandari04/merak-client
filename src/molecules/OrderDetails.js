@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '@mui/material/Card';
-import {Grid, Box} from "@material-ui/core";
+import {Grid, Box, Avatar} from "@material-ui/core";
 import CardContent from '@mui/material/CardContent';
 import {Typography} from "@material-ui/core";
 import MenuItem from '@mui/material/MenuItem';
@@ -107,7 +107,7 @@ const OrderDetails = ( {order} ) => {
                                                 <span></span>
                                                 :
                                                 <span>
-                                                  {order.ordered_by.full_name}
+                                                  {order.ordered_by.name}
                                                 </span>
                                               }</span>
                     </Typography>
@@ -161,7 +161,7 @@ const OrderDetails = ( {order} ) => {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <img src={ordered.product.image} width="100px" alt=""/>
+                  <Avatar  src={ordered.product.image} style={{height: '100px', width: '100px', borderStyle: 'dotted', borderColor: 'gray' }}/>
                   </TableCell>
                   <TableCell align="right">{ordered.product.sku}</TableCell>
                   <TableCell align="right">{ordered.product.price}</TableCell>

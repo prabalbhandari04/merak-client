@@ -96,7 +96,7 @@ const OrderCard = ({ order }) => {
               <p></p>
               :
               <span style={{color: 'gray', textAlign: 'right'}}>
-                {order.ordered_by.full_name}
+                {order.ordered_by.name}
               </span>
             }
             </Typography>

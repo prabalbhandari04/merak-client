@@ -13,6 +13,7 @@ import GettingStarted from '../pages/GettingStarted';
 import Organization from '../pages/organization/Organization';
 import Team from '../pages/organization/Team';
 import Teams from '../pages/Teams';
+import Invoice from '../pages/invoice/Invoice';
 
 
 // ----------------------------------------------------------------------
@@ -71,6 +72,7 @@ export default function Router() {
         { path: 'order', element: <Order /> },
         { path: 'account', element: <AccountSettings/> },
         { path: 'teams', element: <Teams/> },
+        { path: 'invoice', element: <Invoice/> },
       ],
     },
 
