@@ -117,7 +117,7 @@ const Order = () => {
 
 
 
-  //Reducing the order to group by status
+  //Reducing the order array to group by status
 
   let orderStatus = orders.reduce((acc, curr) => {
     const status = curr.status.toLowerCase();
@@ -128,9 +128,9 @@ const Order = () => {
   }, {});
   
 
-  let completed = orderStatus.completed != undefined ? orderStatus.completed.length : 0;
-  let pending = orderStatus.pending != undefined ? orderStatus.pending.length : 0;
-  let cancelled = orderStatus.cancelled != undefined ? orderStatus.cancelled.length : 0;
+  let completed = orderStatus.completed !== undefined ? orderStatus.completed.length : 0;
+  let pending = orderStatus.pending !== undefined ? orderStatus.pending.length : 0;
+  let cancelled = orderStatus.cancelled !== undefined ? orderStatus.cancelled.length : 0;
   let total = completed + pending + cancelled;
 
 

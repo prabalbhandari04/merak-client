@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import {useSelector} from 'react-redux';
+
+
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { useTheme } from '@mui/material/styles';
@@ -56,6 +59,9 @@ export default function Invoice() {
 
   const { themeStretch } = useSettings();
 
+
+  const {orders} = useSelector(state => state.data1); //Redux State
+  
 
   const {
     dense,
@@ -139,12 +145,35 @@ export default function Invoice() {
   const getLengthByStatus = (status) => tableData.filter((item) => item.status === status).length;
 
 
+
+
+   //Reducing the order array to group by status
+
+   let orderStatus = orders.reduce((acc, curr) => {
+    const status = curr.status.toLowerCase();
+    (acc[status] = acc[status] || []).push({
+      invoice: curr.invoice,
+    });
+    return acc;
+  }, {});
+  
+
+  let completed = orderStatus.completed !== undefined ? orderStatus.completed.length : 0;
+  let pending = orderStatus.pending !== undefined ? orderStatus.pending.length : 0;
+  let cancelled = orderStatus.cancelled !== undefined ? orderStatus.cancelled.length : 0;
+  let total = completed + pending + cancelled;
+
+
+
+  
   const TABS = [
-    { value: 'all', label: 'All', color: 'info', count: tableData.length },
-    { value: 'completed', label: 'Completed', color: 'success', count: getLengthByStatus('paid') },
-    { value: 'pending', label: 'Pending', color: 'warning', count: getLengthByStatus('unpaid') },
-    { value: 'cancelled', label: 'Cancelled', color: 'error', count: getLengthByStatus('overdue') },
+    { value: 'all', label: 'All', color: 'info', count: total },
+    { value: 'completed', label: 'Completed', color: 'success', count: completed},
+    { value: 'pending', label: 'Pending', color: 'warning', count: pending},
+    { value: 'cancelled', label: 'Cancelled', color: 'error', count: cancelled},
   ];
+
+
 
   return (
     <Page title="Invoice: List">
@@ -164,8 +193,8 @@ export default function Invoice() {
             >
               <InvoiceAnalytic
                 title="Total"
-                total={10}
-                percent={20}
+                total={total}
+                percent={100*total/total}
                 label="invoice"
                 icon="ic:round-receipt"
                 color={theme.palette.info.main}
@@ -173,24 +202,24 @@ export default function Invoice() {
 
               <InvoiceAnalytic
                 title="Completed"
-                total={8}
-                percent={20}
+                total={completed}
+                percent={100*completed/total}
                 label="invoice"
                 icon="eva:checkmark-circle-2-fill"
                 color={theme.palette.success.main}
               />
               <InvoiceAnalytic
                 title="Pending"
-                total={4}
-                percent={50}
+                total={pending}
+                percent={100*pending/total}
                 label="invoice"
                 icon="eva:clock-fill"
                 color={theme.palette.warning.main}
               />
               <InvoiceAnalytic
                 title="Cancelled"
-                total={3}
-                percent={80}
+                total={cancelled}
+                percent={100*cancelled/total}
                 label="invoice"
                 icon="eva:bell-fill"
                 color={theme.palette.error.main}
