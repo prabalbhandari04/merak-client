@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useMemo} from 'react';
 
 
-
+import { useTheme } from '@mui/material/styles';
 
 
 import Card from '../molecules/OrderCard';
@@ -15,6 +15,7 @@ import useSettings from '../hooks/useSettings';
 
 // components
 import Page from '../components/Page';
+import Scrollbar from '../components/Scrollbar';
 
 
 //Redux
@@ -25,16 +26,18 @@ import {loadVariants} from '../redux/actions/productsActions';
 import {loadUsers} from '../redux/actions/usersActions';
 
 
+import EmptyContent from '../components/EmptyContent';
 
 // material -ui
 
-import { Grid, Container, Typography} from '@mui/material';
+import { Grid, Container, Typography, Card as Cards, Stack, Divider} from '@mui/material';
 
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 
+import InvoiceAnalytic from '../pages/invoice/InvoiceAnalytic';
 
 //-------Custom Styling----------------------------
 const TxtField = styled(TextField)({
@@ -57,6 +60,8 @@ const TxtField = styled(TextField)({
 
 
 const Order = () => {
+
+  const theme = useTheme();
 
   const { themeStretch } = useSettings();
 
@@ -109,6 +114,28 @@ const Order = () => {
   
   // Avoid duplicate function calls with useMemo
   const orderFilteredList = useMemo(getFilteredList, [selectedFilter, orderList]);
+
+
+
+  //Reducing the order to group by status
+
+  let orderStatus = orders.reduce((acc, curr) => {
+    const status = curr.status.toLowerCase();
+    (acc[status] = acc[status] || []).push({
+      invoice: curr.invoice,
+    });
+    return acc;
+  }, {});
+  
+
+  let completed = orderStatus.completed != undefined ? orderStatus.completed.length : 0;
+  let pending = orderStatus.pending != undefined ? orderStatus.pending.length : 0;
+  let cancelled = orderStatus.cancelled != undefined ? orderStatus.cancelled.length : 0;
+  let total = completed + pending + cancelled;
+
+
+
+
   
   return (
 <>
@@ -127,10 +154,48 @@ const Order = () => {
          
         </Typography>
 
+
+        <Cards sx={{ mb: 5, mt: 5, }}>
+          <Scrollbar>
+            <Stack
+              direction="row"
+              divider={<Divider orientation="vertical" flexItem sx={{ borderStyle: 'dashed' }} />}
+              sx={{ py: 2 }}
+            >
         
+              <InvoiceAnalytic
+                title="Completed"
+                total={completed}
+                percent={100*completed/total}
+                label="order"
+                icon="eva:checkmark-circle-2-fill"
+                color={theme.palette.success.main}
+              />
+              <InvoiceAnalytic
+                title="Pending"
+                total={pending}
+                percent={100*pending/total}
+                label="order"
+                icon="eva:clock-fill"
+                color={theme.palette.warning.main}
+              />
+              <InvoiceAnalytic
+                title="Cancelled"
+                total={cancelled}
+                percent={100*cancelled/total}
+                label="order"
+                icon="eva:bell-fill"
+                color={theme.palette.error.main}
+              />
+              
+            </Stack>
+          </Scrollbar>
+        </Cards>
 
         
 
+        
+        {orders != '' ? 
 
         <Grid container spacing={3} style={{marginBottom: '30px'}}>
 
@@ -142,6 +207,20 @@ const Order = () => {
           ))}
 
         </Grid>
+
+        : 
+
+        <span>
+        <EmptyContent
+        title="No Orders Found"
+        description={`You don't have any orders yet.`}
+        sx={{
+          '& span.MuiBox-root': { height: 160 },
+        }}
+      />
+      </span>
+          
+          }
 
 
 

@@ -21,6 +21,7 @@ import CardList from '../organisms/CardList';
 import AddItem from '../molecules/AddItem';
 
 
+import EmptyContent from '../components/EmptyContent';
 
 
 // ----------------------------------------------------------------------
@@ -93,6 +94,9 @@ const Inventory = () => {
           
         </Grid>
 
+        {filteredProduct != '' ? 
+        <>
+
         <Typography variant="h5" component="h1" paragraph>
         To be delivered
         </Typography>
@@ -107,6 +111,21 @@ const Inventory = () => {
 
 
         <CardList filteredProduct={filteredProduct}/>
+
+        </>
+
+        : 
+
+        <span>
+        <EmptyContent
+        title="No Products Found"
+        description={`You don't have any products yet.`}
+        sx={{
+          '& span.MuiBox-root': { height: 160 },
+        }}
+      />
+      </span>
+      }
 
 
       </Container>

@@ -13,6 +13,8 @@ import Page from '../components/Page';
 import AddTeam from '../molecules/AddTeam';
 import TeamCard from './organization/TeamCard';
 
+import EmptyContent from '../components/EmptyContent';
+
 
 const Teams = () => {
 
@@ -29,6 +31,8 @@ const Teams = () => {
   }, [dispatch]);
 
 
+
+
   return (
     <Page title="Inventory">
       <Container maxWidth={themeStretch ? false : 'xl'}>
@@ -39,6 +43,7 @@ const Teams = () => {
         </Typography>
 
 
+        {teams != "" ? 
         <Box
           sx={{
             display: 'grid',
@@ -50,17 +55,32 @@ const Teams = () => {
             },
           }}
         >
+
           
-         {teams && teams.map((team) => {
-            return (
-              <span key={team.id}>
-                <TeamCard team={team}/>
-              </span>
-            )
-          }
-         )}
+         
+          {teams && teams.map((team) => {
+             return (
+               <span key={team.id}>
+                 <TeamCard team={team}/>
+               </span>
+             )
+           }
+          )}
 
         </Box>
+
+        : 
+        <span>
+        <EmptyContent
+        title="No Teams Found"
+        description={`You don't have any teams yet.`}
+        sx={{
+          '& span.MuiBox-root': { height: 160 },
+        }}
+      />
+      </span>
+       
+      }
 
 
 
