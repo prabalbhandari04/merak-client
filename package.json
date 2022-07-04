@@ -12,7 +12,8 @@
     "lint:fix": "eslint --fix --ext .js,.jsx ./src",
     "clear-all": "rm -rf build node_modules",
     "re-start": "rm -rf build node_modules && yarn install && yarn start",
-    "re-build": "rm -rf build node_modules && yarn install && yarn build"
+    "re-build": "rm -rf build node_modules && yarn install && yarn build",
+    "e2e":"cucumber-js"
   },
   "eslintConfig": {
     "extends": [
@@ -86,9 +87,12 @@
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/eslint-parser": "^7.17.0",
+    "@cucumber/cucumber": "^8.4.0",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "babel-eslint": "^10.1.0",
+    "chai": "^4.3.6",
+    "chromedriver": "^103.0.0",
     "eslint": "^8.9.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.4.0",
@@ -100,6 +104,8 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.5.1",
+    "redux-devtools-extension": "^2.13.9",
+    "selenium-webdriver": "^4.3.0",
     "typescript": "^4.5.5"
   }
 }

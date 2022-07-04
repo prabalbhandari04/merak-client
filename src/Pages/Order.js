@@ -37,7 +37,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import InvoiceAnalytic from '../pages/invoice/InvoiceAnalytic';
+import InvoiceAnalytic from './invoice/InvoiceAnalytic';
 
 //-------Custom Styling----------------------------
 const TxtField = styled(TextField)({
