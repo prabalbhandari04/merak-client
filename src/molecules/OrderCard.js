@@ -1,6 +1,7 @@
 
 import React, {useRef, useState} from 'react';
 
+import { Link } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 
@@ -13,9 +14,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import OrderDetails from './OrderDetails';
-import DeleteIcon from '@mui/icons-material/Delete';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import DescriptionIcon from '@mui/icons-material/Description';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Divider from '@mui/material/Divider';
@@ -25,7 +26,7 @@ import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/mat
 
 //Redux
 import {useDispatch} from 'react-redux';
-import {deleteOrders} from '../redux/actions/ordersActions';
+import {putOrders, deleteOrders} from '../redux/actions/ordersActions';
 
 
 
@@ -67,18 +68,27 @@ const OrderCard = ({ order }) => {
     setOpen(false);
   };
 
-  const handleDelete = (uuid) =>{
+  const handleCancel = (uuid) =>{
+
+    
+
+    // const orders = {
+    //   assigned_to: order.assigned_to,
+    //   items: order.items,
+    //   ordered_by: order.ordered_by,
+    //   completed_date: order.completed_date,
+    //   invoice: order.invoice,
+    //   ordered_date: order.ordered_date,
+    //   status: 'CANCELLED',
+    //   sub_total: order.sub_total,
+    //   total: order.total,
+    // }
+
+    dispatch(deleteOrders(uuid));
     handleClose2()
-    dispatch(deleteOrders(uuid))
 
   }
 
-  const url = "http://localhost:3000"
-  const handleBill = (uuid) =>{
-    var win = window.open(url+"/bill/"+order.invoice , '_blank');
-    console.log(uuid)
-    win.focus();
-  }
 
 
 
@@ -141,7 +151,7 @@ const OrderCard = ({ order }) => {
           <DialogTitle id="alert-dialog-title">
             {"Order Details"}
 
-            <IconButton ref={ref} onClick={() => setIsOpen(true)}>
+            <IconButton ref={ref} onClick={() => setIsOpen(true)} style={{display: 'flex', float: 'right'}}>
               <MoreVertIcon style={{ color: 'white' }}/>
         </IconButton>
 
@@ -155,21 +165,41 @@ const OrderCard = ({ order }) => {
             style={{ color: '#181818'}}
           >
 
-            <MenuItem sx={{ color: 'white' }} onClick={() => handleBill()}>
+            <MenuItem sx={{ color: 'white' }}  to={`/dashboard/invoice/${order.invoice}`} component={Link}>
               <ListItemIcon style={{color: 'white'}}>
                 <DescriptionIcon />
               </ListItemIcon>
-              <ListItemText primary="Bill" primaryTypographyProps={{ variant: 'body2' }} />
+              <ListItemText primary="Invoice" primaryTypographyProps={{ variant: 'body2' }} />
+            </MenuItem>
+
+           
+
+            <Divider sx={{ my: 0.5, background: 'gray'}} />
+
+            <MenuItem sx={{ color: 'text.secondary' }} onClick={() => handleClickOpen2()} disabled={order.status === "PENDING"? 'boolean': false}>
+              <ListItemIcon  style={{color: 'white'}}>
+                <WatchLaterIcon style={{ color: '#eed202' }}/>
+              </ListItemIcon>
+              <ListItemText primary="Pending" primaryTypographyProps={{ variant: 'body2' }} style={{ color: '#eed202' }}/>
             </MenuItem>
 
             <Divider sx={{ my: 0.5, background: 'gray'}} />
 
-            <MenuItem sx={{ color: 'text.secondary' }} onClick={() => handleClickOpen2()} disabled={order.status === "CANCELLED"? 'boolean': false}>
+            <MenuItem sx={{ color: 'text.secondary' }} onClick={() => handleClickOpen2()} disabled={order.status === "COMPLETED"? 'boolean': false}>
               <ListItemIcon  style={{color: 'white'}}>
-                <DeleteIcon style={{ color: 'red' }}/>
+                <CheckCircleIcon style={{ color: '#4BB543' }}/>
               </ListItemIcon>
-              <ListItemText primary="Cancel" primaryTypographyProps={{ variant: 'body2' }} style={{ color: 'red' }}/>
+              <ListItemText primary="Completed" primaryTypographyProps={{ variant: 'body2' }} style={{ color: '#4BB543' }}/>
             </MenuItem>
+
+            <Divider sx={{ my: 0.5, background: 'gray'}} />
+
+              <MenuItem sx={{ color: 'text.secondary' }} onClick={() => handleCancel(order.invoice)} disabled={order.status === "CANCELLED"? 'boolean': false}>
+                <ListItemIcon  style={{color: 'white'}}>
+                  <NotificationsIcon style={{ color: '#ff3333' }}/>
+                </ListItemIcon>
+                <ListItemText primary="Cancel" primaryTypographyProps={{ variant: 'body2' }} style={{ color: '#ff3333' }}/>
+              </MenuItem>
 
           </Menu>
           </DialogTitle>
@@ -190,27 +220,6 @@ const OrderCard = ({ order }) => {
 
 
 
-          <Dialog
-            open={open2}
-            onClose={handleClose2}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title" >
-              {"Cancel this order?"}
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description" style={{color: 'white'}}>
-                Are you sure you want to cancel the Order
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose2} style={{color: 'white'}}>No</Button>
-              <Button autoFocus style={{ color: 'red' }} onClick={() => handleDelete(order.invoice)}>
-                Yes
-              </Button>
-            </DialogActions>
-          </Dialog>
     
     </>
   );

@@ -188,7 +188,7 @@ export default function Invoice() {
                       {orders && orders.map((orders) => {
                 
                         return (
-                            <TableRow hover >
+                            <TableRow hover style={{textDecoration: 'none'}} to={`/dashboard/invoice/${orders.invoice}`} component={RouterLink}>
                               
 
                               <TableCell sx={{ display: 'flex', alignItems: 'center' }}>

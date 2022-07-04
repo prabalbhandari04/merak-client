@@ -87,7 +87,7 @@ const MenuButton = ({ product }) => {
 
   return (
     <>
-        <IconButton ref={ref} onClick={() => setIsOpen(true)}>
+        <IconButton ref={ref} style={{display: 'flex', float: 'right'}} onClick={() => setIsOpen(true)}>
               <MoreVertIcon style={{ color: 'white' }}/>
         </IconButton>
 

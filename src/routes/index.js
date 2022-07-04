@@ -14,6 +14,7 @@ import Organization from '../pages/organization/Organization';
 import Team from '../pages/organization/Team';
 import Teams from '../pages/Teams';
 import Invoice from '../pages/invoice/Invoice';
+import InvoiceDetails from '../pages/invoice/InvoiceDetails';
 
 
 // ----------------------------------------------------------------------
@@ -73,6 +74,7 @@ export default function Router() {
         { path: 'account', element: <AccountSettings/> },
         { path: 'teams', element: <Teams/> },
         { path: 'invoice', element: <Invoice/> },
+        { path: 'invoice/:id', element: <InvoiceDetails/> },
       ],
     },
 

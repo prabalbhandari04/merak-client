@@ -22,22 +22,10 @@ const getOrders = (orders) => ({
     payload: orders,
 })
 
-
-// //------------Post Ouders----------------------------
-// const ordersAdd = () => ({
-//     type: types.ADD_ORDERS,
-// })
-
-// //------------Put Ouders----------------------------
-// const ordersUpdate = () => ({
-//     type: types.UPDATE_ORDERS,
-// })
-
-// //------------Delete Ouders----------------------------
-
-// const ordersDelete = () => ({
-//     type: types.DELETE_ORDERS,
-// })
+// ------------Put Products----------------------------
+const orderUpdated = () => ({
+    type: types.UPDATE_ORDERS,
+})
 
 
 //------------Api Call Get Products----------------------------
@@ -60,10 +48,10 @@ export const addOrders = (product) => {
     }
 }
 
-export const putOrders = (uuid, product) => {
+export const putOrders = (uuid, orders) => {
     return function (dispatch) {
-        axios.patch(`https://merak-test.onrender.com/inventory/order/${uuid}/`, product, {headers: headers}).then((res) => {
-            //dispatch(orderAdded());
+        axios.patch(`https://merak-test.onrender.com/inventory/order/${uuid}/`, orders, {headers: headers}).then((res) => {
+            dispatch(orderUpdated());
             dispatch(loadOrders());
         }).catch((err) => console.log(err));
     }
