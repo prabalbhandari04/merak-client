@@ -30,6 +30,11 @@ const usersLogin = (tokens) => ({
     // payload: tokens
 })
 
+//------------Post Customer----------------------------
+const customerAdded = () => ({
+    type: types.ADD_CUSTOMER,
+})
+
 
 
 //------------Api Call Get Products----------------------------
@@ -64,3 +69,12 @@ export const loginUsers = (credential) => {
     }
 }
 
+
+//------------Api Register customers----------------------------
+export const addCustomer = (customer) => {
+    return function (dispatch) {
+        axios.post(`https://merak-test.herokuapp.com/inventory/product/`, customer, {headers: headers}).then((res) => {
+            dispatch(customerAdded());
+        }).catch((err) => console.log(err));
+    }
+}

@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import LocationMap from "./LocationSearchModal";
 import { DialogActions } from "@mui/material";
+import { useState } from 'react';
 
 const style = {
   position: "absolute",
@@ -54,14 +55,17 @@ function ChildModal() {
   );
 }
 const AddCustomer = () => {
-  const [assignby, setAssignby] = React.useState(false);
+  const [firstname, setFirstname] = useState("")
+    const [lastname, setLastname] = useState("")
+    const [email, setEmail] = useState("")
+    const [contact, setContact] = useState("")
+    const [address, setAddress] = useState("")
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
 
   const cancelhandel = () => {
-    alert ("cancel");
     handleClose();
   }
   const addhandle  = () => {
@@ -92,116 +96,62 @@ const AddCustomer = () => {
               Add Customer:
             </Typography>
             <br></br>
-            
-            <Grid>
-            <form>
-            <Grid container spacing={1} style={{color: 'white'}}>
-            <Grid item xs={4} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                <span style={{color: 'gray'}}> First Name: </span> 
-              </Typography>
-            </Grid>
-            <Grid item xs={6} sm={6}>
-            <TextField
-                        sx={{ input: { color: "black", background: "white" } }}
-                        InputLabelProps={{ style: { color: "black" } }}
-                        placeholder="First Name"
-                        label="First Name"
-                        variant="filled"
-                        fullWidth
-                        required
-                        autoComplete="on"
-                    /></Grid>
-            </Grid>
+            <form id="metadata-form-id">
+                <Grid container spacing={2} style={{color: 'white'}}>
+
+                    <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+                    <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                        <span style={{color: 'gray'}}> First name </span> 
+                    </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px'}}} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setFirstname(e.target.value)}/>
+                    </Grid>
+
+
+                    <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+                    <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                        <span style={{color: 'gray'}}> Last name </span> 
+                    </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px'}}} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setLastname(e.target.value)}/>
+                    </Grid>
+
+
+                    <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+                    <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                        <span style={{color: 'gray'}}> Email id </span> 
+                    </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth autoComplete='off' style={{background:'#181818'}} onChange={(e) => setEmail(e.target.value)}/>
+                    </Grid>
+
+                    <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+                    <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                        <span style={{color: 'gray'}}> Contact </span> 
+                    </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setContact(e.target.value)}/>
+                    </Grid>
+
+                    <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
+                    <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
+                        <span style={{color: 'gray'}}> Address </span> 
+                    </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setAddress(e.target.value)}/>
+                    </Grid>
+
+                   
+                    
+
+                    {/* <Box height="70px" /> */}
+                </Grid>
             </form>
-          </Grid>
-
-
-          <Grid>
-            <form>
-            <Grid container spacing={1} style={{color: 'white'}}>
-            <Grid item xs={4} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                <span style={{color: 'gray'}}> Last Name: </span> 
-              </Typography>
-            </Grid>
-            <Grid item xs={6} sm={6}>
-            <TextField
-                        sx={{ input: { color: "black", background: "white" } }}
-                        InputLabelProps={{ style: { color: "black" } }}
-                        placeholder="Last Name"
-                        label="Last Name"
-                        variant="filled"
-                        fullWidth
-                        required
-                        autoComplete="on"
-                    /></Grid>
-            </Grid>
-            </form>
-          </Grid>
-
-
-          <Grid>
-            <form>
-            <Grid container spacing={1} style={{color: 'white'}}>
-            <Grid item xs={4} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                <span style={{color: 'gray'}}> Email: </span> 
-              </Typography>
-            </Grid>
-            <Grid item xs={6} sm={6}>
-            <TextField
-                        sx={{ input: { color: "black", background: "white" } }}
-                        InputLabelProps={{ style: { color: "black" } }}
-                        placeholder="Email"
-                        label="Email"
-                        variant="filled"
-                        fullWidth
-                        required
-                        autoComplete="on"
-                    /></Grid>
-            </Grid>
-            </form>
-          </Grid>
-
-
-          <Grid>
-            <form>
-            <Grid container spacing={1} style={{color: 'white'}}>
-            <Grid item xs={4} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                <span style={{color: 'gray'}}> Contact Number: </span> 
-              </Typography>
-            </Grid>
-            <Grid item xs={6} sm={6}>
-            <TextField
-                        sx={{ input: { color: "black", background: "white" } }}
-                        InputLabelProps={{ style: { color: "black" } }}
-                        placeholder="Contact Number"
-                        label="Contact Number"
-                        variant="filled"
-                        fullWidth
-                        required
-                        autoComplete="on"
-                    /></Grid>
-            </Grid>
-            </form>
-          </Grid>
-
-          <Grid>
-            <form>
-            <Grid container spacing={1} style={{color: 'white'}}>
-            <Grid item xs={4} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-              <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                <span style={{color: 'gray'}}> Location: </span> 
-              </Typography>
-            </Grid>
-            <Grid item xs={6} sm={6}>
-            <ChildModal />
-            </Grid>
-            </Grid>
-            </form>
-          </Grid>
 
           <DialogActions style={{background: '#181818'}}>
 

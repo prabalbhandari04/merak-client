@@ -37,3 +37,6 @@ export const LOAD_INVOICES_DATA = 'LOAD_INVOICES_DATA';
 export const ENABLE_DARK_MODE = 'ENABLE_DARK_MODE';
 export const DISABLE_DARK_MODE = 'DISABLE_DARK_MODE';
 
+
+// customer
+export const ADD_CUSTOMER = 'ADD_CUSTOMER';
