@@ -35,6 +35,11 @@ const customerAdded = () => ({
     type: types.ADD_CUSTOMER,
 })
 
+//------------Get Customer----------------------------
+const getCustomer = (customer) => ({
+    type: types.GET_CUSTOMER,
+    payload: customer,
+})
 
 
 //------------Api Call Get Products----------------------------
@@ -73,8 +78,17 @@ export const loginUsers = (credential) => {
 //------------Api Register customers----------------------------
 export const addCustomer = (customer) => {
     return function (dispatch) {
-        axios.post(`https://merak-test.herokuapp.com/inventory/product/`, customer, {headers: headers}).then((res) => {
+        axios.post(`https://merak-test.onrender.com/user/api/customer/`, customer, {headers: headers}).then((res) => {
             dispatch(customerAdded());
+        }).catch((err) => console.log(err));
+    }
+}
+
+//------------Api Call Get Customer----------------------------
+export const loadCustomer = () => {
+    return function (dispatch) {
+        axios.get(`https://merak-test.onrender.com/user/api/customer/`, {headers: headers}).then((res) => {
+            dispatch(getCustomer(res.data));
         }).catch((err) => console.log(err));
     }
 }

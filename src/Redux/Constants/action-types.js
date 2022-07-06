@@ -40,3 +40,4 @@ export const DISABLE_DARK_MODE = 'DISABLE_DARK_MODE';
 
 // customer
 export const ADD_CUSTOMER = 'ADD_CUSTOMER';
+export const GET_CUSTOMER = 'GET_CUSTOMER';

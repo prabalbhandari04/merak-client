@@ -10,6 +10,9 @@ import Grid from "@mui/material/Grid";
 import LocationMap from "./LocationSearchModal";
 import { DialogActions } from "@mui/material";
 import { useState } from 'react';
+import {useDispatch} from 'react-redux';
+import {addCustomer} from '../../Redux/Actions/usersActions';
+import axios from 'axios';
 
 const style = {
   position: "absolute",
@@ -55,11 +58,12 @@ function ChildModal() {
   );
 }
 const AddCustomer = () => {
-  const [firstname, setFirstname] = useState("")
-    const [lastname, setLastname] = useState("")
-    const [email, setEmail] = useState("")
-    const [contact, setContact] = useState("")
+  const [name, setName] = useState("")
+    const [phone, setPhone] = useState("")
     const [address, setAddress] = useState("")
+    const [organization, setOrganization] = useState("")
+    const dispatch = useDispatch();
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -67,11 +71,25 @@ const AddCustomer = () => {
 
   const cancelhandel = () => {
     handleClose();
+  } 
+  const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1MDM3MTQzLCJpYXQiOjE2NTMwMzcxNDMsImp0aSI6ImJkNjdlMzNmNjE3YzQ2NDI4NWUyNDU2YTkxMDI3NzQ0IiwidXNlcl9pZCI6MX0.FCHJiiWiW7s8kTW-h1wKen43dx-wyPN2YS7MUb23D_o"
+
+    let headers = {
+            "Content-type": "application/json; charset=UTF-8",
+            "Authorization": 'Bearer ' + token
+    };
+  
+    const customer = {name, phone, address, organization}
+  const addhandle  = (e) => {
+    axios.post(`https://merak-test.onrender.com/user/api/customer/`, customer , {headers: headers}).then((res) => res.json()).then(data => {
+      dispatch(addCustomer(data))
+      console.log(data)
+      console.log(customer)
+      dispatch(addCustomer(customer))
+      alert("Customer Added Successfully");
+    });
   }
-  const addhandle  = () => {
-    alert ("add");
-    handleClose();
-  }
+
 
   return (
     <div className="container">
@@ -101,40 +119,30 @@ const AddCustomer = () => {
 
                     <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
                     <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                        <span style={{color: 'gray'}}> First name </span> 
+                        <span style={{color: 'gray'}}> Name </span> 
                     </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px'}}} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setFirstname(e.target.value)}/>
+                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px'}}} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setName(e.target.value)}/>
                     </Grid>
 
 
                     <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
                     <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                        <span style={{color: 'gray'}}> Last name </span> 
+                        <span style={{color: 'gray'}}> Phone </span> 
                     </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px'}}} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setLastname(e.target.value)}/>
-                    </Grid>
-
-
-                    <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
-                    <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                        <span style={{color: 'gray'}}> Email id </span> 
-                    </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth autoComplete='off' style={{background:'#181818'}} onChange={(e) => setEmail(e.target.value)}/>
+                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth autoComplete='off' style={{background:'#181818'}} onChange={(e) => setPhone(e.target.value)}/>
                     </Grid>
 
                     <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
                     <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                        <span style={{color: 'gray'}}> Contact </span> 
+                        <span style={{color: 'gray'}}> Organization </span> 
                     </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setContact(e.target.value)}/>
+                    <TextField sx={{ input: { color: 'white', background: '#252525', padding:'5px' } }} variant="filled" fullWidth required autoComplete='off' style={{background:'#181818'}} onChange={(e) => setOrganization(e.target.value)}/>
                     </Grid>
 
                     <Grid item xs={12} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
