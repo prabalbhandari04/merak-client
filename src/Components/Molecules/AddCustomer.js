@@ -45,7 +45,7 @@ function ChildModal() {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style }}>
+        <Box sx={{ ...style}}>
           <LocationMap />
           <Button onClick={handleClose}>Close</Button>
         </Box>
@@ -98,7 +98,7 @@ const AddCustomer = () => {
             <Grid container spacing={1} style={{color: 'white'}}>
             <Grid item xs={4} sm={6} style={{display: 'flex', alignItems: 'centre'}}>
               <Typography gutterBottom variant="body1" style={{color: 'white', display:'flex', justifyContent:'space-between'}} component="div">
-                <span style={{color: 'gray'}}> Assigned by: </span> 
+                <span style={{color: 'gray'}}> First Name: </span> 
               </Typography>
             </Grid>
             <Grid item xs={6} sm={6}>
