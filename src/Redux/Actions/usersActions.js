@@ -74,6 +74,19 @@ const successLogin = (successMessage) => ({
 
 
 
+//------------Get Customers----------------------------
+const getCustomers = (customers) => ({
+    type: types.GET_CUSTOMERS,
+    payload: customers,
+})
+
+
+//------------Post Customers----------------------------
+const customersCreated = () => ({
+    type: types.CREATE_CUSTOMERS,
+})
+
+
 
 
 
@@ -165,3 +178,26 @@ export const loginUsers = (credential) => {
     }
 }
 
+
+
+//------------Api Call Get Customer----------------------------
+export const loadCustomers = () => {
+    return function (dispatch) {
+        axios.get(`https://merak-test.onrender.com/user/api/customer/`, {headers: headers}).then((res) => {
+            dispatch(getCustomers(res.data));
+        }).catch((err) => console.log(err));
+
+    }
+}
+
+
+//------------Api Call Post Customers----------------------------
+export const createCustomers = (customer) => {
+    
+    return async function (dispatch) {
+        await axios.post(`https://merak-test.onrender.com/user/api/customer/`, customer, {headers: headers}).then((res) => {
+            dispatch(customersCreated());
+            dispatch(loadCustomers());
+        }).catch((err) => console.log(err));
+    }
+}

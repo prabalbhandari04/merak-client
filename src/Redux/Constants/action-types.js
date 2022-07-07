@@ -52,3 +52,9 @@ export const SET_ERROR_ORGANIZATION = "SET_ERROR_ORGANIZATION";
 
 //Success Message
 export const SET_SUCCESS_LOGIN = "SET_SUCCESS_LOGIN";
+
+
+//Customer
+
+export const GET_CUSTOMERS = "GET_CUSTOMERS";
+export const CREATE_CUSTOMERS = "CREATE_CUSTOMERS";

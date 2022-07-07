@@ -3,6 +3,8 @@ import * as types from "../constants/action-types";
 const initialState = {
     users: [],
     user: {}, //single user
+    customers: [],
+    customer: {}, //single customer
     errorMessageLogin: '',
     errorMessageRegister: [],
     errorMessageProfile: '',
@@ -43,6 +45,20 @@ export const usersReducers = (state = initialState, action) => {
             }
 
         case types.UPDATE_PASSWORD:
+            return {
+                ...state,
+                loading: false,
+            }
+
+
+        case types.GET_CUSTOMERS:
+            return {
+                ...state,
+                customers: action.payload,
+                loading: false,
+            };
+
+        case types.CREATE_CUSTOMERS:
             return {
                 ...state,
                 loading: false,
