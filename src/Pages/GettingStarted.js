@@ -24,9 +24,11 @@ const GettingStarted = () => {
 
           
           <Grid item xs={12} sm={6} md={3}>
-          <Link to="/new/organization" style={{textDecoration: 'none'}}>
+            <span id="create">
+          <Link to="/new/organization" style={{textDecoration: 'none'}}  id="organisation">
             <OrgCard title="Create an Organization" icon={'fluent:people-team-add-20-filled'} />
           </Link>
+            </span>
           </Grid>
           
 

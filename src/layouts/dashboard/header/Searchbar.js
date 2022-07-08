@@ -70,9 +70,14 @@ export default function Searchbar() {
               }
               sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
             />
+            
+            <span id="search_submit">
+
             <Button variant="contained" onClick={handleClose}>
               Search
             </Button>
+            </span>
+
           </SearchbarStyle>
         </Slide>
       </div>

@@ -79,7 +79,7 @@ const Organization = () => {
 
 
         <Grid item xs={12}>
-            <TextField type="description" placeholder="Description" label="Description" variant="outlined" value={description} onChange={handleInputChange} name="description" multiline rows={4} fullWidth required autoComplete='off' />
+            <TextField type="description" placeholder="Description" id="desc" label="Description" variant="outlined" value={description} onChange={handleInputChange} name="description" multiline rows={4} fullWidth required autoComplete='off' />
         </Grid>
         
 

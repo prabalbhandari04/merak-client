@@ -21,8 +21,7 @@ Given("Test registration functionality", { timeout: 30000 }, async function () {
   await driver.findElement(By.css("input[type='password']")).sendKeys("test123@gmail.com");
   await driver.sleep(delay);
   await driver.findElement(By.css('button[type="submit"]')).click();
-  await driver.wait(until.elementLocated(By.name("emailOrUsername")), 30000);
-  expect(await driver.wait(until.elementLocated(By.name("emailOrUsername"))));
+  await driver.sleep(delay);
   await driver.quit();
 });
 
@@ -34,18 +33,71 @@ Given("Test login functionality", { timeout: 30000 }, async function () {
   await driver.sleep(delay);
   await driver.findElement(By.css('button[type="submit"]')).click();
   await driver.sleep(delay);
-
   const url = await driver.getCurrentUrl();
-  assert.strictEqual(url,"http://localhost:3000/auth/login/")
+  await driver.quit();
 });
 
-// Given("Test search product", { timeout: 30000 }, async function () {
-//   let driver = await new Builder().forBrowser("chrome").build();
-//   await driver.get("http://localhost:3000/inventory/");
-//   await driver.findElement(By.name("search")).sendKeys("ice cream");
-//   await driver.sleep(delay);
-//   await driver.findElement(By.css('button[type="submit"]')).click();
-//   await driver.wait(until.elementLocated(By.name("search")), 30000);
-//   expect(await driver.wait(until.elementLocated(By.name("search"))));
-//   await driver.quit();
-// });
+Given("Test Search functionality", { timeout: 30000 }, async function () {
+  let driver = await new Builder().forBrowser("chrome").build();
+  await driver.get("http://localhost:3000/dashboard/inventory/");
+  await driver.findElement(By.css("input[type='email']")).sendKeys('admin@admin.com');
+  await driver.findElement(By.css("input[type='password']")).sendKeys("root");
+  await driver.sleep(delay);
+  await driver.findElement(By.css('button[type="submit"]')).click();
+  await driver.sleep(delay);
+  await driver.get("http://localhost:3000/dashboard/order/");
+  await driver.findElement(By.id("search")).click();
+  await driver.sleep(delay);
+  await driver.findElement(By.css("input[type='text']")).sendKeys("Blaze");
+  await driver.sleep(delay);
+  await driver.quit();
+});
+
+Given("Test create organisation", { timeout: 30000 }, async function () {
+  let driver = await new Builder().forBrowser("chrome").build();
+  await driver.get("http://localhost:3000/new/get-started");
+  await driver.findElement(By.css("input[type='email']")).sendKeys('admin@admin.com');
+  await driver.findElement(By.css("input[type='password']")).sendKeys("root");
+  await driver.sleep(delay);
+  await driver.findElement(By.css('button[type="submit"]')).click();
+  await driver.sleep(delay);
+  await driver.get("http://localhost:3000/new/get-started")
+  await driver.findElement(By.id("create")).click();
+  await driver.findElement(By.name("name")).sendKeys('admin@admin.com');
+  await driver.findElement(By.id("desc")).sendKeys('hello world');
+  await driver.findElement(By.css('button[type="submit"]')).click();
+  await driver.sleep(delay);
+  await driver.quit();
+});
+
+Given("Test add product", { timeout: 30000 }, async function () {
+  let driver = await new Builder().forBrowser("chrome").build();
+  await driver.get("http://localhost:3000/dashboard/inventory/");
+  await driver.findElement(By.css("input[type='email']")).sendKeys('admin@admin.com');
+  await driver.findElement(By.css("input[type='password']")).sendKeys("root");
+  await driver.sleep(delay);
+  await driver.findElement(By.css('button[type="submit"]')).click();
+  await driver.sleep(delay);
+  await driver.findElement(By.className("rtf--mb")).click();
+  await driver.findElement(By.id("add_product")).click();
+  await driver.findElement(By.name("name")).sendKeys('admin@admin.com');
+  await driver.findElement(By.id("desc")).sendKeys('hello world');
+  await driver.sleep(delay);
+  await driver.findElement(By.id("add")).click();
+  await driver.findElement(By.id("cancel")).click();
+  await driver.quit();
+});
+
+Given("Test for user logout", { timeout: 30000 }, async function () {
+  let driver = await new Builder().forBrowser("chrome").build();
+  await driver.get("http://localhost:3000/dashboard/inventory/");
+  await driver.findElement(By.css("input[type='email']")).sendKeys('admin@admin.com');
+  await driver.findElement(By.css("input[type='password']")).sendKeys("root");
+  await driver.sleep(delay);
+  await driver.findElement(By.css('button[type="submit"]')).click();
+  await driver.sleep(delay);
+  await driver.findElement(By.id("account")).click();
+  await driver.sleep(delay);
+  await driver.findElement(By.id("logout")).click();
+  await driver.quit();
+});

@@ -76,8 +76,10 @@ export default function DashboardHeader({ onOpenSidebar, isCollapse = false, ver
             <Iconify icon="eva:menu-2-fill" />
           </IconButtonAnimate>
         )}
+        <span id="search">
 
         <Searchbar />
+        </span>
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
@@ -85,8 +87,9 @@ export default function DashboardHeader({ onOpenSidebar, isCollapse = false, ver
           {/* <NotificationsPopover />
           <ContactsPopover /> */}
 
-          
+          <span id="account">
           <AccountPopover />
+          </span>
         </Stack>
       </Toolbar>
     </RootStyle>

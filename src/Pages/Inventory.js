@@ -129,8 +129,9 @@ const Inventory = () => {
 
 
       </Container>
-
-      <AddItem/>
+      <span >
+        <AddItem id="float_item" />
+      </span>
     </Page>
   );
 }

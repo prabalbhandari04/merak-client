@@ -307,7 +307,7 @@ function getStepContent(step) {
          
            
             <Grid item xs={12}>
-              <TextField InputProps={{ style: { color: 'black', background: 'white' } }} name="description" InputLabelProps={{ style: { color: 'black' } }} value={description} onChange={handleInputChange}  label="Description" multiline rows={4} placeholder="Description" variant="filled" fullWidth required autoComplete='off'/>
+              <TextField InputProps={{ style: { color: 'black', background: 'white' } }} name="description" id="desc" InputLabelProps={{ style: { color: 'black' } }} value={description} onChange={handleInputChange}  label="Description" multiline rows={4} placeholder="Description" variant="filled" fullWidth required autoComplete='off'/>
             </Grid>
 
             
@@ -483,7 +483,7 @@ function getStepContent(step) {
         <DialogActions>
        
          
-          <Button onClick={handleClose} style={{color: 'white'}}>Cancel</Button>
+          <Button onClick={handleClose} style={{color: 'white'}} id="cancel">Cancel</Button>
 
          
          {activeStep === 1 ?
@@ -491,7 +491,7 @@ function getStepContent(step) {
            Save
           </Button>
           : 
-          <Button onClick={handleSubmit}  form="product-form-id1" style={{color: '#00A7E3'}} autoFocus >
+          <Button onClick={handleSubmit}  form="product-form-id1" style={{color: '#00A7E3'}} autoFocus id="add">
            Next
           </Button>}
 
@@ -718,9 +718,10 @@ function getStepContent(step) {
 
 <Fab icon={<SettingsIcon/>} style={{ position: "fixed", bottom: 0, right: 0}} alwaysShowTitle={false}>
 
-        
-  <Action text="Add Product" style={{backgroundColor: '#2065D1'}} onClick={handleClickOpen}>
+  <Action text="Add Product" style={{backgroundColor: '#2065D1'}} onClick={handleClickOpen} >
+    <span id="add_product">
     <AddIcon />
+    </span>
   </Action>
 
   <Action text="Add Variant" style={{backgroundColor: '#2065D1'}} onClick={handleClickOpen2}>
