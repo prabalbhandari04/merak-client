@@ -31,6 +31,14 @@ Clone the repo
    ```sh
    git clone https://github.com/prabalbhandari04/merak-client.git
    ```
+   
+   
+###For Employee App
+
+```sh
+https://github.com/prabalbhandari04/merak-app
+```
+
 ### For Backend
 
 Git Repository for Backend at 
