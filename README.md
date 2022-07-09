@@ -21,23 +21,26 @@ The User will be redirected to the login page where the user has to pass in cred
 - [x] Customer: Customer can be added from the customer page. 
 - [x] Invoice : Invoice can be create,edited,viewed or deleted in the invoice page.
 
+<hr>
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Installing
+
 Clone the repo
    ```sh
    git clone https://github.com/prabalbhandari04/merak-client.git
    ```
    
-   
-###For Employee App
+  <hr>
+### For Employee App
 
 ```sh
 https://github.com/prabalbhandari04/merak-app
 ```
+<hr>
 
 ### For Backend
 
@@ -46,6 +49,7 @@ Git Repository for Backend at
 ```sh
 https://github.com/myan-ish/merak.git 
 ```
+<hr>
 
 Backend has been deployed at 
 
@@ -59,6 +63,7 @@ Documentation for backend can be found at
 https://merak-test.onrender.com/swagger/
 ```
 
+<hr> 
 
 ### For Frontend
 
