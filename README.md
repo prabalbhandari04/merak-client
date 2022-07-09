@@ -1,7 +1,7 @@
 # Merak
 A Powerful Tracking, Monitoring & Reporting System Along With Convenient Tools & Workflows to Accelerate Your Field Operations.You can add orders and product along with organization and team members to make effective and efficient decision making. Project lead can add team members and customers while members can use the app to track their tasks and order.
 <p align="center">
-<img src="https://github.com/prabalbhandari04/merak-client/blob/main/public/Logo2x.png">
+<img src="https://github.com/prabalbhandari04/merak-client/blob/main/public/assets/Logo2x.png">
 <h1 align="center">
    Merak
   </h1>
