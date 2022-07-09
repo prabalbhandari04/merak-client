@@ -33,12 +33,20 @@ Clone the repo
    ```
 ### For Backend
 
+Git Repository for Backend at 
+
+```sh
+https://github.com/myan-ish/merak.git 
+```
+
 Backend has been deployed at 
+
 ```sh
 https://merak-test.onrender.com/
 ```
 
 Documentation for backend can be found at
+
 ```sh
 https://merak-test.onrender.com/swagger/
 ```
