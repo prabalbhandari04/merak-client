@@ -1,25 +1,29 @@
-import React from "react";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Inventory from "./Pages/Dashboard/Inventory";
-import Order from "./Pages/Dashboard/Order";
-import Home from "./Pages/Home/Home";
-import FilterTest from "./Pages/Dashboard/FilterTest";
-import Profile from "./Pages/Dashboard/Profile";
+// routes
+import Router from './routes';
+// default theme merak  
+import ThemeProvider from './theme';
+// components
 
+import RtlLayout from './components/RtlLayout';
+import ScrollToTop from './components/ScrollToTop';
+import { ProgressBarStyle } from './components/ProgressBar';
+import ThemeColorPresets from './components/ThemeColorPresets';
+import MotionLazyContainer from './components/animate/MotionLazyContainer';
 
-const App = () => {
+// ----------------------------------------------------------------------
+
+export default function App() {
   return (
-  <Router>
-   <Switch>
-     <Route path="/" exact component={Home}/>
-     <Route path="/inventory" exact component={Inventory}/>
-     <Route path='/order' exact component={Order}/>
-     <Route path="/profile" exact component={Profile}/>
-     <Route path='/filter' exact component={FilterTest}/>
-     <Route exact path='*'component={Home}/> 
-   </Switch>
-   </Router>
+    <ThemeProvider>
+      <ThemeColorPresets>
+        <RtlLayout>
+          <MotionLazyContainer>
+            <ProgressBarStyle />
+            <ScrollToTop />
+            <Router />
+          </MotionLazyContainer>
+        </RtlLayout>
+      </ThemeColorPresets>
+    </ThemeProvider>
   );
 }
-
-export default App;
